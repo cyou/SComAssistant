@@ -4,6 +4,7 @@
 
 #ifndef DB_H
 #define DB_H
+/* Create by CYOU, would modify if need */
 class CMySQLDB
 {
 public:
