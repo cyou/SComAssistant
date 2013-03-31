@@ -6,6 +6,8 @@
 *.pdb
 *.exe
 *.idb
+*.ncb
+*.plg
 
 # Compiled Dynamic libraries
 *.so
