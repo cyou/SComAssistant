@@ -60,7 +60,9 @@ Type=0
 BaseClass=CDialog
 HeaderFile=SCOMMDlg.h
 ImplementationFile=SCOMMDlg.cpp
-LastObject=CSCOMMDlg
+LastObject=IDC_BUTTON_WRITEDB
+Filter=D
+VirtualFilter=dWC
 
 [DLG:IDD_ABOUTBOX]
 Type=1
@@ -145,8 +147,8 @@ Control11=IDC_STATIC,static,1342308352
 
 [DLG:IDD_SCOMM_DIALOG (Chinese (P.R.C.))]
 Type=1
-Class=?
-ControlCount=44
+Class=CSCOMMDlg
+ControlCount=45
 Control1=IDC_EDIT_RECIVE,edit,1352728644
 Control2=IDC_STATIC10,static,1342308352
 Control3=IDC_COMBO_COMSELECT,combobox,1344342018
@@ -191,4 +193,5 @@ Control41=IDC_STATIC_TXCOUNT,static,1342308353
 Control42=IDC_STATIC_GJW,static,1342308352
 Control43=IDC_BUTTON_PUSHPIN,button,1342259339
 Control44=IDC_BUTTON_HELP,button,1342275584
+Control45=IDC_BUTTON_WRITEDB,button,1342242816
 

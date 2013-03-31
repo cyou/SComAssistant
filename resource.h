@@ -32,7 +32,7 @@
 #define IDC_CHECK_AUTOSEND              1014
 #define IDC_STATIC_XFS                  1015
 #define IDC_STATIC_MAIL                 1016
-#define IDC_BUTTON_OPENPORT2            1016
+#define IDC_BUTTON_WRITEDB              1019
 #define IDC_STATIC_WWWXFS               1017
 #define IDC_BUTTON_CLEARRECASENDA       1018
 #define IDC_COMBO_PARITY                1020

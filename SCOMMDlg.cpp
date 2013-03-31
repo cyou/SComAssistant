@@ -9,7 +9,15 @@
 #include ".\scommdlg.h"
 
 
+#include "DB.h"
 
+
+#define DB_HOST			"localhost"
+#define DB_USER			"root"
+#define DB_PASSW		"root"
+#define DB_NAME			"comm"
+#define DB_PORT			3306
+#define DB_UNIX_SOCKET	NULL
 
 
 #ifdef _DEBUG
@@ -119,6 +127,7 @@ void CSCOMMDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CSCOMMDlg)
+	DDX_Control(pDX, IDC_BUTTON_WRITEDB, m_ctrlWriteDB);
 	DDX_Control(pDX, IDC_BUTTON_HELP, m_ctrlHelp);
 	DDX_Control(pDX, IDC_BUTTON_PUSHPIN, m_ctrlPushPin);
 	DDX_Control(pDX, IDC_BUTTON_SENDFILE, m_ctrlSendFile);
@@ -187,6 +196,7 @@ BEGIN_MESSAGE_MAP(CSCOMMDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON_PUSHPIN, OnButtonPushpin)
 	ON_WM_DESTROY()
 	ON_BN_CLICKED(IDC_BUTTON_HELP, OnButtonHelp)
+	ON_BN_CLICKED(IDC_BUTTON_WRITEDB, OnButtonWritedb)
 	//}}AFX_MSG_MAP
 	ON_EN_CHANGE(IDC_EDIT_RECIVE, OnEnChangeEditRecive)
 END_MESSAGE_MAP()
@@ -1130,4 +1140,40 @@ void CSCOMMDlg::OnEnChangeEditRecive()
 	// with the ENM_CHANGE flag ORed into the mask.
 
 	// TODO:  Add your control notification handler code here
+}
+
+void CSCOMMDlg::OnButtonWritedb() 
+{
+	AfxMessageBox("start to write data to mysql");
+
+	CString dummy("no");
+	CMySQLDB db;
+	db.WriteToTable(dummy);
+
+	AfxMessageBox("Done!!");
+
+	// TODO: Add your control notification handler code here
+	//MYSQL*ssock;
+	
+	//mysql_init(&m_mysql);
+	/*m_mysql = mysql_init(NULL);
+	if (m_mysql)
+	{
+		if (!mysql_real_connect(m_mysql,NULL,DB_USER,DB_PASSW,DB_NAME,0,NULL,0))
+		{
+			AfxMessageBox("error");
+		  return;
+		}
+		else
+		{
+			AfxMessageBox("Start to insert data.");
+			for (int i = 0; i < 100; i++)
+			{
+				CString insert_sql;
+				insert_sql.Format("INSERT INTO comm_t VALUES (%d, '%s', %f)", i, "testname", 22.7);
+				mysql_query(m_mysql, insert_sql);
+			}
+		}
+		mysql_close(m_mysql);
+	}*/
 }

@@ -7,6 +7,10 @@
 #include "PushPin.h"
 #include "AnimateDlgIcon.h" 
 
+
+#include "winsock.h"
+#include "mysql.h"
+
 #if !defined(AFX_SCOMMDLG_H__666127A8_FEE4_40AA_9309_1B3B55EEDAFC__INCLUDED_)
 #define AFX_SCOMMDLG_H__666127A8_FEE4_40AA_9309_1B3B55EEDAFC__INCLUDED_
 
@@ -44,6 +48,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CSCOMMDlg)
 	enum { IDD = IDD_SCOMM_DIALOG };
+	CButton	m_ctrlWriteDB;
 	CButton	m_ctrlHelp;
 	CPushPinButton	m_ctrlPushPin;
 	CButton	m_ctrlSendFile;
@@ -95,6 +100,8 @@ protected:
 	BOOL m_bOpenPort;
 	HICON m_hIcon;
 
+	MYSQL* m_mysql;
+
 	// Generated message map functions
 	//{{AFX_MSG(CSCOMMDlg)
 	virtual BOOL OnInitDialog();
@@ -126,6 +133,7 @@ protected:
 	afx_msg void OnButtonPushpin();
 	afx_msg void OnDestroy();
 	afx_msg void OnButtonHelp();
+	afx_msg void OnButtonWritedb();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 	//DECLARE_DYNAMIC_MAP()

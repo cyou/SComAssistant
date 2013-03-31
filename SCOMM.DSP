@@ -65,6 +65,7 @@ LINK32=link.exe
 # PROP Use_Debug_Libraries 1
 # PROP Output_Dir "Debug"
 # PROP Intermediate_Dir "Debug"
+# PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /Yu"stdafx.h" /FD /GZ /c
 # ADD CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Yu"stdafx.h" /FD /GZ /c
@@ -77,7 +78,11 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
+# ADD LINK32 libmysql.lib /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
+# Begin Special Build Tool
+SOURCE="$(InputPath)"
+PostBuild_Cmds=copy config.ini DEBUG\\config.ini	copy .\lib\libmysql.dll DEBUG\\libmysql.dll
+# End Special Build Tool
 
 !ENDIF 
 
@@ -94,7 +99,15 @@ SOURCE=.\AnimateDlgIcon.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\DB.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\HYPERLINK.CPP
+# End Source File
+# Begin Source File
+
+SOURCE=.\IniReader.cpp
 # End Source File
 # Begin Source File
 
@@ -128,6 +141,14 @@ SOURCE=.\StdAfx.cpp
 # Begin Source File
 
 SOURCE=.\AnimateDlgIcon.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\DB.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\IniReader.h
 # End Source File
 # Begin Source File
 
@@ -210,6 +231,10 @@ SOURCE=.\res\xiaofengstudio.bmp
 SOURCE=.\res\xiaofengstudio.ico
 # End Source File
 # End Group
+# Begin Source File
+
+SOURCE=.\config.ini
+# End Source File
 # Begin Source File
 
 SOURCE=.\ReadMe.txt
