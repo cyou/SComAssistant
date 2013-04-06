@@ -103,11 +103,31 @@ SOURCE=.\DB.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Device.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\DSCProtocol.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\HYPERLINK.CPP
 # End Source File
 # Begin Source File
 
 SOURCE=.\IniReader.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MainDialog.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ModbusProtocol.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Protocol.cpp
 # End Source File
 # Begin Source File
 
@@ -148,7 +168,27 @@ SOURCE=.\DB.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\Device.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\DSCProtocol.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\IniReader.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MainDialog.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ModbusProtocol.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Protocol.h
 # End Source File
 # Begin Source File
 

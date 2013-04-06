@@ -17,6 +17,7 @@
 #define IDB_UNPINNED_BITMAP             143
 #define IDB_ANIM_IMGLIST                144
 #define IDI_ICON_GJWTECH                145
+#define IDD_MAIN_DIALOG                 146
 #define IDC_COMBO_COMSELECT             1000
 #define IDC_COMBO_SPEED                 1001
 #define IDC_STATIC_STATUS               1004
@@ -32,9 +33,9 @@
 #define IDC_CHECK_AUTOSEND              1014
 #define IDC_STATIC_XFS                  1015
 #define IDC_STATIC_MAIL                 1016
-#define IDC_BUTTON_WRITEDB              1019
 #define IDC_STATIC_WWWXFS               1017
 #define IDC_BUTTON_CLEARRECASENDA       1018
+#define IDC_BUTTON_WRITEDB              1019
 #define IDC_COMBO_PARITY                1020
 #define IDC_COMBO_DATABITS              1021
 #define IDC_COMBO_STOPBITS              1022
@@ -67,14 +68,15 @@
 #define IDC_BUTTON_PUSHPIN              1059
 #define IDC_BUTTON1                     1060
 #define IDC_BUTTON_HELP                 1060
+#define IDC_TAB1                        1063
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        146
+#define _APS_NEXT_RESOURCE_VALUE        147
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1061
+#define _APS_NEXT_CONTROL_VALUE         1064
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

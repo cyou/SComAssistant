@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "SCOMM.h"
 #include "SCOMMDlg.h"
+#include "MainDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -56,7 +57,7 @@ BOOL CSCOMMApp::InitInstance()
 	Enable3dControlsStatic();	// Call this when linking to MFC statically
 #endif
 
-	CSCOMMDlg dlg;
+	CMainDialog dlg;
 	m_pMainWnd = &dlg;
 
 //	SetDialogBkColor(RGB(051,153,204), RGB(0, 0, 0));//ÃÏ¿∂
