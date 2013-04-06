@@ -6,6 +6,7 @@ Protocol::Protocol(CString name)
 {
 	m_name = name;
 	m_index = 0;
+	m_buffer_length = 256;
 	m_buffer = new char[m_buffer_length];
 	memset(m_buffer, 0, m_buffer_length);
 }
@@ -19,6 +20,13 @@ Protocol::~Protocol()
 
 void Protocol::AddDataToBuffer(char data)
 {
-	m_buffer[m_index] = data;
-	m_index ++;
+	if (m_index < m_buffer_length)
+	{
+		m_buffer[m_index] = data;
+		m_index ++;
+	}
+	else
+	{
+		m_index = 0; //if buffer is full, overwrite it...
+	}
 }
