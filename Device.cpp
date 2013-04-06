@@ -17,7 +17,7 @@ Device::Device(int device_id, int ncom, int type)
 	} 
 	else
 	{
-		m_p_protocol = new ModbusProtocol("dsc");
+		m_p_protocol = new ModbusProtocol("modbus");
 	}
 	
 }
@@ -29,6 +29,11 @@ Device::~Device()
 	}
 
 	delete m_p_protocol;
+}
+
+void Device::setSerialPort(CSerialPort* p_serialPort)
+{
+	this->m_p_Port = p_serialPort;
 }
 
 void Device::setCommInfo(int m_nBaud, char m_cParity, int m_nDatabits, int m_nStopbits)
