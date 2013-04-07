@@ -57,7 +57,7 @@ BOOL CSCOMMApp::InitInstance()
 	Enable3dControlsStatic();	// Call this when linking to MFC statically
 #endif
 
-	CMainDialog dlg;
+	CSCOMMDlg dlg;
 	m_pMainWnd = &dlg;
 
 //	SetDialogBkColor(RGB(051,153,204), RGB(0, 0, 0));//ÃÏ¿∂

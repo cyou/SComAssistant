@@ -18,7 +18,7 @@ protected:
 	CString m_name;
 
 	char* m_buffer;
-	int m_buffer_length = 128;
+	int m_buffer_length;
 	int m_buffer_index;
 };
 #endif
