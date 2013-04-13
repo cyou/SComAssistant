@@ -275,6 +275,7 @@ BEGIN_MESSAGE_MAP(CSCOMMDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON_DEVSTART2, OnButtonDevstart2)
 	ON_BN_CLICKED(IDC_BUTTON_DEVSTART3, OnButtonDevstart3)
 	ON_BN_CLICKED(IDC_BUTTON_DEVSTART4, OnButtonDevstart4)
+	ON_CBN_EDITCHANGE(IDC_COMBO_COMSELECT, OnEditchangeComboComselect)
 	//}}AFX_MSG_MAP
 	ON_EN_CHANGE(IDC_EDIT_RECIVE, OnEnChangeEditRecive)
 END_MESSAGE_MAP()
@@ -390,8 +391,9 @@ BOOL CSCOMMDlg::OnInitDialog()
 	m_DataBits4.SetCurSel(0);
 	m_StopBits4.SetCurSel(0);
 
-	//bind data to controls.
+	// 初始化仪表信息
 
+	
 
 
 	m_nBaud=9600;
@@ -938,6 +940,21 @@ void CSCOMMDlg::ChangeStopbits(int j, int selected)
 
 	this->m_CommInfo[j].setStopbits(i);
 
+}
+
+void CSCOMMDlg::UpdateCommFromEdit(int i, CComboBox &c) 
+{
+
+
+// TODO: Add your control notification handler code here
+	CString comm;
+	//m_Com.GetLBText(m_Com.GetCurSel(), comm);
+	c.GetWindowText(comm);
+	UINT HwPortId;
+	if (1 != sscanf(comm, "COM%d", &HwPortId))
+	{
+		this->ChangeComm(i, HwPortId);
+	}
 }
 
 
@@ -1503,21 +1520,22 @@ void CSCOMMDlg::OnButtonOpenport4()
 void CSCOMMDlg::OnEditchangeComboComselect2() 
 {
 	// TODO: Add your control notification handler code here
-	this->ChangeComm(1, m_Com2.GetCurSel());
+	UpdateCommFromEdit(1, m_Com2);
 	
 }
 
 void CSCOMMDlg::OnEditchangeComboComselect3() 
 {
 	// TODO: Add your control notification handler code here
-	this->ChangeComm(2, m_Com3.GetCurSel());
+	UpdateCommFromEdit(2, m_Com3);
 	
 }
 
 void CSCOMMDlg::OnEditchangeComboComselect4() 
 {
 	// TODO: Add your control notification handler code here
-	this->ChangeComm(3, m_Com4.GetCurSel());
+	//this->ChangeComm(3, m_Com4.GetCurSel());
+	UpdateCommFromEdit(3, m_Com4);
 }
 
 void CSCOMMDlg::OnEditchangeComboSpeed2() 
@@ -1738,4 +1756,9 @@ void CSCOMMDlg::OnButtonDevstart4()
 {
 	// TODO: Add your control notification handler code here
 	
+}
+
+void CSCOMMDlg::OnEditchangeComboComselect() 
+{
+	UpdateCommFromEdit(0, m_Com);
 }

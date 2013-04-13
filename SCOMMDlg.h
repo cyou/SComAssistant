@@ -229,6 +229,7 @@ protected:
 	afx_msg void OnButtonDevstart2();
 	afx_msg void OnButtonDevstart3();
 	afx_msg void OnButtonDevstart4();
+	afx_msg void OnEditchangeComboComselect();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 	//DECLARE_DYNAMIC_MAP()
@@ -244,6 +245,8 @@ private:
 	void ChangeParity(int i, int value);
 	void ChangeDatabits(int i, int value);
 	void ChangeStopbits(int i, int value);
+
+	void UpdateCommFromEdit(int i, CComboBox &c);
 	
 public:
 	afx_msg void OnEnChangeEditRecive();
