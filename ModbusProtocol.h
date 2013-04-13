@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Protocol.h"
+#include "type.h"
 
 #ifndef MODBUSPROTOCOL_H
 #define MODBUSPROTOCOL_H
@@ -13,5 +14,6 @@ public:
 	CString GetName();
 	char* ParseDataToSerialPort(char* szMsg);
 	char* ParseDataFromSerialPort(char* szMsg);
+	uint16 ModbusProtocol::Modbus_CRC16(uint8 *Buff_addr,uint16 len);
 };
 #endif
