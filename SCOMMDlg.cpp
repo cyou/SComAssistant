@@ -554,6 +554,8 @@ void CSCOMMDlg::StartOrStopPort(int i, CButton* openPort, CStatic* statusIcon)
 		m_Ports[i].ClosePort();//关闭串口
 		m_ctrlPortStatus.SetWindowText("STATUS：COM Port Closed");
 		statusIcon->SetIcon(m_hIconOff);
+
+		m_bOpenPorts[i] =! m_bOpenPorts[i];
 	}
 	else  //打开串口
 	{
