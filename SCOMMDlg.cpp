@@ -127,6 +127,43 @@ void CSCOMMDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CSCOMMDlg)
+	DDX_Control(pDX, IDC_STATIC_OPENOFF2, m_ctrlIconOpenoff2);
+	DDX_Control(pDX, IDC_BUTTON_OPENPORT4, m_ctrlOpenPort4);
+	DDX_Control(pDX, IDC_BUTTON_OPENPORT3, m_ctrlOpenPort3);
+	DDX_Control(pDX, IDC_BUTTON_OPENPORT2, m_ctrlOpenPort2);
+	DDX_Control(pDX, IDC_STATIC_OPENOFF4, m_ctrlIconOpenoff4);
+	DDX_Control(pDX, IDC_STATIC_OPENOFF3, m_ctrlIconOpenoff3);
+	DDX_Control(pDX, IDC_COMBO_USEDPORT3, m_usePort3);
+	DDX_Control(pDX, IDC_COMBO_USEDPORT4, m_usePort4);
+	DDX_Control(pDX, IDC_COMBO_USEDPORT1, m_usePort);
+	DDX_Control(pDX, IDC_COMBO_USEDPORT2, m_usePort2);
+	DDX_Control(pDX, IDC_BUTTON_SETPORT4, m_setPort4);
+	DDX_Control(pDX, IDC_BUTTON_SETPORT3, m_setPort3);
+	DDX_Control(pDX, IDC_BUTTON_SETPORT2, m_setPort2);
+	DDX_Control(pDX, IDC_BUTTON_SETPORT1, m_setPort);
+	DDX_Control(pDX, IDC_BUTTON_DEVSTART4, m_devStart4);
+	DDX_Control(pDX, IDC_BUTTON_DEVSTART3, m_devStart3);
+	DDX_Control(pDX, IDC_BUTTON_DEVSTART2, m_devStart2);
+	DDX_Control(pDX, IDC_BUTTON_DEVSTART1, m_devStart);
+	DDX_Control(pDX, IDC_COMBO_PROTOCAL4, m_Protocal4);
+	DDX_Control(pDX, IDC_COMBO_PROTOCAL3, m_Protocal3);
+	DDX_Control(pDX, IDC_COMBO_PROTOCAL2, m_Protocal2);
+	DDX_Control(pDX, IDC_COMBO_PROTOCAL1, m_Protocal);
+	DDX_Control(pDX, IDC_COMBO_STOPBITS4, m_StopBits4);
+	DDX_Control(pDX, IDC_COMBO_STOPBITS3, m_StopBits3);
+	DDX_Control(pDX, IDC_COMBO_STOPBITS2, m_StopBits2);
+	DDX_Control(pDX, IDC_COMBO_SPEED4, m_Speed4);
+	DDX_Control(pDX, IDC_COMBO_SPEED3, m_Speed3);
+	DDX_Control(pDX, IDC_COMBO_SPEED2, m_Speed2);
+	DDX_Control(pDX, IDC_COMBO_PARITY4, m_Parity4);
+	DDX_Control(pDX, IDC_COMBO_PARITY3, m_Parity3);
+	DDX_Control(pDX, IDC_COMBO_PARITY2, m_Parity2);
+	DDX_Control(pDX, IDC_COMBO_DATABITS4, m_DataBits4);
+	DDX_Control(pDX, IDC_COMBO_DATABITS3, m_DataBits3);
+	DDX_Control(pDX, IDC_COMBO_DATABITS2, m_DataBits2);
+	DDX_Control(pDX, IDC_COMBO_COMSELECT4, m_Com4);
+	DDX_Control(pDX, IDC_COMBO_COMSELECT3, m_Com3);
+	DDX_Control(pDX, IDC_COMBO_COMSELECT2, m_Com2);
 	DDX_Control(pDX, IDC_BUTTON_WRITEDB, m_ctrlWriteDB);
 	DDX_Control(pDX, IDC_BUTTON_HELP, m_ctrlHelp);
 	DDX_Control(pDX, IDC_BUTTON_PUSHPIN, m_ctrlPushPin);
@@ -197,6 +234,39 @@ BEGIN_MESSAGE_MAP(CSCOMMDlg, CDialog)
 	ON_WM_DESTROY()
 	ON_BN_CLICKED(IDC_BUTTON_HELP, OnButtonHelp)
 	ON_BN_CLICKED(IDC_BUTTON_WRITEDB, OnButtonWritedb)
+	ON_BN_CLICKED(IDC_BUTTON_OPENPORT2, OnButtonOpenport2)
+	ON_BN_CLICKED(IDC_BUTTON_OPENPORT3, OnButtonOpenport3)
+	ON_BN_CLICKED(IDC_BUTTON_OPENPORT4, OnButtonOpenport4)
+	ON_CBN_EDITCHANGE(IDC_COMBO_COMSELECT2, OnEditchangeComboComselect2)
+	ON_CBN_EDITCHANGE(IDC_COMBO_COMSELECT3, OnEditchangeComboComselect3)
+	ON_CBN_EDITCHANGE(IDC_COMBO_COMSELECT4, OnEditchangeComboComselect4)
+	ON_CBN_EDITCHANGE(IDC_COMBO_SPEED2, OnEditchangeComboSpeed2)
+	ON_CBN_EDITCHANGE(IDC_COMBO_SPEED3, OnEditchangeComboSpeed3)
+	ON_CBN_EDITCHANGE(IDC_COMBO_SPEED4, OnEditchangeComboSpeed4)
+	ON_CBN_EDITCHANGE(IDC_COMBO_PARITY2, OnEditchangeComboParity2)
+	ON_CBN_EDITCHANGE(IDC_COMBO_PARITY3, OnEditchangeComboParity3)
+	ON_CBN_EDITCHANGE(IDC_COMBO_PARITY4, OnEditchangeComboParity4)
+	ON_CBN_EDITCHANGE(IDC_COMBO_DATABITS2, OnEditchangeComboDatabits2)
+	ON_CBN_EDITCHANGE(IDC_COMBO_DATABITS3, OnEditchangeComboDatabits3)
+	ON_CBN_EDITCHANGE(IDC_COMBO_DATABITS4, OnEditchangeComboDatabits4)
+	ON_CBN_EDITCHANGE(IDC_COMBO_STOPBITS2, OnEditchangeComboStopbits2)
+	ON_CBN_EDITCHANGE(IDC_COMBO_STOPBITS3, OnEditchangeComboStopbits3)
+	ON_CBN_EDITCHANGE(IDC_COMBO_STOPBITS4, OnEditchangeComboStopbits4)
+	ON_CBN_SELENDOK(IDC_COMBO_SPEED2, OnSelendokComboSpeed2)
+	ON_CBN_SELENDOK(IDC_COMBO_COMSELECT2, OnSelendokComboComselect2)
+	ON_CBN_SELENDOK(IDC_COMBO_SPEED3, OnSelendokComboSpeed3)
+	ON_CBN_SELENDOK(IDC_COMBO_SPEED4, OnSelendokComboSpeed4)
+	ON_CBN_SELENDOK(IDC_COMBO_COMSELECT3, OnSelendokComboComselect3)
+	ON_CBN_SELENDOK(IDC_COMBO_COMSELECT4, OnSelendokComboComselect4)
+	ON_CBN_SELENDOK(IDC_COMBO_PARITY2, OnSelendokComboParity2)
+	ON_CBN_SELENDOK(IDC_COMBO_PARITY3, OnSelendokComboParity3)
+	ON_CBN_SELENDOK(IDC_COMBO_PARITY4, OnSelendokComboParity4)
+	ON_CBN_SELENDOK(IDC_COMBO_DATABITS2, OnSelendokComboDatabits2)
+	ON_CBN_SELENDOK(IDC_COMBO_DATABITS3, OnSelendokComboDatabits3)
+	ON_CBN_SELENDOK(IDC_COMBO_DATABITS4, OnSelendokComboDatabits4)
+	ON_CBN_SELENDOK(IDC_COMBO_STOPBITS2, OnSelendokComboStopbits2)
+	ON_CBN_SELENDOK(IDC_COMBO_STOPBITS3, OnSelendokComboStopbits3)
+	ON_CBN_SELENDOK(IDC_COMBO_STOPBITS4, OnSelendokComboStopbits4)
 	//}}AFX_MSG_MAP
 	ON_EN_CHANGE(IDC_EDIT_RECIVE, OnEnChangeEditRecive)
 END_MESSAGE_MAP()
@@ -273,6 +343,47 @@ BOOL CSCOMMDlg::OnInitDialog()
 
 //	m_ctrlIconDatareceive.SetIcon(m_hIconOff);
 
+	//初始化串口信息
+	for (int i =0; i < MAX_NUM_SW_PORT; i++)
+	{
+		m_CommInfo[i].setBand(9600);
+		m_CommInfo[i].setCom(i+1);
+		m_CommInfo[i].setParity('N');
+		m_CommInfo[i].setDatabits(8);
+		m_CommInfo[i].setStopbits(1);
+
+		m_bOpenPorts[i] = false;
+	}
+	//initial UI display.
+
+	m_Com.SetCurSel(0);
+	m_Speed.SetCurSel(5);
+	m_Parity.SetCurSel(0);
+	m_DataBits.SetCurSel(0);
+	m_StopBits.SetCurSel(0);
+
+	m_Com2.SetCurSel(1);
+	m_Speed2.SetCurSel(5);
+	m_Parity2.SetCurSel(0);
+	m_DataBits2.SetCurSel(0);
+	m_StopBits2.SetCurSel(0);
+
+	m_Com3.SetCurSel(2);
+	m_Speed3.SetCurSel(5);
+	m_Parity3.SetCurSel(0);
+	m_DataBits3.SetCurSel(0);
+	m_StopBits3.SetCurSel(0);
+
+	m_Com4.SetCurSel(3);
+	m_Speed4.SetCurSel(5);
+	m_Parity4.SetCurSel(0);
+	m_DataBits4.SetCurSel(0);
+	m_StopBits4.SetCurSel(0);
+
+	//bind data to controls.
+
+
+
 	m_nBaud=9600;
 	m_nCom=1;
 	m_cParity='N';
@@ -281,7 +392,7 @@ BOOL CSCOMMDlg::OnInitDialog()
 	m_dwCommEvents = EV_RXFLAG | EV_RXCHAR;
 	//if (m_Port.InitPort(this, 1, 9600,'N',8,1,dwCommEvents,512))
 	CString strStatus;
-	if (m_Port.InitPort(this, m_nCom, m_nBaud,m_cParity,m_nDatabits,m_nStopbits,m_dwCommEvents,512))
+	/*if (m_Port.InitPort(this, m_nCom, m_nBaud,m_cParity,m_nDatabits,m_nStopbits,m_dwCommEvents,512))
 	{
 		m_Port.StartMonitoring();
 		strStatus.Format("STATUS：COM%d OPENED，%d,%c,%d,%d",m_nCom, m_nBaud,m_cParity,m_nDatabits,m_nStopbits);
@@ -294,7 +405,7 @@ BOOL CSCOMMDlg::OnInitDialog()
 	{
 		AfxMessageBox("没有发现此串口");
 		m_ctrlIconOpenoff.SetIcon(m_hIconOff);
-	}
+	}*/
 	m_ctrlPortStatus.SetWindowText(strStatus);
 
 	CEdit* pEdit=(CEdit*)GetDlgItem(IDC_EDIT_CYCLETIME);
@@ -422,11 +533,61 @@ void CSCOMMDlg::OnButtonClearReciArea()
 	UpdateData(FALSE);
 }
 
+void CSCOMMDlg::StartOrStopPort(int i, CButton* openPort, CStatic* statusIcon)
+{
+	// TODO: Add your control notification handler code here
+	
+	if(m_bOpenPorts[i])  //关闭串口
+	{
+
+		openPort->SetWindowText("打开串口");
+		m_Ports[i].ClosePort();//关闭串口
+		m_ctrlPortStatus.SetWindowText("STATUS：COM Port Closed");
+		statusIcon->SetIcon(m_hIconOff);
+	}
+	else  //打开串口
+	{
+		openPort->SetWindowText("关闭串口");
+		
+
+		int m_nCom = this->m_CommInfo[i].getCom();
+		int m_nBaud = this->m_CommInfo[i].getBand();
+		char m_cParity = this->m_CommInfo[i].getParity();
+		int m_nDatabits = this->m_CommInfo[i].getDatabits();
+		int m_nStopbits = this->m_CommInfo[i].getStopbits();
+		int m_dwCommEvents = this->m_CommEvents[i];
+
+		CString strStatus;
+		if (m_Ports[i].InitPort(this, m_nCom, m_nBaud,m_cParity,m_nDatabits,m_nStopbits,m_dwCommEvents,512))
+		{
+			m_Ports[i].StartMonitoring();
+			statusIcon->SetIcon(m_hIconRed);
+			strStatus.Format("STATUS：COM%d OPENED，%d,%c,%d,%d",m_nCom, m_nBaud,m_cParity,m_nDatabits,m_nStopbits);
+	
+			//"当前状态：串口打开，无奇偶校验，8数据位，1停止位");
+
+			m_bOpenPorts[i] =! m_bOpenPorts[i];
+		}
+		else
+		{
+			AfxMessageBox("没有发现此串口或被占用");
+			
+			openPort->SetWindowText("打开串口");
+			statusIcon->SetIcon(m_hIconOff);
+		}
+		m_ctrlPortStatus.SetWindowText(strStatus);
+	}
+
+	
+
+}
+
 //打开/关闭串口
 void CSCOMMDlg::OnButtonOpenport() 
 {
+	StartOrStopPort(0, &m_ctrlOpenPort, &m_ctrlIconOpenoff);
 	// TODO: Add your control notification handler code here
-	m_bOpenPort=!m_bOpenPort;
+	/*m_bOpenPort=!m_bOpenPort;
 	if(m_bOpenPort)  //关闭串口
 	{
 		if(m_ctrlAutoSend.GetCheck())
@@ -459,7 +620,7 @@ void CSCOMMDlg::OnButtonOpenport()
 			m_ctrlIconOpenoff.SetIcon(m_hIconOff);
 		}
 		m_ctrlPortStatus.SetWindowText(strStatus);
-	}
+	}*/
 }
 
 
@@ -655,10 +816,127 @@ void CSCOMMDlg::OnButtonClearrecasenda()
 	UpdateData(FALSE);
 }
 
-void CSCOMMDlg::OnSelendokComboComselect() 
+
+
+void CSCOMMDlg::ChangeComm(int i, int selected)
+{
+    this->m_CommInfo[i].setCom(selected+1);
+}
+
+
+void CSCOMMDlg::ChangeBoud(int j, int selected)
 {
 	// TODO: Add your control notification handler code here
-	if(m_Port.m_hComm!=NULL)
+	//CString temp;
+	int i=selected;
+	switch(i)
+	{
+	case 0:
+		i=300;
+		break;
+	case 1:
+		i=600;
+		break;
+	case 2:
+		i=1200;
+		break;
+	case 3:
+		i=2400;
+		break;
+	case 4:
+		i=4800;
+		break;
+	case 5:
+		i=9600;
+		break;
+	case 6:
+		i=19200;
+		break;
+	case 7:
+		i=38400;
+		break;
+	case 8:
+		i=43000;
+		break;
+	case 9:
+		i=56000;
+		break;
+	case 10:
+		i=57600;
+		break;
+	case 11:
+		i=115200;
+		break;
+	default:
+		break;
+
+	}
+	this->m_CommInfo[j].setBand(i);
+}
+
+void CSCOMMDlg::ChangeParity(int i, int selected)
+{
+	//int i=m_Parity.GetCurSel();
+	char temp;
+	switch(selected)
+	{
+	case 0:
+		temp='N';
+		break;
+	case 1:
+		temp='O';
+		break;
+	case 2:
+		temp='E';
+		break;
+	}
+	this->m_CommInfo[i].setParity(temp);
+
+}
+
+void CSCOMMDlg::ChangeDatabits(int j, int selected)
+{
+	int i=selected;
+	switch(i)
+	{
+	case 0:
+		i=8;
+		break;
+	case 1:
+		i=7;
+		break;
+	case 2:
+		i=6;
+		break;
+	}
+	this->m_CommInfo[j].setDatabits(i);
+}
+
+void CSCOMMDlg::ChangeStopbits(int j, int selected)
+{
+	int i=selected;
+	switch(i)
+	{
+	case 0:
+		i=1;
+		break;
+	case 1:
+		i=2;
+		break;
+	}
+	m_nStopbits=i;
+
+	this->m_CommInfo[j].setStopbits(i);
+
+}
+
+
+void CSCOMMDlg::OnSelendokComboComselect() 
+{
+
+	this->ChangeComm(0, m_Com.GetCurSel());
+	// TODO: Add your control notification handler code here
+	/*if(m_Port.m_hComm!=NULL)
 	{
 		m_Port.ClosePort();
 	}
@@ -685,16 +963,17 @@ void CSCOMMDlg::OnSelendokComboComselect()
 	{
 		m_ctrlIconOpenoff.SetIcon(m_hIconOff);
 		AfxMessageBox("没有发现此串口或被占用");
-	}
-
+	}*/
 
 	
 }
 
 void CSCOMMDlg::OnSelendokComboSpeed() 
 {
+	this->ChangeBoud(0, m_Speed.GetCurSel());
+
 	// TODO: Add your control notification handler code here
-	CString temp;
+	/*CString temp;
 	int i=m_Speed.GetCurSel();
 	switch(i)
 	{
@@ -765,13 +1044,15 @@ void CSCOMMDlg::OnSelendokComboSpeed()
 
 	}
 
-	
+	*/
 }
 
 void CSCOMMDlg::OnSelendokComboParity() 
 {
+
+	this->ChangeParity(0, m_Parity.GetCurSel());
 	// TODO: Add your control notification handler code here
-	char temp;
+	/*char temp;
 	int i=m_Parity.GetCurSel();
 	switch(i)
 	{
@@ -807,13 +1088,16 @@ void CSCOMMDlg::OnSelendokComboParity()
 	{
 		AfxMessageBox("没有成功，请重试");
 		m_ctrlIconOpenoff.SetIcon(m_hIconOff);
-	}
+	}*/
 
 	
 }
 
 void CSCOMMDlg::OnSelendokComboDatabits() 
 {
+	this->ChangeDatabits(0, m_DataBits.GetCurSel());
+
+	/*
 	// TODO: Add your control notification handler code here
 	//char temp;
 	int i=m_DataBits.GetCurSel();
@@ -851,15 +1135,17 @@ void CSCOMMDlg::OnSelendokComboDatabits()
 	{
 		AfxMessageBox("没有成功，请重试");
 		m_ctrlIconOpenoff.SetIcon(m_hIconOff);
-	}
+	}*/
 	
 	
 }
 
 void CSCOMMDlg::OnSelendokComboStopbits() 
 {
+	this->ChangeStopbits(0, m_StopBits.GetCurSel());
+
 	// TODO: Add your control notification handler code here
-	int i=m_StopBits.GetCurSel();
+	/*int i=m_StopBits.GetCurSel();
 	switch(i)
 	{
 	case 0:
@@ -891,7 +1177,7 @@ void CSCOMMDlg::OnSelendokComboStopbits()
 	{
 		AfxMessageBox("没有成功，请重试");
 		m_ctrlIconOpenoff.SetIcon(m_hIconOff);
-	}
+	}*/
 	
 }
 
@@ -1176,4 +1462,222 @@ void CSCOMMDlg::OnButtonWritedb()
 		}
 		mysql_close(m_mysql);
 	}*/
+}
+
+void CSCOMMDlg::OnButtonOpenport2() 
+{
+	// TODO: Add your control notification handler code here
+	this->StartOrStopPort(1, &m_ctrlOpenPort2, &m_ctrlIconOpenoff2);
+
+	CString str;
+	str.Format("%d", this->m_CommInfo[1].getBand());
+
+	AfxMessageBox(str);
+	
+}
+
+void CSCOMMDlg::OnButtonOpenport3() 
+{
+	// TODO: Add your control notification handler code here
+	this->StartOrStopPort(2, &m_ctrlOpenPort3, &m_ctrlIconOpenoff3);
+	
+}
+
+void CSCOMMDlg::OnButtonOpenport4() 
+{
+	// TODO: Add your control notification handler code here
+	this->StartOrStopPort(3, &m_ctrlOpenPort4, &m_ctrlIconOpenoff4);
+	
+}
+
+void CSCOMMDlg::OnEditchangeComboComselect2() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeComm(1, m_Com2.GetCurSel());
+	
+}
+
+void CSCOMMDlg::OnEditchangeComboComselect3() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeComm(2, m_Com3.GetCurSel());
+	
+}
+
+void CSCOMMDlg::OnEditchangeComboComselect4() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeComm(3, m_Com4.GetCurSel());
+}
+
+void CSCOMMDlg::OnEditchangeComboSpeed2() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeBoud(1, m_Speed2.GetCurSel());
+	
+}
+
+void CSCOMMDlg::OnEditchangeComboSpeed3() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeBoud(2, m_Speed3.GetCurSel());
+	
+}
+
+void CSCOMMDlg::OnEditchangeComboSpeed4() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeBoud(3, m_Speed4.GetCurSel());
+	
+}
+
+void CSCOMMDlg::OnEditchangeComboParity2() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeParity(1, m_Parity2.GetCurSel());
+	
+}
+
+void CSCOMMDlg::OnEditchangeComboParity3() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeParity(2, m_Parity3.GetCurSel());
+	
+}
+
+void CSCOMMDlg::OnEditchangeComboParity4() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeParity(3, m_Parity4.GetCurSel());
+	
+}
+
+void CSCOMMDlg::OnEditchangeComboDatabits2() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeDatabits(1, m_DataBits2.GetCurSel());
+}
+
+void CSCOMMDlg::OnEditchangeComboDatabits3() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeDatabits(2, m_DataBits3.GetCurSel());
+}
+
+void CSCOMMDlg::OnEditchangeComboDatabits4() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeDatabits(3, m_DataBits4.GetCurSel());
+}
+
+void CSCOMMDlg::OnEditchangeComboStopbits2() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeStopbits(1, m_StopBits2.GetCurSel());	
+}
+
+void CSCOMMDlg::OnEditchangeComboStopbits3() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeStopbits(2, m_StopBits3.GetCurSel());	
+}
+
+void CSCOMMDlg::OnEditchangeComboStopbits4() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeStopbits(3, m_StopBits4.GetCurSel());	
+}
+
+void CSCOMMDlg::OnSelendokComboSpeed2() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeBoud(1, m_Speed2.GetCurSel());
+	
+}
+
+void CSCOMMDlg::OnSelendokComboComselect2() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeComm(1, m_Com2.GetCurSel());
+}
+
+void CSCOMMDlg::OnSelendokComboSpeed3() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeBoud(2, m_Speed3.GetCurSel());
+	
+}
+
+void CSCOMMDlg::OnSelendokComboSpeed4() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeBoud(3, m_Speed4.GetCurSel());
+}
+
+void CSCOMMDlg::OnSelendokComboComselect3() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeComm(2, m_Com3.GetCurSel());
+	
+}
+
+void CSCOMMDlg::OnSelendokComboComselect4() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeComm(3, m_Com4.GetCurSel());
+	
+}
+
+void CSCOMMDlg::OnSelendokComboParity2() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeParity(1, m_Parity2.GetCurSel());
+}
+
+void CSCOMMDlg::OnSelendokComboParity3() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeParity(2, m_Parity3.GetCurSel());
+}
+
+void CSCOMMDlg::OnSelendokComboParity4() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeParity(3, m_Parity4.GetCurSel());
+}
+
+void CSCOMMDlg::OnSelendokComboDatabits2() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeDatabits(1, m_DataBits2.GetCurSel());
+}
+
+void CSCOMMDlg::OnSelendokComboDatabits3() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeDatabits(2, m_DataBits3.GetCurSel());
+}
+
+void CSCOMMDlg::OnSelendokComboDatabits4() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeDatabits(3, m_DataBits4.GetCurSel());
+}
+
+void CSCOMMDlg::OnSelendokComboStopbits2() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeStopbits(1, m_StopBits2.GetCurSel());
+}
+
+void CSCOMMDlg::OnSelendokComboStopbits3() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeStopbits(2, m_StopBits3.GetCurSel());
+}
+
+void CSCOMMDlg::OnSelendokComboStopbits4() 
+{
+	// TODO: Add your control notification handler code here
+	this->ChangeStopbits(3, m_StopBits4.GetCurSel());
 }

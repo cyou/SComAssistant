@@ -5,10 +5,10 @@
 #include "ModbusProtocol.h"
 
 
-Device::Device(int device_id, int ncom, int type)
+Device::Device(int device_id, int type)
 {
 	this->device_id = device_id;
-	this->m_nCom = ncom;
+//	this->m_nCom = ncom;
 	this->m_is_device_open = false;
 	this->device_type = type;
 	if (this->device_type == 1) {
@@ -36,12 +36,13 @@ void Device::setSerialPort(CSerialPort* p_serialPort)
 	this->m_p_Port = p_serialPort;
 }
 
-void Device::setCommInfo(int m_nBaud, char m_cParity, int m_nDatabits, int m_nStopbits)
+void Device::setCommInfo(CommInfo commInfo)
 {
-	this->m_nBaud = m_nBaud;
-	this->m_cParity = m_cParity;
-	this->m_nDatabits = m_nDatabits;
-	this->m_nStopbits = m_nStopbits;
+	m_commInfo.setCom(commInfo.getCom());
+	m_commInfo.setBand(commInfo.getBand());
+	m_commInfo.setParity(commInfo.getParity());
+	m_commInfo.setDatabits(commInfo.getDatabits());
+	m_commInfo.setStopbits(commInfo.getStopbits());
 }
 
 BOOL Device::openDevice()

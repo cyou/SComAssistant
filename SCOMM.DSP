@@ -99,6 +99,10 @@ SOURCE=.\AnimateDlgIcon.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\CommInfo.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\DB.cpp
 # End Source File
 # Begin Source File
@@ -161,6 +165,10 @@ SOURCE=.\StdAfx.cpp
 # Begin Source File
 
 SOURCE=.\AnimateDlgIcon.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\CommInfo.h
 # End Source File
 # Begin Source File
 

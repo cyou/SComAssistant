@@ -5,7 +5,10 @@
 #include "HyperLink.h"
 #include "label.h"
 #include "PushPin.h"
-#include "AnimateDlgIcon.h" 
+#include "AnimateDlgIcon.h"
+
+#include "CommInfo.h"
+#include "Device.h"
 
 
 #include "winsock.h"
@@ -19,6 +22,8 @@
 #endif // _MSC_VER > 1000
 
 
+#define	MAX_NUM_SW_PORT		4
+#define MAX_NUM_DEVICE      4
 /////////////////////////////////////////////////////////////////////////////
 // CSCOMMDlg dialog
 
@@ -44,10 +49,59 @@ public:
 	CAnimateDlgIcon m_animIcon;  //¶¯»­Í¼±ê
 	CSCOMMDlg(CWnd* pParent = NULL);	// standard constructor
 
+	CommInfo        m_CommInfo[MAX_NUM_SW_PORT];
+	CSerialPort		m_Ports[MAX_NUM_SW_PORT];
+
+	Device*         p_Devices[MAX_NUM_DEVICE];
+
+	BOOL            m_bOpenPorts[MAX_NUM_SW_PORT];
+    DWORD           m_CommEvents[MAX_NUM_SW_PORT];
+
+
+	CString			m_strReceived[MAX_NUM_SW_PORT];
+	UINT			m_HwPortID[MAX_NUM_SW_PORT];
+
 
 // Dialog Data
 	//{{AFX_DATA(CSCOMMDlg)
 	enum { IDD = IDD_SCOMM_DIALOG };
+	CStatic	m_ctrlIconOpenoff2;
+	CButton	m_ctrlOpenPort4;
+	CButton	m_ctrlOpenPort3;
+	CButton	m_ctrlOpenPort2;
+	CStatic	m_ctrlIconOpenoff4;
+	CStatic	m_ctrlIconOpenoff3;
+	CComboBox	m_usePort3;
+	CComboBox	m_usePort4;
+	CComboBox	m_usePort;
+	CComboBox	m_usePort2;
+	CButton	m_setPort4;
+	CButton	m_setPort3;
+	CButton	m_setPort2;
+	CButton	m_setPort;
+	CButton	m_devStart4;
+	CButton	m_devStart3;
+	CButton	m_devStart2;
+	CButton	m_devStart;
+	CComboBox	m_Protocal4;
+	CComboBox	m_Protocal3;
+	CComboBox	m_Protocal2;
+	CComboBox	m_Protocal;
+	CComboBox	m_StopBits4;
+	CComboBox	m_StopBits3;
+	CComboBox	m_StopBits2;
+	CComboBox	m_Speed4;
+	CComboBox	m_Speed3;
+	CComboBox	m_Speed2;
+	CComboBox	m_Parity4;
+	CComboBox	m_Parity3;
+	CComboBox	m_Parity2;
+	CComboBox	m_DataBits4;
+	CComboBox	m_DataBits3;
+	CComboBox	m_DataBits2;
+	CComboBox	m_Com4;
+	CComboBox	m_Com3;
+	CComboBox	m_Com2;
 	CButton	m_ctrlWriteDB;
 	CButton	m_ctrlHelp;
 	CPushPinButton	m_ctrlPushPin;
@@ -134,6 +188,39 @@ protected:
 	afx_msg void OnDestroy();
 	afx_msg void OnButtonHelp();
 	afx_msg void OnButtonWritedb();
+	afx_msg void OnButtonOpenport2();
+	afx_msg void OnButtonOpenport3();
+	afx_msg void OnButtonOpenport4();
+	afx_msg void OnEditchangeComboComselect2();
+	afx_msg void OnEditchangeComboComselect3();
+	afx_msg void OnEditchangeComboComselect4();
+	afx_msg void OnEditchangeComboSpeed2();
+	afx_msg void OnEditchangeComboSpeed3();
+	afx_msg void OnEditchangeComboSpeed4();
+	afx_msg void OnEditchangeComboParity2();
+	afx_msg void OnEditchangeComboParity3();
+	afx_msg void OnEditchangeComboParity4();
+	afx_msg void OnEditchangeComboDatabits2();
+	afx_msg void OnEditchangeComboDatabits3();
+	afx_msg void OnEditchangeComboDatabits4();
+	afx_msg void OnEditchangeComboStopbits2();
+	afx_msg void OnEditchangeComboStopbits3();
+	afx_msg void OnEditchangeComboStopbits4();
+	afx_msg void OnSelendokComboSpeed2();
+	afx_msg void OnSelendokComboComselect2();
+	afx_msg void OnSelendokComboSpeed3();
+	afx_msg void OnSelendokComboSpeed4();
+	afx_msg void OnSelendokComboComselect3();
+	afx_msg void OnSelendokComboComselect4();
+	afx_msg void OnSelendokComboParity2();
+	afx_msg void OnSelendokComboParity3();
+	afx_msg void OnSelendokComboParity4();
+	afx_msg void OnSelendokComboDatabits2();
+	afx_msg void OnSelendokComboDatabits3();
+	afx_msg void OnSelendokComboDatabits4();
+	afx_msg void OnSelendokComboStopbits2();
+	afx_msg void OnSelendokComboStopbits3();
+	afx_msg void OnSelendokComboStopbits4();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 	//DECLARE_DYNAMIC_MAP()
@@ -141,6 +228,14 @@ protected:
 
 
 private:
+
+	void StartOrStopPort(int i, CButton* btn, CStatic* sta);
+
+	void ChangeComm(int i, int value);
+	void ChangeBoud(int i, int value);
+	void ChangeParity(int i, int value);
+	void ChangeDatabits(int i, int value);
+	void ChangeStopbits(int i, int value);
 	
 public:
 	afx_msg void OnEnChangeEditRecive();

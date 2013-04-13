@@ -108,31 +108,47 @@
 #define IDC_STATIC30                    1079
 #define IDC_STATIC31                    1080
 #define IDC_COMBO_DATABITS5             1082
+#define IDC_COMBO_PROTOCAL1             1082
 #define IDC_STATIC32                    1083
 #define IDC_COMBO_COMSELECT5            1084
+#define IDC_COMBO_USEDPORT1             1084
 #define IDC_BUTTON_OPENPORT5            1085
+#define IDC_BUTTON_SETPORT1             1085
 #define IDC_BUTTON_OPENPORT6            1086
+#define IDC_BUTTON_DEVSTART1            1086
 #define IDC_STATIC33                    1087
 #define IDC_STATIC34                    1088
 #define IDC_COMBO_DATABITS6             1089
+#define IDC_COMBO_PROTOCAL2             1089
 #define IDC_STATIC35                    1090
 #define IDC_COMBO_COMSELECT6            1091
+#define IDC_COMBO_USEDPORT2             1091
 #define IDC_BUTTON_OPENPORT7            1092
+#define IDC_BUTTON_SETPORT2             1092
 #define IDC_BUTTON_OPENPORT8            1093
+#define IDC_BUTTON_DEVSTART2            1093
 #define IDC_STATIC36                    1094
 #define IDC_STATIC37                    1095
 #define IDC_COMBO_DATABITS7             1096
+#define IDC_COMBO_PROTOCAL3             1096
 #define IDC_STATIC38                    1097
 #define IDC_COMBO_COMSELECT7            1098
+#define IDC_COMBO_USEDPORT3             1098
 #define IDC_BUTTON_OPENPORT9            1099
+#define IDC_BUTTON_SETPORT3             1099
 #define IDC_BUTTON_OPENPORT10           1100
+#define IDC_BUTTON_DEVSTART3            1100
 #define IDC_STATIC39                    1101
 #define IDC_STATIC40                    1102
 #define IDC_COMBO_DATABITS8             1103
+#define IDC_COMBO_PROTOCAL4             1103
 #define IDC_STATIC41                    1104
 #define IDC_COMBO_COMSELECT8            1105
+#define IDC_COMBO_USEDPORT4             1105
 #define IDC_BUTTON_OPENPORT11           1106
+#define IDC_BUTTON_SETPORT4             1106
 #define IDC_BUTTON_OPENPORT12           1107
+#define IDC_BUTTON_DEVSTART4            1107
 
 // Next default values for new objects
 // 
