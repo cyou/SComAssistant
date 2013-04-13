@@ -267,6 +267,14 @@ BEGIN_MESSAGE_MAP(CSCOMMDlg, CDialog)
 	ON_CBN_SELENDOK(IDC_COMBO_STOPBITS2, OnSelendokComboStopbits2)
 	ON_CBN_SELENDOK(IDC_COMBO_STOPBITS3, OnSelendokComboStopbits3)
 	ON_CBN_SELENDOK(IDC_COMBO_STOPBITS4, OnSelendokComboStopbits4)
+	ON_BN_CLICKED(IDC_BUTTON_SETPORT1, OnButtonSetport1)
+	ON_BN_CLICKED(IDC_BUTTON_SETPORT2, OnButtonSetport2)
+	ON_BN_CLICKED(IDC_BUTTON_SETPORT3, OnButtonSetport3)
+	ON_BN_CLICKED(IDC_BUTTON_SETPORT4, OnButtonSetport4)
+	ON_BN_CLICKED(IDC_BUTTON_DEVSTART1, OnButtonDevstart1)
+	ON_BN_CLICKED(IDC_BUTTON_DEVSTART2, OnButtonDevstart2)
+	ON_BN_CLICKED(IDC_BUTTON_DEVSTART3, OnButtonDevstart3)
+	ON_BN_CLICKED(IDC_BUTTON_DEVSTART4, OnButtonDevstart4)
 	//}}AFX_MSG_MAP
 	ON_EN_CHANGE(IDC_EDIT_RECIVE, OnEnChangeEditRecive)
 END_MESSAGE_MAP()
@@ -353,6 +361,8 @@ BOOL CSCOMMDlg::OnInitDialog()
 		m_CommInfo[i].setStopbits(1);
 
 		m_bOpenPorts[i] = false;
+
+		m_CommEvents[i] =  EV_RXFLAG | EV_RXCHAR;
 	}
 	//initial UI display.
 
@@ -1469,10 +1479,10 @@ void CSCOMMDlg::OnButtonOpenport2()
 	// TODO: Add your control notification handler code here
 	this->StartOrStopPort(1, &m_ctrlOpenPort2, &m_ctrlIconOpenoff2);
 
-	CString str;
-	str.Format("%d", this->m_CommInfo[1].getBand());
+	//CString str;
+	//str.Format("%d", this->m_CommInfo[1].getBand());
 
-	AfxMessageBox(str);
+	//AfxMessageBox(str);
 	
 }
 
@@ -1680,4 +1690,52 @@ void CSCOMMDlg::OnSelendokComboStopbits4()
 {
 	// TODO: Add your control notification handler code here
 	this->ChangeStopbits(3, m_StopBits4.GetCurSel());
+}
+
+void CSCOMMDlg::OnButtonSetport1() 
+{
+	// TODO: Add your control notification handler code here
+	
+}
+
+void CSCOMMDlg::OnButtonSetport2() 
+{
+	// TODO: Add your control notification handler code here
+	
+}
+
+void CSCOMMDlg::OnButtonSetport3() 
+{
+	// TODO: Add your control notification handler code here
+	
+}
+
+void CSCOMMDlg::OnButtonSetport4() 
+{
+	// TODO: Add your control notification handler code here
+	
+}
+
+void CSCOMMDlg::OnButtonDevstart1() 
+{
+	// TODO: Add your control notification handler code here
+	
+}
+
+void CSCOMMDlg::OnButtonDevstart2() 
+{
+	// TODO: Add your control notification handler code here
+	
+}
+
+void CSCOMMDlg::OnButtonDevstart3() 
+{
+	// TODO: Add your control notification handler code here
+	
+}
+
+void CSCOMMDlg::OnButtonDevstart4() 
+{
+	// TODO: Add your control notification handler code here
+	
 }

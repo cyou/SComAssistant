@@ -221,6 +221,14 @@ protected:
 	afx_msg void OnSelendokComboStopbits2();
 	afx_msg void OnSelendokComboStopbits3();
 	afx_msg void OnSelendokComboStopbits4();
+	afx_msg void OnButtonSetport1();
+	afx_msg void OnButtonSetport2();
+	afx_msg void OnButtonSetport3();
+	afx_msg void OnButtonSetport4();
+	afx_msg void OnButtonDevstart1();
+	afx_msg void OnButtonDevstart2();
+	afx_msg void OnButtonDevstart3();
+	afx_msg void OnButtonDevstart4();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 	//DECLARE_DYNAMIC_MAP()
