@@ -66,7 +66,7 @@ BOOL CSerialPort::InitPort(CWnd* pPortOwner,	// the owner (CWnd) of the port (re
 						   DWORD dwCommEvents,	// EV_RXCHAR, EV_CTS etc
 						   UINT  writebuffersize)	// size to the writebuffer
 {
-	assert(portnr > 0 && portnr < 5);
+	assert(portnr > 0 && portnr < MAX_NUM_HW_PORT);
 	assert(pPortOwner != NULL);
 
 	// if the thread is alive: Kill
@@ -130,7 +130,10 @@ BOOL CSerialPort::InitPort(CWnd* pPortOwner,	// the owner (CWnd) of the port (re
 	}
 
 	// prepare port strings
-	sprintf(szPort, "COM%d", portnr);
+	if(portnr < 10)
+		sprintf(szPort, "COM%d", portnr);
+	else
+		sprintf(szPort, "\\\\.\\COM%d", portnr);
 	sprintf(szBaud, "baud=%d parity=%c data=%d stop=%d", baud, parity, databits, stopbits);
 
 	// get a handle to the port
