@@ -495,7 +495,7 @@ HCURSOR CSCOMMDlg::OnQueryDragIcon()
 static long rxdatacount=0;  //该变量用于接收字符计数
 LONG CSCOMMDlg::OnCommunication(WPARAM ch, LPARAM port)
 {
-	if (port <= 0 || port > 4)
+	if (port <= 0 || port > MAX_NUM_HW_PORT)
 		return -1;
 	rxdatacount++;   //接收的字节计数
 	CString strTemp;
@@ -952,10 +952,10 @@ void CSCOMMDlg::UpdateCommFromEdit(int i, CComboBox &c)
 	CString comm;
 	//m_Com.GetLBText(m_Com.GetCurSel(), comm);
 	c.GetWindowText(comm);
-	UINT HwPortId;
-	if (1 != sscanf(comm, "COM%d", &HwPortId))
+	UINT HwPortId = 1;
+	if (1 == sscanf(comm, "COM%d", &HwPortId))
 	{
-		this->ChangeComm(i, HwPortId);
+		this->ChangeComm(i, HwPortId-1);
 	}
 }
 
