@@ -106,7 +106,6 @@ public:
 	CComboBox	m_Com3;
 	CComboBox	m_Com2;
 	CButton	m_ctrlWriteDB;
-	CButton	m_ctrlHelp;
 	CPushPinButton	m_ctrlPushPin;
 	CButton	m_ctrlSendFile;
 	CEdit	m_ctrlEditSendFile;
@@ -117,14 +116,12 @@ public:
 	CButton	m_ctrlManualSend;
 	CHyperLink	m_ctrlHyperLink2;
 	CButton	m_ctrlClearTXData;
-	CStatic	m_ctrlStaticXFS;
 	CButton	m_ctrlClose;
 	CButton	m_ctrlCounterReset;
 	CEdit	m_ctrlEditSend;
 	CEdit	m_ctrlReceiveData;
 	CButton	m_ctrlAutoClear;
 	CStatic	m_ctrlIconOpenoff;
-	CHyperLink	m_ctrlHyperLinkWWW;
 	CComboBox	m_StopBits;
 	CComboBox	m_DataBits;
 	CComboBox	m_Parity;

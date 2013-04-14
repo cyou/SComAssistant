@@ -153,6 +153,7 @@
 #define IDC_STATIC42                    1108
 #define IDC_COMBO_CHANNEL               1109
 #define IDC_STATIC_RECEIVECHAR          1110
+#define IDC_TAB2                        1111
 
 // Next default values for new objects
 // 
@@ -160,7 +161,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        147
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1064
+#define _APS_NEXT_CONTROL_VALUE         1112
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

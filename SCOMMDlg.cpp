@@ -181,7 +181,6 @@ void CSCOMMDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_COMBO_COMSELECT3, m_Com3);
 	DDX_Control(pDX, IDC_COMBO_COMSELECT2, m_Com2);
 	DDX_Control(pDX, IDC_BUTTON_WRITEDB, m_ctrlWriteDB);
-	DDX_Control(pDX, IDC_BUTTON_HELP, m_ctrlHelp);
 	DDX_Control(pDX, IDC_BUTTON_PUSHPIN, m_ctrlPushPin);
 	DDX_Control(pDX, IDC_BUTTON_SENDFILE, m_ctrlSendFile);
 	DDX_Control(pDX, IDC_EDIT_SENDFILE, m_ctrlEditSendFile);
@@ -190,16 +189,13 @@ void CSCOMMDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_STATIC_RXCOUNT, m_ctrlRXCOUNT);
 	DDX_Control(pDX, IDC_EDIT_SAVEPATH, m_ctrlSavePath);
 	DDX_Control(pDX, IDC_BUTTON_MANUALSEND, m_ctrlManualSend);
-	DDX_Control(pDX, IDC_STATIC_GJW, m_ctrlHyperLink2);
 	DDX_Control(pDX, IDC_BUTTON_CLEARRECASENDA, m_ctrlClearTXData);
-	DDX_Control(pDX, IDC_STATIC_XFS, m_ctrlStaticXFS);
 	DDX_Control(pDX, IDC_BUTTON_CLOSE, m_ctrlClose);
 	DDX_Control(pDX, IDC_BUTTON_COUNTRESET, m_ctrlCounterReset);
 	DDX_Control(pDX, IDC_EDIT_SEND, m_ctrlEditSend);
 	DDX_Control(pDX, IDC_EDIT_RECIVE, m_ctrlReceiveData);
 	DDX_Control(pDX, IDC_CHECK_AUTOCLEAR, m_ctrlAutoClear);
 	DDX_Control(pDX, IDC_STATIC_OPENOFF, m_ctrlIconOpenoff);
-	DDX_Control(pDX, IDC_STATIC_XFS2, m_ctrlHyperLinkWWW);
 	DDX_Control(pDX, IDC_COMBO_STOPBITS, m_StopBits);
 	DDX_Control(pDX, IDC_COMBO_DATABITS, m_DataBits);
 	DDX_Control(pDX, IDC_COMBO_PARITY, m_Parity);
@@ -348,13 +344,17 @@ BOOL CSCOMMDlg::OnInitDialog()
 	
 	// TODO: Add extra initialization here
 
-	m_ctrlHyperLink2.SetURL(_T("mailto:webmaster@gjwtech.com"));
-	m_ctrlHyperLink2.SetUnderline(TRUE);
-	m_ctrlHyperLink2.SetLinkCursor(AfxGetApp()->LoadCursor(IDC_CURSOR_HAND));
+//	m_ctrlHyperLink2.SetURL(_T("mailto:webmaster@gjwtech.com"));
+//	m_ctrlHyperLink2.SetUnderline(TRUE);
+//	m_ctrlHyperLink2.SetLinkCursor(AfxGetApp()->LoadCursor(IDC_CURSOR_HAND));
 
-	m_ctrlHyperLinkWWW.SetURL(_T("http://www.gjwtech.com"));
-	m_ctrlHyperLinkWWW.SetUnderline(TRUE);
-	m_ctrlHyperLinkWWW.SetLinkCursor(AfxGetApp()->LoadCursor(IDC_CURSOR_HAND));
+//	m_ctrlHyperLinkWWW.SetURL(_T("http://www.gjwtech.com"));
+//	m_ctrlHyperLinkWWW.SetUnderline(TRUE);
+//	m_ctrlHyperLinkWWW.SetLinkCursor(AfxGetApp()->LoadCursor(IDC_CURSOR_HAND));
+
+	//this->SetWindowPos(this, 0, 0, 1024, 1000,0);
+
+	//MoveWindow(0, 0, 1024, 768);
 
 
 	m_Com.SetCurSel(0);
