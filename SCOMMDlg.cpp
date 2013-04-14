@@ -142,6 +142,7 @@ void CSCOMMDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CSCOMMDlg)
+	DDX_Control(pDX, IDC_BUTTONSTART, m_ctrlProfileStart);
 	DDX_Control(pDX, IDC_COMBO_CHANNEL, m_ctrSendChannel);
 	DDX_Control(pDX, IDC_STATIC_OPENOFF2, m_ctrlIconOpenoff2);
 	DDX_Control(pDX, IDC_BUTTON_OPENPORT4, m_ctrlOpenPort4);
@@ -289,6 +290,7 @@ BEGIN_MESSAGE_MAP(CSCOMMDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON_DEVSTART4, OnButtonDevstart4)
 	ON_CBN_EDITCHANGE(IDC_COMBO_COMSELECT, OnEditchangeComboComselect)
 	ON_BN_CLICKED(IDC_CHECK_CR, OnCheckCr)
+	ON_BN_CLICKED(IDC_BUTTONSTART, OnButtonstart)
 	//}}AFX_MSG_MAP
 	ON_EN_CHANGE(IDC_EDIT_RECIVE, OnEnChangeEditRecive)
 END_MESSAGE_MAP()
@@ -422,7 +424,7 @@ BOOL CSCOMMDlg::OnInitDialog()
 
 	this->m_ctrSendChannel.SetCurSel(0);
 
-	// intial device object.
+	// initial device object.
 	for (int j =0; j < MAX_NUM_DEVICE; j++)
 	{
 		p_Devices[j] = new Device(j, 0);
@@ -431,6 +433,16 @@ BOOL CSCOMMDlg::OnInitDialog()
 
 		SetDeviceSettings(j, 0, 0);
 	}
+
+	// initial inteval time.
+	this->m_nIntervalTime = 5000;
+	
+	CEdit* pEdit2=(CEdit*)GetDlgItem(IDC_EDIT_INTERVAL);
+	CString strText2;
+	strText2.Format("%d",m_nIntervalTime);
+	pEdit2->SetWindowText(strText2);
+
+	m_ProfileStart = false;
 
 
 	m_nBaud=9600;
@@ -533,11 +545,26 @@ HCURSOR CSCOMMDlg::OnQueryDragIcon()
 	return (HCURSOR) m_hIcon;
 }
 
+Device* CSCOMMDlg::GetActiveDevice()
+{
+	for (int i = 0; i < MAX_NUM_DEVICE; i++){
+		if (this->p_Devices[i]->isActive())
+			return this->p_Devices[i];
+	}
+	return NULL;
+}
+
 static long rxdatacount=0;  //该变量用于接收字符计数
 LONG CSCOMMDlg::OnCommunication(WPARAM ch, LPARAM port)
 {
 	if (port <= 0 || port > MAX_NUM_HW_PORT)
 		return -1;
+
+	if (p_activeDevice) {
+		p_activeDevice->getProtocol()->AddDataToBuffer((char) ch);
+	}
+	this->SetTimer(RECEIVE_TIMEOUT_EVENT_ID, 20, NULL);
+
 	rxdatacount++;   //接收的字节计数
 	CString strTemp;
 	strTemp.Format("%ld",rxdatacount);
@@ -859,6 +886,13 @@ void CSCOMMDlg::OnTimer(UINT nIDEvent)
 		break;
 	case 4:
 		m_animIcon.ShowNextImage();
+		break;
+
+	case PROFILE_EVENT_ID:
+		this->OnProfileEvent();
+		break;
+	case RECEIVE_TIMEOUT_EVENT_ID:
+		this->OnReceiveTimeOutEvent();
 		break;
 	default:
 		break;
@@ -1894,4 +1928,47 @@ void CSCOMMDlg::OnCheckCr()
 {
 	// TODO: Add your control notification handler code here
 	m_AutoAddCR = !m_AutoAddCR;
+}
+
+void CSCOMMDlg::OnButtonstart() 
+{
+	// TODO: Add your control notification handler code here
+	CEdit* pEdit=(CEdit*)GetDlgItem(IDC_EDIT_INTERVAL);
+	CString strText;
+	pEdit->GetWindowText(strText);
+	this->m_nIntervalTime =atoi(strText);
+
+	//AfxMessageBox(strText);
+	if(this->m_ProfileStart)
+	{
+		this->m_ctrlProfileStart.SetWindowText("开始采样");
+		//stop profiling.
+		KillTimer(PROFILE_EVENT_ID);
+	}
+	else
+	{
+		this->m_ctrlProfileStart.SetWindowText("停止采样");
+		//set time to start profile
+		SetTimer(PROFILE_EVENT_ID, this->m_nIntervalTime, NULL);
+		//AfxMessageBox(strText);
+	}
+	m_ProfileStart = !m_ProfileStart;
+}
+
+void CSCOMMDlg::OnReceiveTimeOutEvent()
+{
+	this->p_activeDevice->handleTimeout(500);
+}
+
+void CSCOMMDlg::OnProfileEvent()
+{
+	for (int i = 0; i < MAX_NUM_DEVICE; i++)
+	{
+		this->p_Devices[i]->setActive(true);
+		this->p_activeDevice = this->p_Devices[i];
+
+		this->p_Devices[i]->sendCommand("command1");
+		SetTimer(RECEIVE_TIMEOUT_EVENT_ID, 500, NULL);
+		//this->
+	}
 }

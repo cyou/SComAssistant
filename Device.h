@@ -26,9 +26,15 @@ public:
 	char* getCommandResponse();
 	void writeDB(char* res);
 
+	BOOL isActive();
+	void setActive(BOOL active);
+
+	void handleTimeout(int interval);
+
 private:
 	CString m_name;
 	BOOL m_is_device_open;
+	BOOL m_is_active;
 	int device_id;
 	int device_type; // 0 means DSC device, 1 means Modbus device.
 

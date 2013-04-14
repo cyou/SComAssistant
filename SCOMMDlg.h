@@ -24,6 +24,15 @@
 
 #define	MAX_NUM_SW_PORT		4
 #define MAX_NUM_DEVICE      4
+
+///////////////
+///// Timer Eevent.
+
+#define PROFILE_EVENT_ID  1000
+
+#define RECEIVE_TIMEOUT_EVENT_ID  1001
+
+
 /////////////////////////////////////////////////////////////////////////////
 // CSCOMMDlg dialog
 
@@ -56,6 +65,9 @@ public:
 
 	Device*         p_Devices[MAX_NUM_DEVICE];
 
+
+	Device*         p_activeDevice;
+
 	BOOL            m_bOpenPorts[MAX_NUM_SW_PORT];
     DWORD           m_CommEvents[MAX_NUM_SW_PORT];
 
@@ -67,6 +79,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CSCOMMDlg)
 	enum { IDD = IDD_SCOMM_DIALOG };
+	CButton	m_ctrlProfileStart;
 	CComboBox	m_ctrSendChannel;
 	CStatic	m_ctrlIconOpenoff2;
 	CButton	m_ctrlOpenPort4;
@@ -158,6 +171,8 @@ protected:
 
 
 	BOOL m_AutoAddCR;
+	int m_nIntervalTime;
+	BOOL m_ProfileStart;
 
 	// Generated message map functions
 	//{{AFX_MSG(CSCOMMDlg)
@@ -234,6 +249,7 @@ protected:
 	afx_msg void OnButtonDevstart4();
 	afx_msg void OnEditchangeComboComselect();
 	afx_msg void OnCheckCr();
+	afx_msg void OnButtonstart();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 	//DECLARE_DYNAMIC_MAP()
@@ -252,6 +268,11 @@ private:
 
 	void UpdateCommFromEdit(int i, CComboBox &c);
 	void SetDeviceSettings(int i, int pIndex, int cIndex);
+
+	Device* GetActiveDevice();
+
+	afx_msg void OnProfileEvent();
+	afx_msg void OnReceiveTimeOutEvent();
 	
 public:
 	afx_msg void OnEnChangeEditRecive();

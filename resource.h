@@ -34,6 +34,7 @@
 #define IDC_CHECK_HEXSEND               1013
 #define IDC_CHECK_AUTOSEND              1014
 #define IDC_STATIC_XFS                  1015
+#define IDC_EDIT_INTERVAL               1015
 #define IDC_STATIC_MAIL                 1016
 #define IDC_BUTTON_OPENPORT2            1016
 #define IDC_STATIC_WWWXFS               1017
@@ -78,6 +79,7 @@
 #define IDC_STATIC_CYCLETIME            1051
 #define IDC_STATIC_MS                   1052
 #define IDC_STATIC_GJW                  1053
+#define IDC_STATIC_CYCLETIME2           1053
 #define IDC_STATIC10                    1054
 #define IDC_STATIC11                    1055
 #define IDC_STATIC12                    1056
@@ -86,6 +88,7 @@
 #define IDC_BUTTON_PUSHPIN              1059
 #define IDC_BUTTON1                     1060
 #define IDC_BUTTON_HELP                 1060
+#define IDC_STATIC_MS2                  1060
 #define IDC_STATIC15                    1061
 #define IDC_STATIC16                    1062
 #define IDC_TAB1                        1063
@@ -153,7 +156,7 @@
 #define IDC_STATIC42                    1108
 #define IDC_COMBO_CHANNEL               1109
 #define IDC_STATIC_RECEIVECHAR          1110
-#define IDC_TAB2                        1111
+#define IDC_BUTTONSTART                 1112
 
 // Next default values for new objects
 // 
@@ -161,7 +164,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        147
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1112
+#define _APS_NEXT_CONTROL_VALUE         1113
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

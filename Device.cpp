@@ -72,6 +72,15 @@ int Device::getDeviceType()
 	return this->device_type;
 }
 
+BOOL Device::isActive()
+{
+	return this->m_is_active;
+}
+
+void Device::setActive(BOOL active)
+{
+	this->m_is_active = active;
+}
 
 void Device::setDeviceType(int type)
 {
@@ -88,8 +97,9 @@ void Device::closeDevice()
 void Device::sendCommand(char* cmd)
 {
 	// convert cmd through protocol implement class.
-
+	char* data = this->m_p_protocol->ParseDataToSerialPort(cmd);
 	// write data to serial 
+	this->m_p_Port->WriteToPort(data);
 }
 
 char* Device::getCommandResponse()
@@ -98,6 +108,15 @@ char* Device::getCommandResponse()
 
 	// covert it to meanful string through protocol convertor.
 	return "result";
+}
+
+void Device::handleTimeout(int interval)
+{
+	// receive timeout event.
+	// try to verify received data from serial port.
+
+	//
+
 }
 
 
