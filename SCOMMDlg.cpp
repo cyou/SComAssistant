@@ -472,6 +472,10 @@ BOOL CSCOMMDlg::OnInitDialog()
 	m_animIcon.SetImageList(IDB_ANIM_IMGLIST,4,RGB(0,0,0));   
 	SetTimer(4,200,NULL);   
 
+	CButton* pBtn = (CButton*) GetDlgItem(IDC_CHECK_CR);
+	pBtn->SetCheck(0);// check it
+	m_AutoAddCR = FALSE;
+	
 	UpdateData(FALSE);
 
 
@@ -737,7 +741,11 @@ long TX_count=0;
 void CSCOMMDlg::OnButtonManualsend() 
 {
 	// TODO: Add your control notification handler code here
-	if(m_Port.m_hComm==NULL)
+	int swPortID;
+
+	swPortID = m_ctrSendChannel.GetCurSel();
+
+	if(m_Ports[swPortID].m_hComm==NULL)
 	{
 		m_ctrlAutoSend.SetCheck(0);
 		AfxMessageBox("串口没有打开，请打开串口");
@@ -751,13 +759,26 @@ void CSCOMMDlg::OnButtonManualsend()
 		{
 			char data[512];
 			int len=Str2Hex(m_strSendData,data);
-			m_Port.WriteToPort(data,len);
+			if (m_AutoAddCR)
+			{
+				data[len] =13;
+				data[len+1]=10;
+				len +=2;
+			}
+			m_Ports[swPortID].WriteToPort(data,len);
 			TX_count+=(long)((m_strSendData.GetLength()+1)/3);
 			//m_Port.WriteToPort(hexdata);	
 		}
 		else 
 		{
-			m_Port.WriteToPort((LPCTSTR)m_strSendData);	//发送数据
+			CString tmpStr;
+			tmpStr = m_strSendData;
+			if (m_AutoAddCR)
+			{
+				tmpStr += '\n';
+				tmpStr += '\r';
+			}
+			m_Ports[swPortID].WriteToPort((LPCTSTR)tmpStr);	//发送数据
 			TX_count+=m_strSendData.GetLength();
 		}
 		CString strTemp;
@@ -769,10 +790,13 @@ void CSCOMMDlg::OnButtonManualsend()
 void CSCOMMDlg::OnCheckAutosend() 
 {
 	// TODO: Add your control notification handler code here
+	int swPortID;
+	swPortID = m_ctrSendChannel.GetCurSel();
+
 	m_bAutoSend=!m_bAutoSend;
 	if(m_bAutoSend)
 	{
-		if(m_Port.m_hComm==NULL)
+		if(m_Ports[swPortID].m_hComm==NULL)
 		{
 			m_bAutoSend=!m_bAutoSend;
 			m_ctrlAutoSend.SetCheck(0);
@@ -812,9 +836,16 @@ void CSCOMMDlg::OnTimer(UINT nIDEvent)
 
 		if(!(m_ctrlAutoSend.GetCheck()))
 		{
-			if (m_Port.InitPort(this, m_nCom, m_nBaud,m_cParity,m_nDatabits,m_nStopbits,m_dwCommEvents,512))
+			int i = m_ctrSendChannel.GetCurSel();
+			int m_nCom = this->m_CommInfo[i].getCom();
+			int m_nBaud = this->m_CommInfo[i].getBand();
+			char m_cParity = this->m_CommInfo[i].getParity();
+			int m_nDatabits = this->m_CommInfo[i].getDatabits();
+			int m_nStopbits = this->m_CommInfo[i].getStopbits();
+			int m_dwCommEvents = this->m_CommEvents[i];
+			if (m_Ports[i].InitPort(this, m_nCom, m_nBaud,m_cParity,m_nDatabits,m_nStopbits,m_dwCommEvents,512))
 			{
-				m_Port.StartMonitoring();
+				m_Ports[i].StartMonitoring();
 				strStatus.Format("STATUS：COM%d OPENED，%d,%c,%d,%d",m_nCom, m_nBaud,m_cParity,m_nDatabits,m_nStopbits);
 				m_ctrlIconOpenoff.SetIcon(m_hIconRed);
 			}
@@ -1406,9 +1437,17 @@ void CSCOMMDlg::OnButtonSendfile()
 	fp.Close();
 
 	CString strStatus;
-	if (m_Port.InitPort(this, m_nCom, m_nBaud, m_cParity, m_nDatabits, m_nStopbits, m_dwCommEvents, fplength))
+	int i = m_ctrSendChannel.GetCurSel();
+	int m_nCom = this->m_CommInfo[i].getCom();
+	int m_nBaud = this->m_CommInfo[i].getBand();
+	char m_cParity = this->m_CommInfo[i].getParity();
+	int m_nDatabits = this->m_CommInfo[i].getDatabits();
+	int m_nStopbits = this->m_CommInfo[i].getStopbits();
+	int m_dwCommEvents = this->m_CommEvents[i] | WM_COMM_TXEMPTY_DETECTED;
+
+	if (m_Ports[i].InitPort(this, m_nCom, m_nBaud, m_cParity, m_nDatabits, m_nStopbits, m_dwCommEvents, fplength))
 	{
-		m_Port.StartMonitoring();
+		m_Ports[i].StartMonitoring();
 		strStatus.Format("STATUS：COM%d OPENED，%d,%c,%d,%d",m_nCom, m_nBaud,m_cParity,m_nDatabits,m_nStopbits);
 		m_ctrlIconOpenoff.SetIcon(m_hIconRed);
 		m_bSendFile=TRUE;
@@ -1418,7 +1457,7 @@ void CSCOMMDlg::OnButtonSendfile()
 		m_ctrlManualSend.EnableWindow(FALSE); 
 		m_ctrlAutoSend.EnableWindow(FALSE);
 		m_ctrlSendFile.EnableWindow(FALSE);
-		m_Port.WriteToPort((LPCTSTR)fpBuff,fplength);
+		m_Ports[i].WriteToPort((LPCTSTR)fpBuff,fplength);
 	}
 	else
 	{
