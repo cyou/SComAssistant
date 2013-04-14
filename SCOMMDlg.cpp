@@ -1427,11 +1427,20 @@ void CSCOMMDlg::OnButtonPushpin()
 
 void CSCOMMDlg::OnDestroy() 
 {
+	int i = 0;
 	CDialog::OnDestroy();
 	m_ctrlAutoSend.SetCheck(0);  //强行关闭自动发送
 	KillTimer(1);   //关闭定时器
 	KillTimer(4);
-	m_Port.ClosePort();  //关闭串口
+
+	while (i++ < MAX_NUM_SW_PORT)
+	{
+		if(m_bOpenPorts[i])  //关闭串口
+		{
+			m_Ports[i].ClosePort();//关闭串口
+			m_bOpenPorts[i] =! m_bOpenPorts[i];
+		}
+	}
 	m_ReceiveData.Empty();  //清空接收数据字符串
 }
 
