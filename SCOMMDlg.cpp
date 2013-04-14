@@ -752,8 +752,8 @@ void CSCOMMDlg::OnButtonManualsend()
 			tmpStr = m_strSendData;
 			if (m_AutoAddCR)
 			{
-				tmpStr += '\r';
 				tmpStr += '\n';
+				tmpStr += '\r';
 			}
 			m_Ports[swPortID].WriteToPort((LPCTSTR)tmpStr);	//·¢ËÍÊý¾Ý
 			TX_count+=m_strSendData.GetLength();
@@ -813,9 +813,16 @@ void CSCOMMDlg::OnTimer(UINT nIDEvent)
 
 		if(!(m_ctrlAutoSend.GetCheck()))
 		{
-			if (m_Port.InitPort(this, m_nCom, m_nBaud,m_cParity,m_nDatabits,m_nStopbits,m_dwCommEvents,512))
+			int i = m_ctrSendChannel.GetCurSel();
+			int m_nCom = this->m_CommInfo[i].getCom();
+			int m_nBaud = this->m_CommInfo[i].getBand();
+			char m_cParity = this->m_CommInfo[i].getParity();
+			int m_nDatabits = this->m_CommInfo[i].getDatabits();
+			int m_nStopbits = this->m_CommInfo[i].getStopbits();
+			int m_dwCommEvents = this->m_CommEvents[i];
+			if (m_Ports[i].InitPort(this, m_nCom, m_nBaud,m_cParity,m_nDatabits,m_nStopbits,m_dwCommEvents,512))
 			{
-				m_Port.StartMonitoring();
+				m_Ports[i].StartMonitoring();
 				strStatus.Format("STATUS£ºCOM%d OPENED£¬%d,%c,%d,%d",m_nCom, m_nBaud,m_cParity,m_nDatabits,m_nStopbits);
 				m_ctrlIconOpenoff.SetIcon(m_hIconRed);
 			}
@@ -1407,9 +1414,17 @@ void CSCOMMDlg::OnButtonSendfile()
 	fp.Close();
 
 	CString strStatus;
-	if (m_Port.InitPort(this, m_nCom, m_nBaud, m_cParity, m_nDatabits, m_nStopbits, m_dwCommEvents, fplength))
+	int i = m_ctrSendChannel.GetCurSel();
+	int m_nCom = this->m_CommInfo[i].getCom();
+	int m_nBaud = this->m_CommInfo[i].getBand();
+	char m_cParity = this->m_CommInfo[i].getParity();
+	int m_nDatabits = this->m_CommInfo[i].getDatabits();
+	int m_nStopbits = this->m_CommInfo[i].getStopbits();
+	int m_dwCommEvents = this->m_CommEvents[i] | WM_COMM_TXEMPTY_DETECTED;
+
+	if (m_Ports[i].InitPort(this, m_nCom, m_nBaud, m_cParity, m_nDatabits, m_nStopbits, m_dwCommEvents, fplength))
 	{
-		m_Port.StartMonitoring();
+		m_Ports[i].StartMonitoring();
 		strStatus.Format("STATUS£ºCOM%d OPENED£¬%d,%c,%d,%d",m_nCom, m_nBaud,m_cParity,m_nDatabits,m_nStopbits);
 		m_ctrlIconOpenoff.SetIcon(m_hIconRed);
 		m_bSendFile=TRUE;
@@ -1419,7 +1434,7 @@ void CSCOMMDlg::OnButtonSendfile()
 		m_ctrlManualSend.EnableWindow(FALSE); 
 		m_ctrlAutoSend.EnableWindow(FALSE);
 		m_ctrlSendFile.EnableWindow(FALSE);
-		m_Port.WriteToPort((LPCTSTR)fpBuff,fplength);
+		m_Ports[i].WriteToPort((LPCTSTR)fpBuff,fplength);
 	}
 	else
 	{
