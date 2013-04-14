@@ -391,7 +391,16 @@ BOOL CSCOMMDlg::OnInitDialog()
 	m_DataBits4.SetCurSel(0);
 	m_StopBits4.SetCurSel(0);
 
-	// 初始化仪表信息
+	// initial device UI.
+	this->m_Protocal.SetCurSel(0);
+	this->m_Protocal2.SetCurSel(0);
+	this->m_Protocal3.SetCurSel(0);
+	this->m_Protocal4.SetCurSel(0);
+
+	this->m_usePort.SetCurSel(0);
+	this->m_usePort2.SetCurSel(0);
+	this->m_usePort3.SetCurSel(0);
+	this->m_usePort4.SetCurSel(0);
 
 	
 
