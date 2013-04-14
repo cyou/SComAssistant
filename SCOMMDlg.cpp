@@ -449,6 +449,10 @@ BOOL CSCOMMDlg::OnInitDialog()
 	m_animIcon.SetImageList(IDB_ANIM_IMGLIST,4,RGB(0,0,0));   
 	SetTimer(4,200,NULL);   
 
+	CButton* pBtn = (CButton*) GetDlgItem(IDC_CHECK_CR);
+	pBtn->SetCheck(0);// check it
+	m_AutoAddCR = FALSE;
+	
 	UpdateData(FALSE);
 
 
@@ -714,7 +718,11 @@ long TX_count=0;
 void CSCOMMDlg::OnButtonManualsend() 
 {
 	// TODO: Add your control notification handler code here
-	if(m_Port.m_hComm==NULL)
+	int swPortID;
+
+	swPortID = m_ctrSendChannel.GetCurSel();
+
+	if(m_Ports[swPortID].m_hComm==NULL)
 	{
 		m_ctrlAutoSend.SetCheck(0);
 		AfxMessageBox("串口没有打开，请打开串口");
@@ -728,13 +736,24 @@ void CSCOMMDlg::OnButtonManualsend()
 		{
 			char data[512];
 			int len=Str2Hex(m_strSendData,data);
-			m_Port.WriteToPort(data,len);
+			if (m_AutoAddCR)
+			{
+				data[len] =13;
+				data[len+1]=10;
+				len +=2;
+			}
+			m_Ports[swPortID].WriteToPort(data,len);
 			TX_count+=(long)((m_strSendData.GetLength()+1)/3);
 			//m_Port.WriteToPort(hexdata);	
 		}
 		else 
 		{
-			m_Port.WriteToPort((LPCTSTR)m_strSendData);	//发送数据
+			if (m_AutoAddCR)
+			{
+				m_strSendData += '\r';
+				m_strSendData += '\n';
+			}
+			m_Ports[swPortID].WriteToPort((LPCTSTR)m_strSendData);	//发送数据
 			TX_count+=m_strSendData.GetLength();
 		}
 		CString strTemp;
