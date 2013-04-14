@@ -127,6 +127,7 @@ void CSCOMMDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CSCOMMDlg)
+	DDX_Control(pDX, IDC_COMBO_CHANNEL, m_ctrSendChannel);
 	DDX_Control(pDX, IDC_STATIC_OPENOFF2, m_ctrlIconOpenoff2);
 	DDX_Control(pDX, IDC_BUTTON_OPENPORT4, m_ctrlOpenPort4);
 	DDX_Control(pDX, IDC_BUTTON_OPENPORT3, m_ctrlOpenPort3);
@@ -276,6 +277,7 @@ BEGIN_MESSAGE_MAP(CSCOMMDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON_DEVSTART3, OnButtonDevstart3)
 	ON_BN_CLICKED(IDC_BUTTON_DEVSTART4, OnButtonDevstart4)
 	ON_CBN_EDITCHANGE(IDC_COMBO_COMSELECT, OnEditchangeComboComselect)
+	ON_BN_CLICKED(IDC_CHECK_CR, OnCheckCr)
 	//}}AFX_MSG_MAP
 	ON_EN_CHANGE(IDC_EDIT_RECIVE, OnEnChangeEditRecive)
 END_MESSAGE_MAP()
@@ -401,6 +403,9 @@ BOOL CSCOMMDlg::OnInitDialog()
 	this->m_usePort2.SetCurSel(0);
 	this->m_usePort3.SetCurSel(0);
 	this->m_usePort4.SetCurSel(0);
+
+
+	this->m_ctrSendChannel.SetCurSel(0);
 
 	
 
@@ -1781,4 +1786,10 @@ void CSCOMMDlg::OnButtonDevstart4()
 void CSCOMMDlg::OnEditchangeComboComselect() 
 {
 	UpdateCommFromEdit(0, m_Com);
+}
+
+void CSCOMMDlg::OnCheckCr() 
+{
+	// TODO: Add your control notification handler code here
+	m_AutoAddCR = !m_AutoAddCR;
 }

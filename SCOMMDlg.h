@@ -65,6 +65,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CSCOMMDlg)
 	enum { IDD = IDD_SCOMM_DIALOG };
+	CComboBox	m_ctrSendChannel;
 	CStatic	m_ctrlIconOpenoff2;
 	CButton	m_ctrlOpenPort4;
 	CButton	m_ctrlOpenPort3;
@@ -156,6 +157,9 @@ protected:
 
 	MYSQL* m_mysql;
 
+
+	BOOL m_AutoAddCR;
+
 	// Generated message map functions
 	//{{AFX_MSG(CSCOMMDlg)
 	virtual BOOL OnInitDialog();
@@ -230,6 +234,7 @@ protected:
 	afx_msg void OnButtonDevstart3();
 	afx_msg void OnButtonDevstart4();
 	afx_msg void OnEditchangeComboComselect();
+	afx_msg void OnCheckCr();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 	//DECLARE_DYNAMIC_MAP()

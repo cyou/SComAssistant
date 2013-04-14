@@ -107,6 +107,7 @@
 #define IDC_STATIC_OPENOFF4             1078
 #define IDC_STATIC30                    1079
 #define IDC_STATIC31                    1080
+#define IDC_CHECK_CR                    1081
 #define IDC_COMBO_DATABITS5             1082
 #define IDC_COMBO_PROTOCAL1             1082
 #define IDC_STATIC32                    1083
@@ -149,6 +150,8 @@
 #define IDC_BUTTON_SETPORT4             1106
 #define IDC_BUTTON_OPENPORT12           1107
 #define IDC_BUTTON_DEVSTART4            1107
+#define IDC_STATIC42                    1108
+#define IDC_COMBO_CHANNEL               1109
 
 // Next default values for new objects
 // 
