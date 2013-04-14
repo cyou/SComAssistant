@@ -15,9 +15,12 @@ public:
 
 	void setCommInfo(CommInfo commInfo);
 	void setProtocol(Protocol* protocol);
+	Protocol* getProtocol();
 	void setSerialPort(CSerialPort* serialPort);
 	BOOL openDevice();
 	void closeDevice();
+	int getDeviceType();
+	void setDeviceType(int type);
 
 	void sendCommand(char* cmd);
 	char* getCommandResponse();
@@ -27,7 +30,7 @@ private:
 	CString m_name;
 	BOOL m_is_device_open;
 	int device_id;
-	int device_type; // 1 means DSC device, 2 means Modbus device.
+	int device_type; // 0 means DSC device, 1 means Modbus device.
 
 	int timeout;
 

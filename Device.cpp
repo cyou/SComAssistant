@@ -11,14 +11,16 @@ Device::Device(int device_id, int type)
 //	this->m_nCom = ncom;
 	this->m_is_device_open = false;
 	this->device_type = type;
-	if (this->device_type == 1) {
+
+	this->m_p_protocol = NULL;
+	/*if (this->device_type == 1) {
 
 		m_p_protocol = new DSCProtocol("dsc");
 	} 
 	else
 	{
 		m_p_protocol = new ModbusProtocol("modbus");
-	}
+	}*/
 	
 }
 
@@ -52,6 +54,29 @@ BOOL Device::openDevice()
 	return true;
 }
 
+
+Protocol* Device::getProtocol()
+{
+	if (this->m_p_protocol)
+		return this->m_p_protocol;
+	return NULL;
+}
+
+void Device::setProtocol(Protocol* protocol)
+{
+	this->m_p_protocol = protocol;
+}
+
+int Device::getDeviceType()
+{
+	return this->device_type;
+}
+
+
+void Device::setDeviceType(int type)
+{
+	this->device_type = type;
+}
 
 void Device::closeDevice()
 {

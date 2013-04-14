@@ -7,6 +7,11 @@
 #include "io.h"
 #include "math.h"
 #include ".\scommdlg.h"
+#include "Device.h"
+#include "Protocol.h"
+
+#include "DSCProtocol.h"
+#include "ModbusProtocol.h"
 
 
 #include "DB.h"
@@ -120,6 +125,16 @@ CSCOMMDlg::CSCOMMDlg(CWnd* pParent /*=NULL*/)
 	m_strSendFilePathName="还没有选择文件";//"No File Selected!";
 	m_nFileLength=0;
 
+}
+
+
+CSCOMMDlg::~CSCOMMDlg()
+{
+
+	for (int j =0; j < MAX_NUM_DEVICE; j++)
+	{
+		delete p_Devices[j];
+	}
 }
 
 
@@ -407,7 +422,15 @@ BOOL CSCOMMDlg::OnInitDialog()
 
 	this->m_ctrSendChannel.SetCurSel(0);
 
-	
+	// intial device object.
+	for (int j =0; j < MAX_NUM_DEVICE; j++)
+	{
+		p_Devices[j] = new Device(j, 0);
+		//p_Devices[j]->setCommInfo(m_CommInfo[j%MAX_NUM_DEVICE]);
+		//p_Devices[j]->setSerialPort(&this->m_Ports[j%MAX_NUM_DEVICE]);
+
+		SetDeviceSettings(j, 0, 0);
+	}
 
 
 	m_nBaud=9600;
@@ -1735,29 +1758,69 @@ void CSCOMMDlg::OnSelendokComboStopbits4()
 	this->ChangeStopbits(3, m_StopBits4.GetCurSel());
 }
 
+
+void CSCOMMDlg::SetDeviceSettings(int i, int pIndex, int cIndex)
+{
+	p_Devices[i]->setCommInfo(m_CommInfo[cIndex]);
+	p_Devices[i]->setSerialPort(&this->m_Ports[cIndex]);
+	//int index = this->m_Protocal.GetCurSel()+1;
+	Protocol* p = p_Devices[i]->getProtocol();
+
+	if (pIndex != p_Devices[i]->getDeviceType() || p == NULL) 
+	{
+		if (p) {
+			delete p;
+		}
+		if (pIndex == 0) {
+			p = new DSCProtocol("dsc");
+		}
+		else
+		{
+			p = new ModbusProtocol("modbus");
+		}
+		p_Devices[i]->setDeviceType(pIndex);
+		p_Devices[i]->setProtocol(p);
+	}
+}
+
 void CSCOMMDlg::OnButtonSetport1() 
 {
 	// TODO: Add your control notification handler code here
-	
+	int pIndex = this->m_Protocal.GetCurSel();
+	int cIndex = this->m_usePort.GetCurSel();
+	SetDeviceSettings(0, pIndex, cIndex);
+	AfxMessageBox("仪表1设置成功。");
 }
 
 void CSCOMMDlg::OnButtonSetport2() 
 {
 	// TODO: Add your control notification handler code here
-	
+	// TODO: Add your control notification handler code here
+	int pIndex = this->m_Protocal2.GetCurSel();
+	int cIndex = this->m_usePort2.GetCurSel();
+	SetDeviceSettings(1, pIndex, cIndex);
+	AfxMessageBox("仪表2设置成功。");
 }
+	
 
 void CSCOMMDlg::OnButtonSetport3() 
 {
 	// TODO: Add your control notification handler code here
-	
+	int pIndex = this->m_Protocal3.GetCurSel();
+	int cIndex = this->m_usePort3.GetCurSel();
+	SetDeviceSettings(2, pIndex, cIndex);
+	AfxMessageBox("仪表3设置成功。");
 }
-
+	
 void CSCOMMDlg::OnButtonSetport4() 
 {
 	// TODO: Add your control notification handler code here
-	
+	int pIndex = this->m_Protocal4.GetCurSel();
+	int cIndex = this->m_usePort4.GetCurSel();
+	SetDeviceSettings(3, pIndex, cIndex);
+	AfxMessageBox("仪表4设置成功。");
 }
+
 
 void CSCOMMDlg::OnButtonDevstart1() 
 {

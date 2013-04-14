@@ -48,6 +48,8 @@ public:
 	CSerialPort m_Port;  //CSerialPort类对象
 	CAnimateDlgIcon m_animIcon;  //动画图标
 	CSCOMMDlg(CWnd* pParent = NULL);	// standard constructor
+	~CSCOMMDlg();
+
 
 	CommInfo        m_CommInfo[MAX_NUM_SW_PORT];
 	CSerialPort		m_Ports[MAX_NUM_SW_PORT];
@@ -252,6 +254,7 @@ private:
 	void ChangeStopbits(int i, int value);
 
 	void UpdateCommFromEdit(int i, CComboBox &c);
+	void SetDeviceSettings(int i, int pIndex, int cIndex);
 	
 public:
 	afx_msg void OnEnChangeEditRecive();
