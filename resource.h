@@ -102,11 +102,15 @@
 #define IDC_STATIC27                    1073
 #define IDC_STATIC28                    1074
 #define IDC_STATIC29                    1075
+#define IDC_COMBO_DATABITS9             1075
 #define IDC_COMBO_DATABITS4             1076
+#define IDC_COMBO_STOPBITS5             1076
 #define IDC_COMBO_STOPBITS4             1077
+#define IDC_STATIC_OPENOFF5             1077
 #define IDC_STATIC_OPENOFF4             1078
 #define IDC_STATIC30                    1079
 #define IDC_STATIC31                    1080
+#define IDC_STATIC42                    1081
 #define IDC_COMBO_DATABITS5             1082
 #define IDC_COMBO_PROTOCAL1             1082
 #define IDC_STATIC32                    1083
