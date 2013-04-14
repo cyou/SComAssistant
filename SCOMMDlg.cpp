@@ -748,12 +748,14 @@ void CSCOMMDlg::OnButtonManualsend()
 		}
 		else 
 		{
+			CString tmpStr;
+			tmpStr = m_strSendData;
 			if (m_AutoAddCR)
 			{
-				m_strSendData += '\r';
-				m_strSendData += '\n';
+				tmpStr += '\r';
+				tmpStr += '\n';
 			}
-			m_Ports[swPortID].WriteToPort((LPCTSTR)m_strSendData);	//发送数据
+			m_Ports[swPortID].WriteToPort((LPCTSTR)tmpStr);	//发送数据
 			TX_count+=m_strSendData.GetLength();
 		}
 		CString strTemp;
@@ -765,10 +767,13 @@ void CSCOMMDlg::OnButtonManualsend()
 void CSCOMMDlg::OnCheckAutosend() 
 {
 	// TODO: Add your control notification handler code here
+	int swPortID;
+	swPortID = m_ctrSendChannel.GetCurSel();
+
 	m_bAutoSend=!m_bAutoSend;
 	if(m_bAutoSend)
 	{
-		if(m_Port.m_hComm==NULL)
+		if(m_Ports[swPortID].m_hComm==NULL)
 		{
 			m_bAutoSend=!m_bAutoSend;
 			m_ctrlAutoSend.SetCheck(0);
