@@ -4,6 +4,8 @@
 
 Protocol::Protocol(CString name)
 {
+
+    m_cmdReader = new CIniReader(CMD_CFG);
 	m_name = name;
 	m_buffer_index = 0;
 	m_buffer_length = 256;
@@ -15,6 +17,9 @@ Protocol::~Protocol()
 {
 	if (m_buffer)
 		delete[] m_buffer;
+
+	if (m_cmdReader)
+		delete m_cmdReader;
 }
 
 

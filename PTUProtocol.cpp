@@ -1,33 +1,33 @@
 #include "stdafx.h"
 
-#include "DSCProtocol.h"
+#include "PTUProtocol.h"
 
-DSCProtocol::DSCProtocol(CString name):Protocol(name)
+PTUProtocol::PTUProtocol(CString name):Protocol(name)
 
 {
 	m_name = name;
 	dscData_length = 0;
-	this->m_send_cmd = m_cmdReader->ReadString("Device", "dsc", "@1 MES 16");
+	this->m_send_cmd = m_cmdReader->ReadString("Device", "ptu", "$1 POLL 21");
 }
 
-DSCProtocol::~DSCProtocol()
+PTUProtocol::~PTUProtocol()
 {
 }
 
-CString DSCProtocol::GetName()
+CString PTUProtocol::GetName()
 {
 	return m_name;
 }
 
 
-char* DSCProtocol::ParseDataToSerialPort()
+char* PTUProtocol::ParseDataToSerialPort()
 {
 	//convert messages from DSC potocal here, then you can send out it by serial port.
 	// 
 	return this->m_send_cmd;
 }
 
-void DSCProtocol::ParseDataFromSerialPort(const char* szMsg)
+void PTUProtocol::ParseDataFromSerialPort(const char* szMsg)
 {
 	//parse results from serial port and covert to details message then write to DB later.
 	//
@@ -54,7 +54,7 @@ void DSCProtocol::ParseDataFromSerialPort(const char* szMsg)
 	this->convertToProtocolData();
 }
 
-void DSCProtocol::convertToProtocolData()
+void PTUProtocol::convertToProtocolData()
 {
 	for(int i=0;i<dscData_length;i++)
     {
@@ -75,7 +75,7 @@ void DSCProtocol::convertToProtocolData()
     }
 }
 
-void DSCProtocol::removeSpaces(char * dst, const char * src)
+void PTUProtocol::removeSpaces(char * dst, const char * src)
 {
     for (; *src; ++dst, ++src) {
         *dst = *src;

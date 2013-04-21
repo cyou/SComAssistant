@@ -111,6 +111,10 @@ SOURCE=.\Device.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\DeviceData.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\DSCProtocol.cpp
 # End Source File
 # Begin Source File
@@ -132,6 +136,10 @@ SOURCE=.\ModbusProtocol.cpp
 # Begin Source File
 
 SOURCE=.\Protocol.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\PTUProtocol.cpp
 # End Source File
 # Begin Source File
 
@@ -158,6 +166,10 @@ SOURCE=.\SerialPort.cpp
 SOURCE=.\StdAfx.cpp
 # ADD CPP /Yc"stdafx.h"
 # End Source File
+# Begin Source File
+
+SOURCE=.\WMTProtocol.cpp
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
@@ -180,6 +192,10 @@ SOURCE=.\Device.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\DeviceData.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\DSCProtocol.h
 # End Source File
 # Begin Source File
@@ -197,6 +213,10 @@ SOURCE=.\ModbusProtocol.h
 # Begin Source File
 
 SOURCE=.\Protocol.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\PTUProtocol.h
 # End Source File
 # Begin Source File
 
@@ -221,6 +241,10 @@ SOURCE=.\SerialPort.h
 # Begin Source File
 
 SOURCE=.\StdAfx.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\WMTProtocol.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

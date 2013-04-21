@@ -1,9 +1,10 @@
 #include "stdafx.h"
+#include "IniReader.h"
 
 #ifndef PROTOCOL_H
 #define PROTOCOL_H
 
-
+#define CMD_CFG ".\\config.ini"
 #define BODY_LEN  128
 
 typedef struct 
@@ -21,12 +22,16 @@ public:
 	virtual	~Protocol();
 
 	virtual CString GetName() = 0;
-	virtual char* ParseDataToSerialPort(char* szMsg) = 0; // convert data from protocol sub class to serial port.
+	virtual char* ParseDataToSerialPort() = 0; // convert data from protocol sub class to serial port.
 	virtual void ParseDataFromSerialPort(const char* szMsg) = 0; // convert data from serial to upper protocol class.
 	void AddDataToBuffer(char data);
 	ProtocolData* GetProtocolData();
 
 protected:
+
+	char* m_send_cmd;
+	CIniReader* m_cmdReader;
+
 	CString m_name;
 
 	char* m_buffer;

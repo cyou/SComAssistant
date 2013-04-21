@@ -1,18 +1,18 @@
 #include "stdafx.h"
 #include "Protocol.h"
 
-#ifndef DSCPROTOCOL_H
-#define DSCPROTOCOL_H
+#ifndef WMTPROTOCOL_H
+#define WMTPROTOCOL_H
 
 #define HEADER_LEN  4
 //#define BODY_LEN  215
 
 
-class DSCProtocol : public Protocol
+class WMTProtocol : public Protocol
 {
 public:
-	DSCProtocol(CString name);
-	virtual	~DSCProtocol();
+	WMTProtocol(CString name);
+	virtual	~WMTProtocol();
 
 	CString GetName();
 	char* ParseDataToSerialPort();

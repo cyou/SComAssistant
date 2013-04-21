@@ -9,6 +9,7 @@
 
 #include "CommInfo.h"
 #include "Device.h"
+#include "DeviceData.h"
 
 
 #include "winsock.h"
@@ -75,6 +76,10 @@ public:
 
 	CString			m_strReceived[MAX_NUM_SW_PORT];
 	UINT			m_HwPortID[MAX_NUM_SW_PORT];
+
+	DeviceData      m_deviceData; // collect data from all devices.
+
+	BOOL            m_is_DeviceData_ready;
 
 
 // Dialog Data
@@ -276,6 +281,11 @@ private:
 
 	afx_msg void OnProfileEvent();
 	afx_msg void OnReceiveTimeOutEvent();
+
+	static UINT ThreadFunc(LPVOID pParam);
+	CWinThread *m_pThread;
+	
+
 	
 public:
 	afx_msg void OnEnChangeEditRecive();

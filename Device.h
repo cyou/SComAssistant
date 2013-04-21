@@ -23,8 +23,8 @@ public:
 	int getDeviceType();
 	void setDeviceType(int type);
 
-	void sendCommand(char* cmd);
-	char* getCommandResponse();
+	void sendCommand();
+	ProtocolData* getCommandResponse();
 	void convertToDeviceData(DeviceData* d_data, ProtocolData* p_data);
 
 	BOOL isActive();
@@ -38,6 +38,7 @@ private:
 	CString m_name;
 	BOOL m_is_device_open;
 	BOOL m_is_active;
+	BOOL m_is_timeout;
 	int device_id;
 	int device_type; // 0 means DSC device, 1 means Modbus device.
 

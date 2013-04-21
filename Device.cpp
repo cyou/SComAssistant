@@ -4,7 +4,6 @@
 #include "DSCProtocol.h"
 #include "ModbusProtocol.h"
 
-
 Device::Device(int device_id, int type)
 {
 	this->device_id = device_id;
@@ -99,28 +98,35 @@ void Device::closeDevice()
 }
 
 
-void Device::sendCommand(char* cmd)
+void Device::sendCommand()
 {
+	this->m_is_timeout = false;
 	// convert cmd through protocol implement class.
-	char* data = this->m_p_protocol->ParseDataToSerialPort(cmd);
+	char* data = this->m_p_protocol->ParseDataToSerialPort();
 	// write data to serial 
-	this->m_p_Port->WriteToPort(data);
+	if (this->m_p_Port->m_hComm) {
+		this->m_p_Port->WriteToPort(data);
+	}
 }
 
-char* Device::getCommandResponse()
+ProtocolData* Device::getCommandResponse()
 {
 	// read data from serial port.
-
-	// covert it to meanful string through protocol convertor.
-	return "result";
+	for (;;){
+		if (m_is_timeout) {
+			m_is_timeout = false;
+			this->getProtocol()->ParseDataFromSerialPort(NULL); 
+			return this->getProtocol()->GetProtocolData();
+		}
+		//::Sleep(100);
+	}
 }
 
 void Device::handleTimeout(int interval)
 {
 	// receive timeout event.
 	// try to verify received data from serial port.
-
-	//
+	this->m_is_timeout = true;
 }
 
 

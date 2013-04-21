@@ -41,14 +41,3 @@ public:
 
 };
 #endif
-
-/*
-
-
-  `GRIPLEVEL`  FLOAT DEFAULT 0 COMMENT '地面滑溜系列(百分比)',
-  `GRIPLEVELFLG`  INT DEFAULT 0 COMMENT '地面滑溜系列(0：有效 1：无效)',
-
-  `WATERPERCENT`  FLOAT DEFAULT 0 COMMENT '地面含水量(毫米)',
-  `WATERPERCENTFLG`  INT DEFAULT 0 COMMENT '地面含水量(0：有效 1：无效)',
-
-  */

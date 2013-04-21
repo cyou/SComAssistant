@@ -16,7 +16,7 @@ CString ModbusProtocol::GetName()
 	return m_name;
 }
 
-char* ModbusProtocol::ParseDataToSerialPort(char* szMsg)
+char* ModbusProtocol::ParseDataToSerialPort()
 {
 	//convert messages from modbus potocal here, then you can send out it by serial port.
 	// 

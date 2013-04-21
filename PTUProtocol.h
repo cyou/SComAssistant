@@ -1,18 +1,18 @@
 #include "stdafx.h"
 #include "Protocol.h"
 
-#ifndef DSCPROTOCOL_H
-#define DSCPROTOCOL_H
+#ifndef PTUPROTOCOL_H
+#define PTUPROTOCOL_H
 
 #define HEADER_LEN  4
 //#define BODY_LEN  215
 
 
-class DSCProtocol : public Protocol
+class PTUProtocol : public Protocol
 {
 public:
-	DSCProtocol(CString name);
-	virtual	~DSCProtocol();
+	PTUProtocol(CString name);
+	virtual	~PTUProtocol();
 
 	CString GetName();
 	char* ParseDataToSerialPort();

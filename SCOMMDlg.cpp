@@ -129,6 +129,7 @@ CSCOMMDlg::CSCOMMDlg(CWnd* pParent /*=NULL*/)
 	m_strSendFilePathName="还没有选择文件";//"No File Selected!";
 	m_nFileLength=0;
 
+	m_is_DeviceData_ready = FALSE;
 }
 
 
@@ -486,7 +487,7 @@ BOOL CSCOMMDlg::OnInitDialog()
 	m_ctrlEditSendFile.SetWindowText("No File Selected!");
 
 	m_animIcon.SetImageList(IDB_ANIM_IMGLIST,4,RGB(0,0,0));   
-	SetTimer(4,200,NULL);   
+	//SetTimer(4,200,NULL);   
 
 	CButton* pBtn = (CButton*) GetDlgItem(IDC_CHECK_CR);
 	pBtn->SetCheck(0);// check it
@@ -1885,9 +1886,17 @@ void CSCOMMDlg::SetDeviceSettings(int i, int pIndex, int cIndex)
 		if (pIndex == 0) {
 			p = new DSCProtocol("dsc");
 		}
-		else
+		else if (pIndex == 1)
 		{
 			p = new ModbusProtocol("modbus");
+		}
+		else if (pIndex == 2)
+		{
+			p = new ModbusProtocol("ptu");
+		}
+		else 
+		{
+			p = new ModbusProtocol("wmt");
 		}
 		p_Devices[i]->setDeviceType(pIndex);
 		p_Devices[i]->setProtocol(p);
@@ -2022,14 +2031,18 @@ void CSCOMMDlg::OnButtonstart()
 	{
 		this->m_ctrlProfileStart.SetWindowText("开始采样");
 		//stop profiling.
+		KillTimer(4);
 		KillTimer(PROFILE_EVENT_ID);
+		m_ctrlPortStatus.SetWindowText("系统停止采样!");
 	}
 	else
 	{
 		this->m_ctrlProfileStart.SetWindowText("停止采样");
 		//set time to start profile
 		SetTimer(PROFILE_EVENT_ID, this->m_nIntervalTime, NULL);
+		SetTimer(4,200,NULL); 
 		//AfxMessageBox(strText);
+		m_ctrlPortStatus.SetWindowText("系统正在采样数据...");
 	}
 	m_ProfileStart = !m_ProfileStart;
 }
@@ -2039,30 +2052,43 @@ void CSCOMMDlg::OnReceiveTimeOutEvent()
 	this->p_activeDevice->handleTimeout(500);
 }
 
-void CSCOMMDlg::OnProfileEvent()
+UINT CSCOMMDlg::ThreadFunc(LPVOID pParam)
 {
-	DeviceData deviceData; // collect data from all devices.
+	CSCOMMDlg* pDlg = (CSCOMMDlg *) pParam;
 
 	for (int i = 0; i < MAX_NUM_DEVICE; i++)
 	{
 		// check if device is started.
-		if (!this->p_Devices[i]->isDeviceOpen()){
+		if (!pDlg->p_Devices[i]->isDeviceOpen()){
 			continue;
 		}
 
-		this->p_Devices[i]->setActive(true);
-		this->p_activeDevice = this->p_Devices[i];
+		pDlg->p_Devices[i]->setActive(true);
+		pDlg->p_activeDevice = pDlg->p_Devices[i];
 
-		//this->p_Devices[i]->sendCommand("command1");
+		//send request command to serial port.
+		pDlg->p_activeDevice->sendCommand();
+		pDlg->SetTimer(RECEIVE_TIMEOUT_EVENT_ID, 500, NULL);
+
+		ProtocolData* p = pDlg->p_activeDevice->getCommandResponse();
 
 		//Get data from debug input
-		this->p_activeDevice->getProtocol()->ParseDataFromSerialPort((LPCTSTR)m_strSendData); 
-		ProtocolData* p = this->p_activeDevice->getProtocol()->GetProtocolData();
-		this->p_activeDevice->convertToDeviceData(&deviceData, p);
-		SetTimer(RECEIVE_TIMEOUT_EVENT_ID, 500, NULL);
-		//this->
+		//this->p_activeDevice->getProtocol()->ParseDataFromSerialPort((LPCTSTR)m_strSendData); 
+		//ProtocolData* p = this->p_activeDevice->getProtocol()->GetProtocolData();
+		pDlg->p_activeDevice->convertToDeviceData(&pDlg->m_deviceData, p);
+		pDlg->m_is_DeviceData_ready = TRUE;
+		
 	}
+	return 0;
+}
 
-	// Write data to mysql after pull from all devices.
-	this->m_db.WriteProtocolData(this->m_nIntervalTime, &deviceData);
+void CSCOMMDlg::OnProfileEvent()
+{
+	if (m_is_DeviceData_ready) {
+		// Write data to mysql after pull from all devices and data is ready.
+		this->m_db.WriteProtocolData(this->m_nIntervalTime, &m_deviceData);
+		m_is_DeviceData_ready = FALSE;
+	}
+	// start new thread to recieve data from serial port.
+	m_pThread = AfxBeginThread(ThreadFunc, this);	
 }

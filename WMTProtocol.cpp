@@ -1,33 +1,33 @@
 #include "stdafx.h"
 
-#include "DSCProtocol.h"
+#include "WMTProtocol.h"
 
-DSCProtocol::DSCProtocol(CString name):Protocol(name)
+WMTProtocol::WMTProtocol(CString name):Protocol(name)
 
 {
 	m_name = name;
 	dscData_length = 0;
-	this->m_send_cmd = m_cmdReader->ReadString("Device", "dsc", "@1 MES 16");
+	this->m_send_cmd = m_cmdReader->ReadString("Device", "wmt", "SEND 2");
 }
 
-DSCProtocol::~DSCProtocol()
+WMTProtocol::~WMTProtocol()
 {
 }
 
-CString DSCProtocol::GetName()
+CString WMTProtocol::GetName()
 {
 	return m_name;
 }
 
 
-char* DSCProtocol::ParseDataToSerialPort()
+char* WMTProtocol::ParseDataToSerialPort()
 {
 	//convert messages from DSC potocal here, then you can send out it by serial port.
 	// 
 	return this->m_send_cmd;
 }
 
-void DSCProtocol::ParseDataFromSerialPort(const char* szMsg)
+void WMTProtocol::ParseDataFromSerialPort(const char* szMsg)
 {
 	//parse results from serial port and covert to details message then write to DB later.
 	//
@@ -54,7 +54,7 @@ void DSCProtocol::ParseDataFromSerialPort(const char* szMsg)
 	this->convertToProtocolData();
 }
 
-void DSCProtocol::convertToProtocolData()
+void WMTProtocol::convertToProtocolData()
 {
 	for(int i=0;i<dscData_length;i++)
     {
@@ -75,7 +75,7 @@ void DSCProtocol::convertToProtocolData()
     }
 }
 
-void DSCProtocol::removeSpaces(char * dst, const char * src)
+void WMTProtocol::removeSpaces(char * dst, const char * src)
 {
     for (; *src; ++dst, ++src) {
         *dst = *src;
