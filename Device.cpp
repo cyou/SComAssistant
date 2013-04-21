@@ -77,6 +77,11 @@ BOOL Device::isActive()
 	return this->m_is_active;
 }
 
+BOOL Device::isDeviceOpen()
+{
+	return this->m_is_device_open;
+}
+
 void Device::setActive(BOOL active)
 {
 	this->m_is_active = active;
@@ -116,12 +121,18 @@ void Device::handleTimeout(int interval)
 	// try to verify received data from serial port.
 
 	//
-
 }
 
 
-void Device::writeDB(char* res)
+void Device::convertToDeviceData(DeviceData * d_data, ProtocolData* p_data)
 {
-	// write data to database.
+	for (int i = 0; i < BODY_LEN; i++){
+		if (p_data[i].code == "01"){
+			d_data->TEMPERATURE = p_data[i].value;
+			d_data->TEMPERATUREFLG = p_data[i].valid;
+			continue;
+		}
+	}
+	// convert protocol data to device data.
 }
 

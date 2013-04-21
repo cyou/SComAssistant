@@ -3,6 +3,17 @@
 #ifndef PROTOCOL_H
 #define PROTOCOL_H
 
+
+#define BODY_LEN  128
+
+typedef struct 
+{
+	CString code;
+	float value;
+	int valid;
+}ProtocolData;
+
+
 class Protocol
 {
 public:
@@ -11,8 +22,9 @@ public:
 
 	virtual CString GetName() = 0;
 	virtual char* ParseDataToSerialPort(char* szMsg) = 0; // convert data from protocol sub class to serial port.
-	virtual char* ParseDataFromSerialPort(char* szMsg) = 0; // convert data from serial to upper protocol class.
+	virtual void ParseDataFromSerialPort(const char* szMsg) = 0; // convert data from serial to upper protocol class.
 	void AddDataToBuffer(char data);
+	ProtocolData* GetProtocolData();
 
 protected:
 	CString m_name;
@@ -20,6 +32,8 @@ protected:
 	char* m_buffer;
 	int m_buffer_length;
 	int m_buffer_index;
+
+	ProtocolData m_data[128];
 };
 #endif
 

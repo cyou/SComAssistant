@@ -30,3 +30,8 @@ void Protocol::AddDataToBuffer(char data)
 		m_buffer_index = 0; //if buffer is full, overwrite it...
 	}
 }
+
+ProtocolData* Protocol::GetProtocolData()
+{
+	return this->m_data;
+}

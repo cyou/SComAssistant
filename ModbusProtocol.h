@@ -13,7 +13,7 @@ public:
 
 	CString GetName();
 	char* ParseDataToSerialPort(char* szMsg);
-	char* ParseDataFromSerialPort(char* szMsg);
+	void ParseDataFromSerialPort(const char* szMsg);
 	uint16 ModbusProtocol::Modbus_CRC16(uint8 *Buff_addr,uint16 len);
 };
 #endif

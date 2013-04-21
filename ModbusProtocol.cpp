@@ -23,11 +23,10 @@ char* ModbusProtocol::ParseDataToSerialPort(char* szMsg)
 	return "";
 }
 
-char* ModbusProtocol::ParseDataFromSerialPort(char* szMsg)
+void ModbusProtocol::ParseDataFromSerialPort(const char* szMsg)
 {
 	//parse results from serial port and covert to details message by modbus protocol then write to DB later.
 	// 
-	return "";
 }
 
 // µÍ×Ö½ÚCRCÖµ±í

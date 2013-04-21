@@ -2,6 +2,7 @@
 #include "SerialPort.h"
 #include "Protocol.h"
 #include "CommInfo.h"
+#include "DeviceData.h"
 
 
 #ifndef DEVICE_H
@@ -24,9 +25,11 @@ public:
 
 	void sendCommand(char* cmd);
 	char* getCommandResponse();
-	void writeDB(char* res);
+	void convertToDeviceData(DeviceData* d_data, ProtocolData* p_data);
 
 	BOOL isActive();
+	BOOL isDeviceOpen();
+
 	void setActive(BOOL active);
 
 	void handleTimeout(int interval);

@@ -25,6 +25,10 @@
 #define DB_UNIX_SOCKET	NULL
 
 
+//#define HEAD_LEN  4
+//#define BODY_LEN  215
+
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -1578,13 +1582,47 @@ void CSCOMMDlg::OnEnChangeEditRecive()
 
 void CSCOMMDlg::OnButtonWritedb() 
 {
-	AfxMessageBox("start to write data to mysql");
+
+   //p_Devices[0]->getProtocol()->ParseDataFromSerialPort((LPCTSTR)m_strSendData);
+
+   //p_Devices[0]->getProtocol()->
+
+   //p_Devices[0]->writeDB();
+
+   /*
+   CString strHeader[HEAD_LEN];
+   CString strBody[BODY_LEN];
+   //CStringArray strArry;
+   for(int i=0;i<HEAD_LEN;i++)
+   {
+	   AfxExtractSubString(strHeader[i], m_strSendData, i, _T(','));
+   }
+   strHeader[3].Replace("DSC", ""); // remove DSC
+   for(int j=0;j<BODY_LEN;j++)
+   {
+	   AfxExtractSubString(strBody[j], strHeader[3], j, _T(';'));
+	   if (strBody[j].Compare("=") == 0) {
+		   break;
+	   }
+   }
+
+   for(int k=0;k<BODY_LEN;k++)
+   {
+	  strBody[k].TrimLeft(_T("\t \r \n \r\n"));
+	  MessageBox(strBody[k]);
+	  if (strBody[k].Compare("=") == 0) {
+		   break;
+	   }
+   }*/
+ 
+	/*AfxMessageBox("start to write data to mysql");
 
 	CString dummy("no");
 	CMySQLDB db;
 	db.WriteToTable(dummy);
 
-	AfxMessageBox("Done!!");
+	AfxMessageBox("Done!!");*/
+
 
 	// TODO: Add your control notification handler code here
 	//MYSQL*ssock;
@@ -1898,24 +1936,65 @@ void CSCOMMDlg::OnButtonSetport4()
 void CSCOMMDlg::OnButtonDevstart1() 
 {
 	// TODO: Add your control notification handler code here
-	
+	if (this->p_Devices[0]->isDeviceOpen()){
+
+		this->m_devStart.SetWindowText("开启");
+		this->p_Devices[0]->closeDevice();
+		AfxMessageBox("仪表1关闭成功。");
+	}else{
+
+		this->m_devStart.SetWindowText("关闭");
+		this->p_Devices[0]->openDevice();
+		AfxMessageBox("仪表1开启成功。");
+	}
 }
 
 void CSCOMMDlg::OnButtonDevstart2() 
 {
 	// TODO: Add your control notification handler code here
+	if (this->p_Devices[1]->isDeviceOpen()){
+
+		this->m_devStart2.SetWindowText("开启");
+		this->p_Devices[1]->closeDevice();
+		AfxMessageBox("仪表2关闭成功。");
+	}else{
+
+		this->m_devStart2.SetWindowText("关闭");
+		this->p_Devices[1]->openDevice();
+		AfxMessageBox("仪表2开启成功。");
+	}
 	
 }
 
 void CSCOMMDlg::OnButtonDevstart3() 
 {
-	// TODO: Add your control notification handler code here
+	if (this->p_Devices[2]->isDeviceOpen()){
+
+		this->m_devStart3.SetWindowText("开启");
+		this->p_Devices[2]->closeDevice();
+		AfxMessageBox("仪表3关闭成功。");
+	}else{
+
+		this->m_devStart3.SetWindowText("关闭");
+		this->p_Devices[2]->openDevice();
+		AfxMessageBox("仪表3开启成功。");
+	}
 	
 }
 
 void CSCOMMDlg::OnButtonDevstart4() 
 {
-	// TODO: Add your control notification handler code here
+	if (this->p_Devices[3]->isDeviceOpen()){
+
+		this->m_devStart4.SetWindowText("开启");
+		this->p_Devices[3]->closeDevice();
+		AfxMessageBox("仪表4关闭成功。");
+	}else{
+
+		this->m_devStart4.SetWindowText("关闭");
+		this->p_Devices[3]->openDevice();
+		AfxMessageBox("仪表4开启成功。");
+	}
 	
 }
 
@@ -1962,13 +2041,28 @@ void CSCOMMDlg::OnReceiveTimeOutEvent()
 
 void CSCOMMDlg::OnProfileEvent()
 {
+	DeviceData deviceData; // collect data from all devices.
+
 	for (int i = 0; i < MAX_NUM_DEVICE; i++)
 	{
+		// check if device is started.
+		if (!this->p_Devices[i]->isDeviceOpen()){
+			continue;
+		}
+
 		this->p_Devices[i]->setActive(true);
 		this->p_activeDevice = this->p_Devices[i];
 
-		this->p_Devices[i]->sendCommand("command1");
+		//this->p_Devices[i]->sendCommand("command1");
+
+		//Get data from debug input
+		this->p_activeDevice->getProtocol()->ParseDataFromSerialPort((LPCTSTR)m_strSendData); 
+		ProtocolData* p = this->p_activeDevice->getProtocol()->GetProtocolData();
+		this->p_activeDevice->convertToDeviceData(&deviceData, p);
 		SetTimer(RECEIVE_TIMEOUT_EVENT_ID, 500, NULL);
 		//this->
 	}
+
+	// Write data to mysql after pull from all devices.
+	this->m_db.WriteProtocolData(this->m_nIntervalTime, &deviceData);
 }

@@ -13,6 +13,7 @@
 
 #include "winsock.h"
 #include "mysql.h"
+#include "DB.h"
 
 #if !defined(AFX_SCOMMDLG_H__666127A8_FEE4_40AA_9309_1B3B55EEDAFC__INCLUDED_)
 #define AFX_SCOMMDLG_H__666127A8_FEE4_40AA_9309_1B3B55EEDAFC__INCLUDED_
@@ -167,7 +168,9 @@ protected:
 	BOOL m_bOpenPort;
 	HICON m_hIcon;
 
-	MYSQL* m_mysql;
+	//MYSQL* m_mysql;
+
+	CMySQLDB m_db;
 
 
 	BOOL m_AutoAddCR;

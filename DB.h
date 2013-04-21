@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "winsock.h"
 #include "mysql.h"
+#include "DeviceData.h"
 
 #ifndef DB_H
 #define DB_H
@@ -12,6 +13,7 @@ public:
 	virtual	~CMySQLDB();
 
 	BOOL WriteToTable(CString string);
+	void WriteProtocolData(int interval, DeviceData* data);
 
 
 private:
