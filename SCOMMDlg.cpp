@@ -1947,11 +1947,18 @@ void CSCOMMDlg::OnButtonDevstart1()
 	// TODO: Add your control notification handler code here
 	if (this->p_Devices[0]->isDeviceOpen()){
 
+		CWnd * pwnd = GetDlgItem(IDC_COMBO_PROTOCAL1);
+		pwnd->EnableWindow(TRUE);
+		pwnd = GetDlgItem(IDC_COMBO_USEDPORT1);
+		pwnd->EnableWindow(TRUE);
 		this->m_devStart.SetWindowText("开启");
 		this->p_Devices[0]->closeDevice();
 		AfxMessageBox("仪表1关闭成功。");
 	}else{
-
+		CWnd * pwnd = GetDlgItem(IDC_COMBO_PROTOCAL1);
+		pwnd->EnableWindow(FALSE);
+		pwnd = GetDlgItem(IDC_COMBO_USEDPORT1);
+		pwnd->EnableWindow(FALSE);
 		this->m_devStart.SetWindowText("关闭");
 		this->p_Devices[0]->openDevice();
 		AfxMessageBox("仪表1开启成功。");
@@ -1962,12 +1969,18 @@ void CSCOMMDlg::OnButtonDevstart2()
 {
 	// TODO: Add your control notification handler code here
 	if (this->p_Devices[1]->isDeviceOpen()){
-
+		CWnd * pwnd = GetDlgItem(IDC_COMBO_PROTOCAL2);
+		pwnd->EnableWindow(TRUE);
+		pwnd = GetDlgItem(IDC_COMBO_USEDPORT2);
+		pwnd->EnableWindow(TRUE);
 		this->m_devStart2.SetWindowText("开启");
 		this->p_Devices[1]->closeDevice();
 		AfxMessageBox("仪表2关闭成功。");
 	}else{
-
+        CWnd * pwnd = GetDlgItem(IDC_COMBO_PROTOCAL2);
+		pwnd->EnableWindow(FALSE);
+		pwnd = GetDlgItem(IDC_COMBO_USEDPORT2);
+		pwnd->EnableWindow(FALSE);
 		this->m_devStart2.SetWindowText("关闭");
 		this->p_Devices[1]->openDevice();
 		AfxMessageBox("仪表2开启成功。");
@@ -1978,12 +1991,18 @@ void CSCOMMDlg::OnButtonDevstart2()
 void CSCOMMDlg::OnButtonDevstart3() 
 {
 	if (this->p_Devices[2]->isDeviceOpen()){
-
+        CWnd * pwnd = GetDlgItem(IDC_COMBO_PROTOCAL3);
+		pwnd->EnableWindow(TRUE);
+		pwnd = GetDlgItem(IDC_COMBO_USEDPORT3);
+		pwnd->EnableWindow(TRUE);
 		this->m_devStart3.SetWindowText("开启");
 		this->p_Devices[2]->closeDevice();
 		AfxMessageBox("仪表3关闭成功。");
 	}else{
-
+		CWnd * pwnd = GetDlgItem(IDC_COMBO_PROTOCAL3);
+		pwnd->EnableWindow(FALSE);
+		pwnd = GetDlgItem(IDC_COMBO_USEDPORT3);
+		pwnd->EnableWindow(FALSE);
 		this->m_devStart3.SetWindowText("关闭");
 		this->p_Devices[2]->openDevice();
 		AfxMessageBox("仪表3开启成功。");
@@ -1994,12 +2013,18 @@ void CSCOMMDlg::OnButtonDevstart3()
 void CSCOMMDlg::OnButtonDevstart4() 
 {
 	if (this->p_Devices[3]->isDeviceOpen()){
-
+        CWnd * pwnd = GetDlgItem(IDC_COMBO_PROTOCAL4);
+		pwnd->EnableWindow(TRUE);
+		pwnd = GetDlgItem(IDC_COMBO_USEDPORT4);
+		pwnd->EnableWindow(TRUE);
 		this->m_devStart4.SetWindowText("开启");
 		this->p_Devices[3]->closeDevice();
 		AfxMessageBox("仪表4关闭成功。");
 	}else{
-
+        CWnd * pwnd = GetDlgItem(IDC_COMBO_PROTOCAL4);
+		pwnd->EnableWindow(FALSE);
+		pwnd = GetDlgItem(IDC_COMBO_USEDPORT4);
+		pwnd->EnableWindow(FALSE);
 		this->m_devStart4.SetWindowText("关闭");
 		this->p_Devices[3]->openDevice();
 		AfxMessageBox("仪表4开启成功。");
@@ -2029,6 +2054,8 @@ void CSCOMMDlg::OnButtonstart()
 	//AfxMessageBox(strText);
 	if(this->m_ProfileStart)
 	{
+		CWnd * pwnd = GetDlgItem(IDC_EDIT_INTERVAL);
+		pwnd->EnableWindow(TRUE);
 		this->m_ctrlProfileStart.SetWindowText("开始采样");
 		//stop profiling.
 		KillTimer(4);
@@ -2037,6 +2064,8 @@ void CSCOMMDlg::OnButtonstart()
 	}
 	else
 	{
+		CWnd * pwnd = GetDlgItem(IDC_EDIT_INTERVAL);
+		pwnd->EnableWindow(FALSE);
 		this->m_ctrlProfileStart.SetWindowText("停止采样");
 		//set time to start profile
 		SetTimer(PROFILE_EVENT_ID, this->m_nIntervalTime, NULL);

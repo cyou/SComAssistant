@@ -118,7 +118,8 @@ ProtocolData* Device::getCommandResponse()
 			this->getProtocol()->ParseDataFromSerialPort(NULL); 
 			return this->getProtocol()->GetProtocolData();
 		}
-		//::Sleep(100);
+		// sleep pull thread some time.
+		::Sleep(100);
 	}
 }
 
