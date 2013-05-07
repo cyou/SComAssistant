@@ -139,6 +139,26 @@ void Device::convertToDeviceData(DeviceData * d_data, ProtocolData* p_data)
 			d_data->TEMPERATUREFLG = p_data[i].valid;
 			continue;
 		}
+		if (p_data[i].code == "68"){
+			d_data->GRIPLEVEL = p_data[i].value;
+			d_data->GRIPLEVELFLG = p_data[i].valid;
+			continue;
+		}
+		if (p_data[i].code == "30"){
+			d_data->GRANDTEMPERATURE = p_data[i].value;
+			d_data->GRANDTEMPERATUREFLG = p_data[i].valid;
+			continue;
+		}
+		if (p_data[i].code == "02"){
+			d_data->GRANDHUMIDITY = p_data[i].value;
+			d_data->GRANDHUMIDITYFLG = p_data[i].valid;
+			continue;
+		}
+		if (p_data[i].code == "72"){
+			d_data->WATERPERCENT = p_data[i].value;
+			d_data->WATERPERCENTFLG = p_data[i].valid;
+			continue;
+		}
 	}
 	// convert protocol data to device data.
 }
