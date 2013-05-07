@@ -56,6 +56,7 @@ void DSCProtocol::ParseDataFromSerialPort(const char* szMsg)
 
 void DSCProtocol::convertToProtocolData()
 {
+	float tmp;
 	for(int i=0;i<dscData_length;i++)
     {
 		// remove addtional spaces.
@@ -70,8 +71,18 @@ void DSCProtocol::convertToProtocolData()
 		}
 
 	   this->m_data[i].code = pair[0];
-	   this->m_data[i].value = (float)atof(pair[1]); // if convert fail, set valid to 0, otherwise, set it to 1.
-	   this->m_data[i].valid = 1;
+
+	  // if convert fail, set valid to 0, otherwise, set it to 1.
+	   if (1 == sscanf(pair[1], "%f", &tmp))
+	   {
+			this->m_data[i].value = tmp;
+			this->m_data[i].valid = 1;
+	   }
+	   else
+	   {
+			this->m_data[i].value = 0;
+			this->m_data[i].valid = 0;
+	   }
     }
 }
 
