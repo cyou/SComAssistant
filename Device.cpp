@@ -159,6 +159,11 @@ void Device::convertToDeviceData(DeviceData * d_data, ProtocolData* p_data)
 			d_data->WATERPERCENTFLG = p_data[i].valid;
 			continue;
 		}
+		if (p_data[i].code == "99"){ // from modbus protocol.
+			d_data->NOISE = p_data[i].value;
+			d_data->NOISEFLG = p_data[i].valid;
+			break;
+		}
 	}
 	// convert protocol data to device data.
 }
