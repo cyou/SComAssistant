@@ -25,6 +25,7 @@ public:
 	virtual char* ParseDataToSerialPort() = 0; // convert data from protocol sub class to serial port.
 	virtual void ParseDataFromSerialPort(const char* szMsg) = 0; // convert data from serial to upper protocol class.
 	void AddDataToBuffer(char data);
+	void ResetBuffer();
 	ProtocolData* GetProtocolData();
 
 protected:

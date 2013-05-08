@@ -36,6 +36,12 @@ void Protocol::AddDataToBuffer(char data)
 	}
 }
 
+void Protocol::ResetBuffer()
+{
+	memset(this->m_buffer, 0, this->m_buffer_length);
+	this->m_buffer_index = 0;
+}
+
 ProtocolData* Protocol::GetProtocolData()
 {
 	return this->m_data;

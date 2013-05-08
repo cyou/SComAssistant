@@ -34,8 +34,6 @@ void DSCProtocol::ParseDataFromSerialPort(const char* szMsg)
 	//CString data(szMsg);
 	CString data(this->m_buffer); // get data from buffer.
 
-
-
     for(int i=0;i<HEADER_LEN;i++)
     {
 	   AfxExtractSubString(strHeader[i], data, i, _T(','));
@@ -51,6 +49,8 @@ void DSCProtocol::ParseDataFromSerialPort(const char* szMsg)
 		   break;
 	   }
     }
+	// reset protocol buffer.
+	this->ResetBuffer();//ResetBuffer
 	this->convertToProtocolData();
 }
 
