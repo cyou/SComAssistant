@@ -156,6 +156,7 @@
 #define IDC_STATIC42                    1108
 #define IDC_COMBO_CHANNEL               1109
 #define IDC_STATIC_RECEIVECHAR          1110
+#define IDC_CHECK_CRC                   1111
 #define IDC_BUTTONSTART                 1112
 
 // Next default values for new objects

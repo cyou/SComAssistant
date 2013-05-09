@@ -10,6 +10,7 @@
 #include "CommInfo.h"
 #include "Device.h"
 #include "DeviceData.h"
+#include "CRC16.h"
 
 
 #include "winsock.h"
@@ -179,8 +180,11 @@ protected:
 
 
 	BOOL m_AutoAddCR;
+	BOOL m_AutoAddCRC;
 	int m_nIntervalTime;
 	BOOL m_ProfileStart;
+
+	CRC16 &m_crc16;
 
 	// Generated message map functions
 	//{{AFX_MSG(CSCOMMDlg)
@@ -258,6 +262,7 @@ protected:
 	afx_msg void OnEditchangeComboComselect();
 	afx_msg void OnCheckCr();
 	afx_msg void OnButtonstart();
+	afx_msg void OnCheckCrc();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 	//DECLARE_DYNAMIC_MAP()

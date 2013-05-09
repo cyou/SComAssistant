@@ -103,6 +103,10 @@ SOURCE=.\CommInfo.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\CRC16.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\DB.cpp
 # End Source File
 # Begin Source File
@@ -181,6 +185,10 @@ SOURCE=.\AnimateDlgIcon.h
 # Begin Source File
 
 SOURCE=.\CommInfo.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\CRC16.h
 # End Source File
 # Begin Source File
 

@@ -12,6 +12,7 @@
 
 #include "DSCProtocol.h"
 #include "ModbusProtocol.h"
+#include "CRC16.h"
 
 
 #include "DB.h"
@@ -108,7 +109,7 @@ END_MESSAGE_MAP()
 // CSCOMMDlg dialog
 
 CSCOMMDlg::CSCOMMDlg(CWnd* pParent /*=NULL*/)
-	: CDialog(CSCOMMDlg::IDD, pParent)
+	: CDialog(CSCOMMDlg::IDD, pParent), m_crc16(CRC16::instance())
 {
 	//{{AFX_DATA_INIT(CSCOMMDlg)
 	m_ReceiveData = _T("");
@@ -296,6 +297,7 @@ BEGIN_MESSAGE_MAP(CSCOMMDlg, CDialog)
 	ON_CBN_EDITCHANGE(IDC_COMBO_COMSELECT, OnEditchangeComboComselect)
 	ON_BN_CLICKED(IDC_CHECK_CR, OnCheckCr)
 	ON_BN_CLICKED(IDC_BUTTONSTART, OnButtonstart)
+	ON_BN_CLICKED(IDC_CHECK_CRC, OnCheckCrc)
 	//}}AFX_MSG_MAP
 	ON_EN_CHANGE(IDC_EDIT_RECIVE, OnEnChangeEditRecive)
 END_MESSAGE_MAP()
@@ -492,6 +494,7 @@ BOOL CSCOMMDlg::OnInitDialog()
 	CButton* pBtn = (CButton*) GetDlgItem(IDC_CHECK_CR);
 	pBtn->SetCheck(0);// check it
 	m_AutoAddCR = FALSE;
+	m_AutoAddCRC = FALSE;
 	
 	UpdateData(FALSE);
 
@@ -797,6 +800,15 @@ void CSCOMMDlg::OnButtonManualsend()
 				data[len+1]=10;
 				len +=2;
 			}
+			// add CRC check.
+			if (m_AutoAddCRC)
+			{
+				this->m_crc16.Modbus_CRC16((unsigned char*)data, len);
+				data[len] =(char)m_crc16.CRC16_Lo();
+				data[len+1]=(char)m_crc16.CRC16_Hi();
+				len +=2;
+			}
+
 			m_Ports[swPortID].WriteToPort(data,len);
 			TX_count+=(long)((m_strSendData.GetLength()+1)/3);
 			//m_Port.WriteToPort(hexdata);	
@@ -810,6 +822,15 @@ void CSCOMMDlg::OnButtonManualsend()
 				tmpStr += '\n';
 				tmpStr += '\r';
 			}
+			
+			// add CRC check.
+			if (m_AutoAddCRC)
+			{
+				this->m_crc16.Modbus_CRC16((unsigned char*)(LPCTSTR)tmpStr, tmpStr.GetLength());
+				tmpStr +=(char)m_crc16.CRC16_Lo();
+				tmpStr +=(char)m_crc16.CRC16_Hi();
+			}
+
 			m_Ports[swPortID].WriteToPort((LPCTSTR)tmpStr);	//·¢ËÍÊý¾Ý
 			TX_count+=m_strSendData.GetLength();
 		}
@@ -2120,4 +2141,11 @@ void CSCOMMDlg::OnProfileEvent()
 	}
 	// start new thread to recieve data from serial port.
 	m_pThread = AfxBeginThread(ThreadFunc, this);	
+}
+
+void CSCOMMDlg::OnCheckCrc() 
+{
+	// TODO: Add your control notification handler code here
+	m_AutoAddCRC = !m_AutoAddCRC;
+	
 }
