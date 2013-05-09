@@ -67,7 +67,7 @@ void ModbusProtocol::ParseDataFromSerialPort(const char* szMsg)
 	float tmp_value = 0.0f;
 
 	//convert data to protocol data.
-	this->m_data[0].code = "99"; // use code.
+	this->m_data[0].code = "ns"; // noise
 	this->m_data[0].value = 0;
 	this->m_data[0].valid = 0;
 

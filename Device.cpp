@@ -159,9 +159,19 @@ void Device::convertToDeviceData(DeviceData * d_data, ProtocolData* p_data)
 			d_data->WATERPERCENTFLG = p_data[i].valid;
 			continue;
 		}
-		if (p_data[i].code == "99"){ // from modbus protocol.
+		if (p_data[i].code == "ns"){ // from modbus protocol.
 			d_data->NOISE = p_data[i].value;
 			d_data->NOISEFLG = p_data[i].valid;
+			break;
+		}
+		if (p_data[i].code == "ws"){ // from modbus protocol.
+			d_data->WINDSPEED = p_data[i].value;
+			d_data->WINDSPEEDFLG = p_data[i].valid;
+			break;
+		}
+		if (p_data[i].code == "wd"){ // from modbus protocol.
+			d_data->WINDDIRECT = p_data[i].value;
+			d_data->WINDDIRECTFLG = p_data[i].valid;
 			break;
 		}
 	}

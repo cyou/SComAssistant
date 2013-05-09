@@ -12,6 +12,8 @@
 
 #include "DSCProtocol.h"
 #include "ModbusProtocol.h"
+#include "WMTProtocol.h"
+#include "PTUProtocol.h"
 #include "CRC16.h"
 
 
@@ -1913,11 +1915,11 @@ void CSCOMMDlg::SetDeviceSettings(int i, int pIndex, int cIndex)
 		}
 		else if (pIndex == 2)
 		{
-			p = new ModbusProtocol("ptu");
+			p = new PTUProtocol("ptu");
 		}
 		else 
 		{
-			p = new ModbusProtocol("wmt");
+			p = new WMTProtocol("wmt");
 		}
 		p_Devices[i]->setDeviceType(pIndex);
 		p_Devices[i]->setProtocol(p);
