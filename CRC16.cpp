@@ -50,7 +50,6 @@ void CRC16::Modbus_CRC16(uint8 *Buff_addr,uint16 len)
 {                                              // 函数返回值是无符号短整型CRC值
                                                // 待进行CRC校验计算的报文
                                                // 待校验的报文长度
-
 	uint8 uchCRCHi = 0xFF;             // CRC高字节的初始化
 	uint8 uchCRCLo = 0xFF;             // CRC低字节的初始化
 	uint16 uIndex;                           // CRC查找表的指针
@@ -61,8 +60,9 @@ void CRC16::Modbus_CRC16(uint8 *Buff_addr,uint16 len)
 		uchCRCHi = auchCRCLo[uIndex];
 	}
 	//return(uchCRCHi <<8 | uchCRCLo);
-	this->m_crc_lo = (uint8)((uchCRCHi <<8 | uchCRCLo) & 0x00FF);
-	this->m_crc_hi = (uint8)((uchCRCHi <<8 | uchCRCLo)>>8 & 0xFF);
+	uint16 res = (uchCRCHi <<8 | uchCRCLo);
+	this->m_crc_lo = (uint8)(res & 0x00FF);
+	this->m_crc_hi = (uint8)(res>>8 & 0xFF);
 }
 
 uint8 CRC16::CRC16_Hi()
