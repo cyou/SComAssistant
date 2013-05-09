@@ -20,6 +20,8 @@ Protocol::~Protocol()
 
 	if (m_cmdReader)
 		delete m_cmdReader;
+	if (m_send_cmd)
+		delete[] m_send_cmd;
 }
 
 
