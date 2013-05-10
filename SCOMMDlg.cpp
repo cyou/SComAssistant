@@ -2074,6 +2074,11 @@ void CSCOMMDlg::OnButtonstart()
 	pEdit->GetWindowText(strText);
 	this->m_nIntervalTime =atoi(strText);
 
+	if (this->m_nIntervalTime < 2000) {
+		AfxMessageBox("采样间隔不能小于2000毫秒");
+		return;
+	}
+
 	//AfxMessageBox(strText);
 	if(this->m_ProfileStart)
 	{
