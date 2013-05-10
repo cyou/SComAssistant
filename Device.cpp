@@ -164,12 +164,12 @@ void Device::convertToDeviceData(DeviceData * d_data, ProtocolData* p_data)
 			d_data->NOISEFLG = p_data[i].valid;
 			break;
 		}
-		if (p_data[i].code == "ws"){ // from modbus protocol.
+		if (p_data[i].code == "ws"){ // from wmt protocol.
 			d_data->WINDSPEED = p_data[i].value;
 			d_data->WINDSPEEDFLG = p_data[i].valid;
 			break;
 		}
-		if (p_data[i].code == "wd"){ // from modbus protocol.
+		if (p_data[i].code == "wd"){ // from wmt protocol.
 			d_data->WINDDIRECT = p_data[i].value;
 			d_data->WINDDIRECTFLG = p_data[i].valid;
 			break;

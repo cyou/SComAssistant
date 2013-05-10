@@ -6,7 +6,6 @@ WMTProtocol::WMTProtocol(CString name):Protocol(name)
 
 {
 	m_name = name;
-	dscData_length = 0;
 	this->m_send_cmd = m_cmdReader->ReadString("Device", "wmt", "$1 POLL,21");
 	int cmd_length = strlen(this->m_send_cmd);
 	this->m_send_cmd[cmd_length] = '\r';
