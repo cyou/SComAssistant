@@ -174,6 +174,17 @@ void Device::convertToDeviceData(DeviceData * d_data, ProtocolData* p_data)
 			d_data->WINDDIRECTFLG = p_data[i].valid;
 			break;
 		}
+
+		if (p_data[i].code == "ps"){ // from ptu protocol.
+			d_data->PRESSURE = p_data[i].value;
+			d_data->PRESSUREFLG = p_data[i].valid;
+			break;
+		}
+		if (p_data[i].code == "hd"){ // from ptu protocol.
+			d_data->HUMIDITY = p_data[i].value;
+			d_data->HUMIDITYFLG = p_data[i].valid;
+			break;
+		}
 	}
 	// convert protocol data to device data.
 }
