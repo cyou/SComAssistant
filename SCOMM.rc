@@ -78,22 +78,15 @@ IDI_ICON_GJWTECH        ICON    DISCARDABLE     "RES\\gjwtech1.ico"
 
 IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 129
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "关于串口调试助手"
+CAPTION "关于气象采集系统"
 FONT 9, "宋体"
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,6,7,20,20
-    LTEXT           "串口调试助手 V2.2  2002.08",IDC_STATIC,31,15,129,8,
-                    SS_NOPREFIX
-    LTEXT           "版权所有 (C) 2002",IDC_STATIC,93,101,72,8
+    LTEXT           "基于串口调试助手",IDC_STATIC,31,15,129,8,SS_NOPREFIX
     DEFPUSHBUTTON   "确定",IDOK,178,7,50,23,WS_GROUP
-    ICON            IDI_ICON_GJWTECH,IDC_STATIC,208,102,20,20
-    LTEXT           "免费试用 永不过期",IDC_STATIC,32,26,73,8
-    LTEXT           "版权所有，未经许可，不得作为商用",IDC_STATIC,31,35,131,
-                    8
-    LTEXT           "网站用作下载程序，请通知",IDC_STATIC,31,45,97,8
-    LTEXT           "作者，以便及时更新",IDC_STATIC,129,45,73,8
-    LTEXT           "龚建伟技术主页",IDC_STATIC_MAILXFS1,47,63,57,8
-    LTEXT           "http://www.gjwtech.com",IDC_STATIC,48,77,133,8
+    LTEXT           "版本V1.0",IDC_STATIC,32,26,73,8
+    LTEXT           "目前支持WMT700，PTU300，DSC111等仪表",IDC_STATIC,31,35,
+                    131,8
 END
 
 IDD_SCOMM_DIALOG DIALOGEX 0, 0, 681, 377
