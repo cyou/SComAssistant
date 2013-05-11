@@ -11,6 +11,8 @@ Protocol::Protocol(CString name)
 	m_buffer_length = 256;
 	m_buffer = new char[m_buffer_length];
 	memset(m_buffer, 0, m_buffer_length);
+
+	m_send_cmd = NULL;
 }
 
 Protocol::~Protocol()

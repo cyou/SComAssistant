@@ -82,6 +82,7 @@ void DSCProtocol::convertToProtocolData()
 	   {
 			this->m_data[i].value = 0;
 			this->m_data[i].valid = 0;
+			break;
 	   }
     }
     this->m_data[i+1].code = "!last";

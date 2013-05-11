@@ -8,6 +8,8 @@ class DeviceData
 public:
 	DeviceData();
 
+	void ResetDeviceData();
+
 	float WINDDIRECT; //'·çÏò(¶È)'
 	int WINDDIRECTFLG;
 

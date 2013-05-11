@@ -15,9 +15,6 @@ ModbusProtocol::ModbusProtocol(CString name):Protocol(name), m_CRC16(CRC16::inst
 
 ModbusProtocol::~ModbusProtocol()
 {
-	if (this->m_send_cmd) {
-		delete[] m_send_cmd;
-	}
 }
 
 CString ModbusProtocol::GetName()

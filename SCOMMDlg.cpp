@@ -2096,6 +2096,10 @@ void CSCOMMDlg::OnButtonstart()
 		CWnd * pwnd = GetDlgItem(IDC_EDIT_INTERVAL);
 		pwnd->EnableWindow(FALSE);
 		this->m_ctrlProfileStart.SetWindowText("Í£Ö¹²ÉÑù");
+	
+		// start new thread to recieve data from serial port.
+		m_pThread = AfxBeginThread(ThreadFunc, this);
+
 		//set time to start profile
 		SetTimer(PROFILE_EVENT_ID, this->m_nIntervalTime, NULL);
 		SetTimer(4,200,NULL); 
@@ -2145,10 +2149,12 @@ void CSCOMMDlg::OnProfileEvent()
 	if (m_is_DeviceData_ready) {
 		// Write data to mysql after pull from all devices and data is ready.
 		this->m_db.WriteProtocolData(this->m_nIntervalTime, &m_deviceData);
+		m_deviceData.ResetDeviceData(); // reset device data.
 		m_is_DeviceData_ready = FALSE;
-	}
-	// start new thread to recieve data from serial port.
-	m_pThread = AfxBeginThread(ThreadFunc, this);	
+		
+		// start new thread to recieve data from serial port.
+		m_pThread = AfxBeginThread(ThreadFunc, this);
+	}	
 }
 
 void CSCOMMDlg::OnCheckCrc() 
