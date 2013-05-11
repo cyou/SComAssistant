@@ -134,7 +134,11 @@ void Device::handleTimeout(int interval)
 void Device::convertToDeviceData(DeviceData * d_data, ProtocolData* p_data)
 {
 	for (int i = 0; i < BODY_LEN; i++){
-		if (p_data[i].code == "01"){
+		if (p_data[i].code == "!last" ||p_data[i].code == ""  )
+		{
+			break;
+		}
+		else if (p_data[i].code == "01"){
 			d_data->GRANDTEMPERATURE = p_data[i].value;
 			d_data->GRANDTEMPERATUREFLG = p_data[i].valid;
 			continue;
@@ -188,10 +192,6 @@ void Device::convertToDeviceData(DeviceData * d_data, ProtocolData* p_data)
 			d_data->TEMPERATURE = p_data[i].value;
 			d_data->TEMPERATUREFLG= p_data[i].valid;
 			continue;
-		}
-		else if (p_data[i].code == "!last" ||p_data[i].code == ""  )
-		{
-			break;
 		}
 	}
 	// convert protocol data to device data.

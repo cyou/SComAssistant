@@ -2118,6 +2118,8 @@ UINT CSCOMMDlg::ThreadFunc(LPVOID pParam)
 {
 	CSCOMMDlg* pDlg = (CSCOMMDlg *) pParam;
 
+	pDlg->m_deviceData.ResetDeviceData(); // reset device data before new test.
+
 	for (int i = 0; i < MAX_NUM_DEVICE; i++)
 	{
 		// check if device is started.
@@ -2138,20 +2140,20 @@ UINT CSCOMMDlg::ThreadFunc(LPVOID pParam)
 		//this->p_activeDevice->getProtocol()->ParseDataFromSerialPort((LPCTSTR)m_strSendData); 
 		//ProtocolData* p = this->p_activeDevice->getProtocol()->GetProtocolData();
 		pDlg->p_activeDevice->convertToDeviceData(&pDlg->m_deviceData, p);
-		pDlg->m_is_DeviceData_ready = TRUE;
-		
 	}
+
+	// Write data to mysql after pull from all devices and data is ready.
+	pDlg->m_db.WriteProtocolData(pDlg->m_nIntervalTime, &pDlg->m_deviceData);
+
+	pDlg->m_is_DeviceData_ready = TRUE;
 	return 0;
 }
 
 void CSCOMMDlg::OnProfileEvent()
 {
 	if (m_is_DeviceData_ready) {
-		// Write data to mysql after pull from all devices and data is ready.
-		this->m_db.WriteProtocolData(this->m_nIntervalTime, &m_deviceData);
-		m_deviceData.ResetDeviceData(); // reset device data.
 		m_is_DeviceData_ready = FALSE;
-		
+
 		// start new thread to recieve data from serial port.
 		m_pThread = AfxBeginThread(ThreadFunc, this);
 	}	
