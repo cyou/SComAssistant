@@ -41,7 +41,7 @@ void PTUProtocol::ParseDataFromSerialPort(const char* szMsg)
 	
 	//if (2 == sscanf("2004-07-05 03:48:04 RH= 98.5 %RH T= 31.1 'C", "%*s%*s%*s%f%*s%*s%f", &ws,&wd))
 
-	if (1 == sscanf(this->m_buffer, "%*[^P=]P=%f", &pressure))
+	if (1 == sscanf(this->m_buffer, "%*[^P]P=%f", &pressure))
 	{
 		this->m_data[index].code = "PTU_P";
 		this->m_data[index].value = pressure;
@@ -49,7 +49,7 @@ void PTUProtocol::ParseDataFromSerialPort(const char* szMsg)
 		index ++;
 	}
 
-	if (1 == sscanf(this->m_buffer, "%*[^RH=]RH=%f", &humity))
+	if (1 == sscanf(this->m_buffer, "%*[^R]RH=%f", &humity))
 	{
 		this->m_data[index].code = "PTU_RH";
 		this->m_data[index].value = humity;
@@ -57,7 +57,7 @@ void PTUProtocol::ParseDataFromSerialPort(const char* szMsg)
 		index++;
 	}
 
-	if (1 == sscanf(this->m_buffer, "%*[^T=]T=%f", &tempeture))
+	if (1 == sscanf(this->m_buffer, "%*[^T]T=%f", &tempeture))
 	{
 		this->m_data[index].code = "PTU_T";
 		this->m_data[index].value = humity;
