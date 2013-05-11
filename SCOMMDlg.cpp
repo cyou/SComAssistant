@@ -134,6 +134,8 @@ CSCOMMDlg::CSCOMMDlg(CWnd* pParent /*=NULL*/)
 
 	m_is_DeviceData_ready = FALSE;
 	p_activeDevice = NULL;
+
+	m_writeDB = FALSE;
 }
 
 
@@ -1607,6 +1609,19 @@ void CSCOMMDlg::OnEnChangeEditRecive()
 
 void CSCOMMDlg::OnButtonWritedb() 
 {
+	if (m_writeDB)
+	{
+		this->m_ctrlWriteDB.SetWindowText("开始写数据");
+		AfxMessageBox("停止写数据到DB.");
+	
+	}else
+	{
+		this->m_ctrlWriteDB.SetWindowText("停止写数据");
+		AfxMessageBox("开始写数据到DB.");
+	}
+
+
+	m_writeDB = !m_writeDB;
 
    //p_Devices[0]->getProtocol()->ParseDataFromSerialPort((LPCTSTR)m_strSendData);
 
@@ -2143,7 +2158,9 @@ UINT CSCOMMDlg::ThreadFunc(LPVOID pParam)
 	}
 
 	// Write data to mysql after pull from all devices and data is ready.
-	pDlg->m_db.WriteProtocolData(pDlg->m_nIntervalTime, &pDlg->m_deviceData);
+	if (pDlg->m_writeDB) {
+		pDlg->m_db.WriteProtocolData(pDlg->m_nIntervalTime, &pDlg->m_deviceData);
+	}
 
 	pDlg->m_is_DeviceData_ready = TRUE;
 	return 0;

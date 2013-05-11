@@ -81,6 +81,7 @@ public:
 	DeviceData      m_deviceData; // collect data from all devices.
 
 	BOOL            m_is_DeviceData_ready;
+	BOOL            m_writeDB;
 
 
 // Dialog Data
