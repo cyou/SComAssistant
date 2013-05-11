@@ -133,6 +133,7 @@ CSCOMMDlg::CSCOMMDlg(CWnd* pParent /*=NULL*/)
 	m_nFileLength=0;
 
 	m_is_DeviceData_ready = FALSE;
+	p_activeDevice = NULL;
 }
 
 
@@ -570,10 +571,10 @@ LONG CSCOMMDlg::OnCommunication(WPARAM ch, LPARAM port)
 	if (port <= 0 || port > MAX_NUM_HW_PORT)
 		return -1;
 
-	if (p_activeDevice) {
+	if (p_activeDevice && p_activeDevice->isDeviceOpen()) {
 		p_activeDevice->getProtocol()->AddDataToBuffer((char) ch);
+		this->SetTimer(RECEIVE_TIMEOUT_EVENT_ID, 20, NULL);
 	}
-	this->SetTimer(RECEIVE_TIMEOUT_EVENT_ID, 20, NULL);
 
 	rxdatacount++;   //接收的字节计数
 	CString strTemp;
