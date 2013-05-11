@@ -1932,7 +1932,7 @@ void CSCOMMDlg::OnButtonSetport1()
 	int pIndex = this->m_Protocal.GetCurSel();
 	int cIndex = this->m_usePort.GetCurSel();
 	SetDeviceSettings(0, pIndex, cIndex);
-	AfxMessageBox("仪表1设置成功。");
+	// AfxMessageBox("仪表1设置成功。");
 }
 
 void CSCOMMDlg::OnButtonSetport2() 
@@ -1942,7 +1942,7 @@ void CSCOMMDlg::OnButtonSetport2()
 	int pIndex = this->m_Protocal2.GetCurSel();
 	int cIndex = this->m_usePort2.GetCurSel();
 	SetDeviceSettings(1, pIndex, cIndex);
-	AfxMessageBox("仪表2设置成功。");
+	// AfxMessageBox("仪表2设置成功。");
 }
 	
 
@@ -1952,7 +1952,7 @@ void CSCOMMDlg::OnButtonSetport3()
 	int pIndex = this->m_Protocal3.GetCurSel();
 	int cIndex = this->m_usePort3.GetCurSel();
 	SetDeviceSettings(2, pIndex, cIndex);
-	AfxMessageBox("仪表3设置成功。");
+	// AfxMessageBox("仪表3设置成功。");
 }
 	
 void CSCOMMDlg::OnButtonSetport4() 
@@ -1961,7 +1961,7 @@ void CSCOMMDlg::OnButtonSetport4()
 	int pIndex = this->m_Protocal4.GetCurSel();
 	int cIndex = this->m_usePort4.GetCurSel();
 	SetDeviceSettings(3, pIndex, cIndex);
-	AfxMessageBox("仪表4设置成功。");
+	// AfxMessageBox("仪表4设置成功。");
 }
 
 
@@ -1976,7 +1976,7 @@ void CSCOMMDlg::OnButtonDevstart1()
 		pwnd->EnableWindow(TRUE);
 		this->m_devStart.SetWindowText("开启");
 		this->p_Devices[0]->closeDevice();
-		AfxMessageBox("仪表1关闭成功。");
+		// AfxMessageBox("仪表1关闭成功。");
 	}else{
 		CWnd * pwnd = GetDlgItem(IDC_COMBO_PROTOCAL1);
 		pwnd->EnableWindow(FALSE);
@@ -1984,7 +1984,7 @@ void CSCOMMDlg::OnButtonDevstart1()
 		pwnd->EnableWindow(FALSE);
 		this->m_devStart.SetWindowText("关闭");
 		this->p_Devices[0]->openDevice();
-		AfxMessageBox("仪表1开启成功。");
+		// AfxMessageBox("仪表1开启成功。");
 	}
 }
 
@@ -1998,7 +1998,7 @@ void CSCOMMDlg::OnButtonDevstart2()
 		pwnd->EnableWindow(TRUE);
 		this->m_devStart2.SetWindowText("开启");
 		this->p_Devices[1]->closeDevice();
-		AfxMessageBox("仪表2关闭成功。");
+		// AfxMessageBox("仪表2关闭成功。");
 	}else{
         CWnd * pwnd = GetDlgItem(IDC_COMBO_PROTOCAL2);
 		pwnd->EnableWindow(FALSE);
@@ -2006,7 +2006,7 @@ void CSCOMMDlg::OnButtonDevstart2()
 		pwnd->EnableWindow(FALSE);
 		this->m_devStart2.SetWindowText("关闭");
 		this->p_Devices[1]->openDevice();
-		AfxMessageBox("仪表2开启成功。");
+		// AfxMessageBox("仪表2开启成功。");
 	}
 	
 }
@@ -2020,7 +2020,7 @@ void CSCOMMDlg::OnButtonDevstart3()
 		pwnd->EnableWindow(TRUE);
 		this->m_devStart3.SetWindowText("开启");
 		this->p_Devices[2]->closeDevice();
-		AfxMessageBox("仪表3关闭成功。");
+		// AfxMessageBox("仪表3关闭成功。");
 	}else{
 		CWnd * pwnd = GetDlgItem(IDC_COMBO_PROTOCAL3);
 		pwnd->EnableWindow(FALSE);
@@ -2028,7 +2028,7 @@ void CSCOMMDlg::OnButtonDevstart3()
 		pwnd->EnableWindow(FALSE);
 		this->m_devStart3.SetWindowText("关闭");
 		this->p_Devices[2]->openDevice();
-		AfxMessageBox("仪表3开启成功。");
+		// AfxMessageBox("仪表3开启成功。");
 	}
 	
 }
@@ -2042,7 +2042,7 @@ void CSCOMMDlg::OnButtonDevstart4()
 		pwnd->EnableWindow(TRUE);
 		this->m_devStart4.SetWindowText("开启");
 		this->p_Devices[3]->closeDevice();
-		AfxMessageBox("仪表4关闭成功。");
+		// AfxMessageBox("仪表4关闭成功。");
 	}else{
         CWnd * pwnd = GetDlgItem(IDC_COMBO_PROTOCAL4);
 		pwnd->EnableWindow(FALSE);
@@ -2050,7 +2050,7 @@ void CSCOMMDlg::OnButtonDevstart4()
 		pwnd->EnableWindow(FALSE);
 		this->m_devStart4.SetWindowText("关闭");
 		this->p_Devices[3]->openDevice();
-		AfxMessageBox("仪表4开启成功。");
+		// AfxMessageBox("仪表4开启成功。");
 	}
 	
 }
