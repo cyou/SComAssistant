@@ -37,7 +37,8 @@ void WMTProtocol::ParseDataFromSerialPort(const char* szMsg)
 
 	float ws,wd;
 	// if convert fail, set valid to 0, otherwise, set it to 1.
-	if (2 == sscanf(this->m_buffer, "$%f,%f", &ws,&wd))
+	// Convert the data from keyword of "$"
+	if (2 == sscanf(this->m_buffer, "%*[^$]$%f,%f", &ws,&wd))
 	{
 	   this->m_data[0].code = "ws";
 	   this->m_data[0].value = ws; // get the windspeed
