@@ -135,8 +135,8 @@ void Device::convertToDeviceData(DeviceData * d_data, ProtocolData* p_data)
 {
 	for (int i = 0; i < BODY_LEN; i++){
 		if (p_data[i].code == "01"){
-			d_data->TEMPERATURE = p_data[i].value;
-			d_data->TEMPERATUREFLG = p_data[i].valid;
+			d_data->GRANDTEMPERATURE = p_data[i].value;
+			d_data->GRANDTEMPERATUREFLG = p_data[i].valid;
 			continue;
 		}
 		else if (p_data[i].code == "68"){
@@ -169,19 +169,24 @@ void Device::convertToDeviceData(DeviceData * d_data, ProtocolData* p_data)
 			d_data->WINDSPEEDFLG = p_data[i].valid;
 			continue;
 		}
-		if (p_data[i].code == "wd"){ // from wmt protocol.
+		else if (p_data[i].code == "wd"){ // from wmt protocol.
 			d_data->WINDDIRECT = p_data[i].value;
 			d_data->WINDDIRECTFLG = p_data[i].valid;
 			break;
 		}
-		else if (p_data[i].code == "ps"){ // from ptu protocol.
+		else if (p_data[i].code == "PTU_P"){ // from ptu protocol.
 			d_data->PRESSURE = p_data[i].value;
 			d_data->PRESSUREFLG = p_data[i].valid;
 			continue;
 		}
-		else if (p_data[i].code == "hd"){ // from ptu protocol.
+		else if (p_data[i].code == "PTU_RH"){ // from ptu protocol.
 			d_data->HUMIDITY = p_data[i].value;
 			d_data->HUMIDITYFLG = p_data[i].valid;
+			continue;
+		}
+		else if (p_data[i].code == "PTU_T"){ // from ptu protocol.
+			d_data->TEMPERATURE = p_data[i].value;
+			d_data->TEMPERATUREFLG= p_data[i].valid;
 			continue;
 		}
 		else if (p_data[i].code == "!last" ||p_data[i].code == ""  )
