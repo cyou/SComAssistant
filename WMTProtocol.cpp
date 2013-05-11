@@ -58,6 +58,7 @@ void WMTProtocol::ParseDataFromSerialPort(const char* szMsg)
 	   this->m_data[1].value = 0;
 	   this->m_data[1].valid = 0;
 	}
+	this->m_data[2].code = "!last";
 
 	//reset buffer for next protocol data.
 	this->ResetBuffer(); 

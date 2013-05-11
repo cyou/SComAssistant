@@ -84,6 +84,7 @@ void DSCProtocol::convertToProtocolData()
 			this->m_data[i].valid = 0;
 	   }
     }
+    this->m_data[i+1].code = "!last";
 }
 
 void DSCProtocol::removeSpaces(char * dst, const char * src)

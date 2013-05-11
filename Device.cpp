@@ -139,50 +139,53 @@ void Device::convertToDeviceData(DeviceData * d_data, ProtocolData* p_data)
 			d_data->TEMPERATUREFLG = p_data[i].valid;
 			continue;
 		}
-		if (p_data[i].code == "68"){
+		else if (p_data[i].code == "68"){
 			d_data->GRIPLEVEL = p_data[i].value;
 			d_data->GRIPLEVELFLG = p_data[i].valid;
 			continue;
 		}
-		if (p_data[i].code == "30"){
+		else if (p_data[i].code == "30"){
 			d_data->GRANDTEMPERATURE = p_data[i].value;
 			d_data->GRANDTEMPERATUREFLG = p_data[i].valid;
 			continue;
 		}
-		if (p_data[i].code == "02"){
+		else if (p_data[i].code == "02"){
 			d_data->GRANDHUMIDITY = p_data[i].value;
 			d_data->GRANDHUMIDITYFLG = p_data[i].valid;
 			continue;
 		}
-		if (p_data[i].code == "72"){
+		else if (p_data[i].code == "72"){
 			d_data->WATERPERCENT = p_data[i].value;
 			d_data->WATERPERCENTFLG = p_data[i].valid;
 			continue;
 		}
-		if (p_data[i].code == "ns"){ // from modbus protocol.
+		else if (p_data[i].code == "ns"){ // from modbus protocol.
 			d_data->NOISE = p_data[i].value;
 			d_data->NOISEFLG = p_data[i].valid;
 			break;
 		}
-		if (p_data[i].code == "ws"){ // from wmt protocol.
+		else if (p_data[i].code == "ws"){ // from wmt protocol.
 			d_data->WINDSPEED = p_data[i].value;
 			d_data->WINDSPEEDFLG = p_data[i].valid;
-			break;
+			continue;
 		}
 		if (p_data[i].code == "wd"){ // from wmt protocol.
 			d_data->WINDDIRECT = p_data[i].value;
 			d_data->WINDDIRECTFLG = p_data[i].valid;
 			break;
 		}
-
-		if (p_data[i].code == "ps"){ // from ptu protocol.
+		else if (p_data[i].code == "ps"){ // from ptu protocol.
 			d_data->PRESSURE = p_data[i].value;
 			d_data->PRESSUREFLG = p_data[i].valid;
-			break;
+			continue;
 		}
-		if (p_data[i].code == "hd"){ // from ptu protocol.
+		else if (p_data[i].code == "hd"){ // from ptu protocol.
 			d_data->HUMIDITY = p_data[i].value;
 			d_data->HUMIDITYFLG = p_data[i].valid;
+			continue;
+		}
+		else if (p_data[i].code == "!last" ||p_data[i].code == ""  )
+		{
 			break;
 		}
 	}
