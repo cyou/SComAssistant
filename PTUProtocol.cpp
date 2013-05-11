@@ -60,7 +60,7 @@ void PTUProtocol::ParseDataFromSerialPort(const char* szMsg)
 	if (1 == sscanf(this->m_buffer, "%*[^T]T=%f", &tempeture))
 	{
 		this->m_data[index].code = "PTU_T";
-		this->m_data[index].value = humity;
+		this->m_data[index].value = tempeture;
 		this->m_data[index].valid = 1;
 		index++;
 	}
