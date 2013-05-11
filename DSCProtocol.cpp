@@ -44,8 +44,8 @@ void DSCProtocol::ParseDataFromSerialPort(const char* szMsg)
 	   AfxExtractSubString(strBody[j], strHeader[3], j, _T(';'));
 	   strBody[j].TrimLeft(_T("\t \r \n \r\n")); // remove tab/enter character.
 	   strBody[j].TrimRight(_T("\t \r \n \r\n")); // remove tab/enter character.
+	   dscData_length = j;
 	   if (strBody[j].Compare("=") == 0) {
-		   dscData_length = j;
 		   break;
 	   }
     }

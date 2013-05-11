@@ -5,7 +5,7 @@
 #define PROTOCOL_H
 
 #define CMD_CFG ".\\config.ini"
-#define BODY_LEN  128
+#define BODY_LEN  20
 
 typedef struct 
 {
@@ -39,7 +39,7 @@ protected:
 	int m_buffer_length;
 	int m_buffer_index;
 
-	ProtocolData m_data[128];
+	ProtocolData m_data[BODY_LEN];
 };
 #endif
 
