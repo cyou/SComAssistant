@@ -8,6 +8,10 @@ DSCProtocol::DSCProtocol(CString name):Protocol(name)
 	m_name = name;
 	dscData_length = 0;
 	this->m_send_cmd = m_cmdReader->ReadString("Device", "dsc", "@1 MES 16");
+
+	int cmd_length = strlen(this->m_send_cmd);
+	this->m_send_cmd[cmd_length] = '\r';
+	this->m_send_cmd[cmd_length+1] = '\n';
 }
 
 DSCProtocol::~DSCProtocol()
@@ -71,7 +75,25 @@ void DSCProtocol::convertToProtocolData()
 		}
 
 	   this->m_data[i].code = pair[0];
+	   this->m_data[i].valid = 0;
+#if 1
+		int code;
+		float value;
+		int result;
+		result = sscanf(cstr,"%d %f",&code, &value);
 
+		if(result == 2)
+		{
+			this->m_data[i].value = value;
+			this->m_data[i].valid = 1;
+		}
+		else if(result == 1)
+		{
+			this->m_data[i].value = 0;
+		}
+		else if(result <= 0)
+			break;
+#else
 	  // if convert fail, set valid to 0, otherwise, set it to 1.
 	   if (1 == sscanf(pair[1], "%f", &tmp))
 	   {
@@ -82,10 +104,16 @@ void DSCProtocol::convertToProtocolData()
 	   {
 			this->m_data[i].value = 0;
 			this->m_data[i].valid = 0;
-			break;
+			// break;
 	   }
+#endif
     }
-    this->m_data[i+1].code = "!last";
+
+    if (i == dscData_length){
+		this->m_data[i-1].code = "!last";
+	}else {
+		this->m_data[i].code = "!last";
+	}
 }
 
 void DSCProtocol::removeSpaces(char * dst, const char * src)
