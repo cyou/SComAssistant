@@ -35,11 +35,11 @@ void DSCProtocol::ParseDataFromSerialPort(const char* szMsg)
 {
 	//parse results from serial port and covert to details message then write to DB later.
 	//
-	CString data(szMsg);
-	//CString data(this->m_buffer); // get data from buffer.
+	//CString data(szMsg);
+	CString data(this->m_buffer); // get data from buffer.
 	char dsc_buffer[256]={0};
 
-	if (1 == sscanf(szMsg, "%*[^D]DSC %[0-9a-z.;- ]", dsc_buffer))
+	if (1 == sscanf(data, "%*[^D]DSC %[0-9a-z.;/- ]", dsc_buffer))
 	{
 		CString dsc_str(dsc_buffer);
 		for(int j=0;j<BODY_LEN;j++)
@@ -48,12 +48,15 @@ void DSCProtocol::ParseDataFromSerialPort(const char* szMsg)
 		   strBody[j].TrimLeft(_T("\t \r \n \r\n")); // remove tab/enter character.
 		   strBody[j].TrimRight(_T("\t \r \n \r\n")); // remove tab/enter character.
 		   dscData_length = j;
-		   if (strBody[j].Compare("=") == 0) {
+		   if (strBody[j].Compare("") == 0) {
 			   break;
 		   }
 		}
 	}
-	dscData_length = 0;
+	else
+	{
+		dscData_length = 0;
+	}
 	// reset protocol buffer.
 	this->ResetBuffer();//ResetBuffer
 	this->convertToProtocolData();
@@ -62,7 +65,8 @@ void DSCProtocol::ParseDataFromSerialPort(const char* szMsg)
 void DSCProtocol::convertToProtocolData()
 {
 	float tmp;
-	for(int i=0;i<dscData_length;i++)
+	int i;
+	for(i=0;i<dscData_length;i++)
     {
 		// remove addtional spaces.
 		//
@@ -110,7 +114,7 @@ void DSCProtocol::convertToProtocolData()
 #endif
     }
 
-    if (i == dscData_length){
+    if (BODY_LEN == dscData_length){
 		this->m_data[i-1].code = "!last";
 	}else {
 		this->m_data[i].code = "!last";
