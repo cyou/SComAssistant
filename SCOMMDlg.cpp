@@ -924,6 +924,7 @@ void CSCOMMDlg::OnTimer(UINT nIDEvent)
 		break;
 	case RECEIVE_TIMEOUT_EVENT_ID:
 		this->OnReceiveTimeOutEvent();
+		KillTimer(RECEIVE_TIMEOUT_EVENT_ID);
 		break;
 	default:
 		break;
@@ -2126,7 +2127,8 @@ void CSCOMMDlg::OnButtonstart()
 
 void CSCOMMDlg::OnReceiveTimeOutEvent()
 {
-	this->p_activeDevice->handleTimeout(500);
+	if (this->p_activeDevice)
+		this->p_activeDevice->handleTimeout(500);
 }
 
 UINT CSCOMMDlg::ThreadFunc(LPVOID pParam)
@@ -2139,6 +2141,7 @@ UINT CSCOMMDlg::ThreadFunc(LPVOID pParam)
 	{
 		// check if device is started.
 		if (!pDlg->p_Devices[i]->isDeviceOpen()){
+			pDlg->p_activeDevice = NULL;
 			continue;
 		}
 

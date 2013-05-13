@@ -119,7 +119,7 @@ ProtocolData* Device::getCommandResponse()
 			return this->getProtocol()->GetProtocolData();
 		}
 		// sleep pull thread some time.
-		::Sleep(100);
+		::Sleep(20);
 	}
 }
 
@@ -134,7 +134,7 @@ void Device::handleTimeout(int interval)
 void Device::convertToDeviceData(DeviceData * d_data, ProtocolData* p_data)
 {
 	for (int i = 0; i < BODY_LEN; i++){
-		if (p_data[i].code == "!last" ||p_data[i].code == ""  )
+		if (p_data[i].code == "!last" )
 		{
 			break;
 		}
