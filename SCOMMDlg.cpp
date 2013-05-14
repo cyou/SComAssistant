@@ -575,7 +575,7 @@ LONG CSCOMMDlg::OnCommunication(WPARAM ch, LPARAM port)
 
 	if (p_activeDevice && p_activeDevice->isDeviceOpen()) {
 		p_activeDevice->getProtocol()->AddDataToBuffer((char) ch);
-		this->SetTimer(RECEIVE_TIMEOUT_EVENT_ID, 20, NULL);
+		this->SetTimer(RECEIVE_CHAR_TIMEOUT_EVENT_ID, 20, NULL);
 	}
 
 	rxdatacount++;   //接收的字节计数
@@ -923,8 +923,12 @@ void CSCOMMDlg::OnTimer(UINT nIDEvent)
 		this->OnProfileEvent();
 		break;
 	case RECEIVE_TIMEOUT_EVENT_ID:
-		this->OnReceiveTimeOutEvent();
+		this->OnReceiveTimeOutEvent(RECEIVE_TIMEOUT_EVENT_ID);
 		KillTimer(RECEIVE_TIMEOUT_EVENT_ID);
+		break;
+	case RECEIVE_CHAR_TIMEOUT_EVENT_ID:
+		this->OnReceiveTimeOutEvent(RECEIVE_CHAR_TIMEOUT_EVENT_ID);
+		KillTimer(RECEIVE_CHAR_TIMEOUT_EVENT_ID);
 		break;
 	default:
 		break;
@@ -2125,10 +2129,17 @@ void CSCOMMDlg::OnButtonstart()
 	m_ProfileStart = !m_ProfileStart;
 }
 
-void CSCOMMDlg::OnReceiveTimeOutEvent()
+void CSCOMMDlg::OnReceiveTimeOutEvent(int timerId)
 {
-	if (this->p_activeDevice)
-		this->p_activeDevice->handleTimeout(500);
+	if (this->p_activeDevice){
+		if (timerId == RECEIVE_TIMEOUT_EVENT_ID){
+			this->p_activeDevice->handleTimeout(500);
+		}else{
+			if (this->p_activeDevice->handleTimeout(20)){
+				KillTimer(RECEIVE_TIMEOUT_EVENT_ID);
+			};
+		}
+	}
 }
 
 UINT CSCOMMDlg::ThreadFunc(LPVOID pParam)

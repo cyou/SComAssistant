@@ -20,7 +20,7 @@ class Protocol
 public:
 	Protocol(CString name);
 	virtual	~Protocol();
-
+	virtual BOOL checkResponseValid();
 	virtual CString GetName() = 0;
 	virtual char* ParseDataToSerialPort() = 0; // convert data from protocol sub class to serial port.
 	virtual void ParseDataFromSerialPort(const char* szMsg) = 0; // convert data from serial to upper protocol class.
@@ -38,6 +38,8 @@ protected:
 	char* m_buffer;
 	int m_buffer_length;
 	int m_buffer_index;
+
+	BOOL m_isResponseReady;
 
 	ProtocolData m_data[BODY_LEN];
 };

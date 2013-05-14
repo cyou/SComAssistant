@@ -13,6 +13,7 @@ Protocol::Protocol(CString name)
 	memset(m_buffer, 0, m_buffer_length);
 
 	m_send_cmd = NULL;
+	m_isResponseReady = TRUE;
 }
 
 Protocol::~Protocol()
@@ -49,4 +50,9 @@ void Protocol::ResetBuffer()
 ProtocolData* Protocol::GetProtocolData()
 {
 	return this->m_data;
+}
+
+BOOL Protocol::checkResponseValid()
+{
+	return this->m_isResponseReady;
 }

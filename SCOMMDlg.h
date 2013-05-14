@@ -34,6 +34,7 @@
 #define PROFILE_EVENT_ID  1000
 
 #define RECEIVE_TIMEOUT_EVENT_ID  1001
+#define RECEIVE_CHAR_TIMEOUT_EVENT_ID  1002
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -286,7 +287,7 @@ private:
 	Device* GetActiveDevice();
 
 	afx_msg void OnProfileEvent();
-	afx_msg void OnReceiveTimeOutEvent();
+	afx_msg void OnReceiveTimeOutEvent(int timer_id);
 
 	static UINT ThreadFunc(LPVOID pParam);
 	CWinThread *m_pThread;
