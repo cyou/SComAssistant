@@ -2004,6 +2004,11 @@ void CSCOMMDlg::OnButtonDevstart1()
 		pwnd = GetDlgItem(IDC_COMBO_USEDPORT1);
 		pwnd->EnableWindow(FALSE);
 		this->m_devStart.SetWindowText("关闭");
+
+		int pIndex = this->m_Protocal.GetCurSel();
+		int cIndex = this->m_usePort.GetCurSel();
+		SetDeviceSettings(0, pIndex, cIndex);
+
 		this->p_Devices[0]->openDevice();
 		// AfxMessageBox("仪表1开启成功。");
 	}
@@ -2026,6 +2031,10 @@ void CSCOMMDlg::OnButtonDevstart2()
 		pwnd = GetDlgItem(IDC_COMBO_USEDPORT2);
 		pwnd->EnableWindow(FALSE);
 		this->m_devStart2.SetWindowText("关闭");
+		
+		int pIndex = this->m_Protocal2.GetCurSel();
+		int cIndex = this->m_usePort2.GetCurSel();
+		SetDeviceSettings(1, pIndex, cIndex);
 		this->p_Devices[1]->openDevice();
 		// AfxMessageBox("仪表2开启成功。");
 	}
@@ -2048,6 +2057,10 @@ void CSCOMMDlg::OnButtonDevstart3()
 		pwnd = GetDlgItem(IDC_COMBO_USEDPORT3);
 		pwnd->EnableWindow(FALSE);
 		this->m_devStart3.SetWindowText("关闭");
+		
+		int pIndex = this->m_Protocal3.GetCurSel();
+		int cIndex = this->m_usePort3.GetCurSel();
+		SetDeviceSettings(2, pIndex, cIndex);
 		this->p_Devices[2]->openDevice();
 		// AfxMessageBox("仪表3开启成功。");
 	}
@@ -2070,6 +2083,11 @@ void CSCOMMDlg::OnButtonDevstart4()
 		pwnd = GetDlgItem(IDC_COMBO_USEDPORT4);
 		pwnd->EnableWindow(FALSE);
 		this->m_devStart4.SetWindowText("关闭");
+		
+		
+		int pIndex = this->m_Protocal4.GetCurSel();
+		int cIndex = this->m_usePort4.GetCurSel();
+		SetDeviceSettings(3, pIndex, cIndex);		
 		this->p_Devices[3]->openDevice();
 		// AfxMessageBox("仪表4开启成功。");
 	}
