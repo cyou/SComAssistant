@@ -131,3 +131,14 @@ void DSCProtocol::removeSpaces(char * dst, const char * src)
     }
     *dst = '\0';
 }
+
+BOOL DSCProtocol::checkResponseValid()
+{
+	//return this->m_isResponseReady;
+	for (int i = 0; i < m_buffer_index; i++){
+		if (m_buffer[i] == 10 || m_buffer[i] == 13){
+			return true;
+		}
+	}
+	return false;
+}

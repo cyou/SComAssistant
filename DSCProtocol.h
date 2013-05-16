@@ -17,6 +17,7 @@ public:
 	CString GetName();
 	char* ParseDataToSerialPort();
 	void ParseDataFromSerialPort(const char* szMsg);
+	BOOL checkResponseValid();
 private:
 	void convertToProtocolData();
 	void removeSpaces(char * dst, const char * src);
