@@ -84,6 +84,8 @@ public:
 	BOOL            m_is_DeviceData_ready;
 	BOOL            m_writeDB;
 
+	HANDLE          m_hProfileEvent;
+
 
 // Dialog Data
 	//{{AFX_DATA(CSCOMMDlg)
@@ -291,8 +293,8 @@ private:
 
 	static UINT ThreadFunc(LPVOID pParam);
 	CWinThread *m_pThread;
-	
 
+	
 	
 public:
 	afx_msg void OnEnChangeEditRecive();
