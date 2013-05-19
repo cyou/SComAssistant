@@ -2141,7 +2141,7 @@ void CSCOMMDlg::OnButtonstart()
 		pwnd->EnableWindow(FALSE);
 		this->m_ctrlProfileStart.SetWindowText("Í£Ö¹²ÉÑù");
 	
-		m_hProfileEvent = CreateEvent(NULL, FALSE, TRUE, NULL);
+		m_hProfileEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 		// start new thread to recieve data from serial port.
 		m_pThread = AfxBeginThread(ThreadFunc, this);
 
@@ -2174,9 +2174,6 @@ UINT CSCOMMDlg::ThreadFunc(LPVOID pParam)
 
 	while (pDlg->m_ProfileStart) 
 	{
-		//wait for timer event notification.
-		WaitForSingleObject(pDlg->m_hProfileEvent, INFINITE);
-
 		pDlg->m_deviceData.ResetDeviceData(); // reset device data before new test.
 
 		for (int i = 0; i < MAX_NUM_DEVICE; i++)
@@ -2208,6 +2205,9 @@ UINT CSCOMMDlg::ThreadFunc(LPVOID pParam)
 		}
 
 		pDlg->m_is_DeviceData_ready = TRUE;
+
+		//wait for timer event notification.
+		WaitForSingleObject(pDlg->m_hProfileEvent, INFINITE);
 	}
 	return 0;
 }
