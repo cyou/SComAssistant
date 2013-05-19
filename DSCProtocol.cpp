@@ -132,13 +132,64 @@ void DSCProtocol::removeSpaces(char * dst, const char * src)
     *dst = '\0';
 }
 
+static int find_nr_of_keyword(char *source, char keyword)
+{
+	int source_length;
+	int nr = 0;
+	int i;
+
+	source_length = strlen(source);
+	for (i = 0; i <= source_length; i++) {
+		if  (source[i] == keyword)
+			nr ++;
+	}
+	return nr;
+}
+
+static int find_position_of_keywords(char *source, char *keywords)
+{
+	int source_length,keywords_length,i;
+	int flag = -1;
+	source_length = strlen(source);
+	keywords_length = strlen(keywords);
+	if (keywords_length > source_length) return -1;
+	for (i = 0; i <= source_length - keywords_length; i++) {
+		if  (strncmp(source + i, keywords, keywords_length) == 0)
+			return i;
+	}
+	return -1;
+}
 BOOL DSCProtocol::checkResponseValid()
 {
 	//return this->m_isResponseReady;
-	for (int i = 0; i < m_buffer_index; i++){
-		if (m_buffer[i] == 10 || m_buffer[i] == 13){
-			return true;
+	int start_pos =0;
+	int end_pos =0;
+	int nr = 0;
+	char *data = this->m_buffer; // get data from buffer.
+
+	start_pos = find_position_of_keywords(data, "DSC");
+	if(start_pos >= 0)
+	{
+		data += start_pos;
+	#if 0
+		end_pos = find_position_of_keywords(data, "\n");
+		if(end_pos)
+			return TRUE;
+	#else
+		nr = find_nr_of_keyword(data, ';');
+		if (nr >= 16)
+			return TRUE;
+	#endif
+	}
+#if 0
+	if (1 == sscanf(data, "%*[^D]DSC %[0-9a-z.;/- ]", dsc_buffer))
+	{
+		for (int i = 0; i < m_buffer_index; i++)
+		{
+			if ( m_buffer[i] == 10 || m_buffer[i] == 13)){
+				return true;
 		}
 	}
+#endif
 	return false;
 }

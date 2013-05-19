@@ -63,3 +63,45 @@ void WMTProtocol::ParseDataFromSerialPort(const char* szMsg)
 	//reset buffer for next protocol data.
 	this->ResetBuffer(); 
 }
+
+
+static int find_position_of_keywords(char *source, char *keywords)
+{
+	int source_length,keywords_length,i;
+	int flag = -1;
+	source_length = strlen(source);
+	keywords_length = strlen(keywords);
+	if (keywords_length > source_length) return -1;
+	for (i = 0; i <= source_length - keywords_length; i++) {
+		if  (strncmp(source + i, keywords, keywords_length) == 0) 
+			return i;
+	}
+	return -1;
+}
+BOOL WMTProtocol::checkResponseValid()
+{
+	//return this->m_isResponseReady;
+
+#if 1
+	int start_pos =0;
+	int end_pos =0;
+
+	char *data = this->m_buffer; // get data from buffer.
+
+	start_pos = find_position_of_keywords(data, "$");
+	if(start_pos >= 0)
+	{
+		data += start_pos;
+		end_pos = find_position_of_keywords(data, "\n");
+		if(end_pos)
+			return TRUE;
+	}
+#else
+	for (int i = 0; i < m_buffer_index; i++){
+		if (m_buffer[i] == 10 || m_buffer[i] == 13){
+			return true;
+		}
+	}
+#endif
+	return false;
+}

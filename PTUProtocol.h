@@ -13,7 +13,7 @@ public:
 	CString GetName();
 	char* ParseDataToSerialPort();
 	void ParseDataFromSerialPort(const char* szMsg);
-
+	BOOL checkResponseValid();
 };
 
 #endif
