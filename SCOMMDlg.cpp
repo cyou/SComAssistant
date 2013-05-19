@@ -2132,6 +2132,7 @@ void CSCOMMDlg::OnButtonstart()
 		KillTimer(4);
 		KillTimer(PROFILE_EVENT_ID);
 		m_ctrlPortStatus.SetWindowText("系统停止采样!");
+		SetEvent(m_hProfileEvent);
 		CloseHandle(m_hProfileEvent);
 	}
 	else
@@ -2140,11 +2141,11 @@ void CSCOMMDlg::OnButtonstart()
 		pwnd->EnableWindow(FALSE);
 		this->m_ctrlProfileStart.SetWindowText("停止采样");
 	
-		m_hProfileEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+		m_hProfileEvent = CreateEvent(NULL, FALSE, TRUE, NULL);
 		// start new thread to recieve data from serial port.
 		m_pThread = AfxBeginThread(ThreadFunc, this);
 
-		SetEvent(m_hProfileEvent);
+		//SetEvent(m_hProfileEvent);
 
 		//set time to start profile
 		SetTimer(PROFILE_EVENT_ID, this->m_nIntervalTime, NULL);
