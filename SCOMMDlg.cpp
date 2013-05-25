@@ -385,11 +385,23 @@ BOOL CSCOMMDlg::OnInitDialog()
 	m_DataBits.SetCurSel(iniReader.ReadInteger("Setting", "com1_databits", 0));
 	m_StopBits.SetCurSel(iniReader.ReadInteger("Setting", "com1_stopbits", 0));
 
+	this->ChangeComm(0, m_Com.GetCurSel());
+	this->ChangeBoud(0, m_Speed.GetCurSel());
+	this->ChangeParity(0, m_Parity.GetCurSel());
+	this->ChangeDatabits(0, m_DataBits.GetCurSel());
+	this->ChangeStopbits(0, m_StopBits.GetCurSel());
+
 	m_Com2.SetCurSel(iniReader.ReadInteger("Setting", "com2_num", 1));
 	m_Speed2.SetCurSel(iniReader.ReadInteger("Setting", "com2_speed", 5));
 	m_Parity2.SetCurSel(iniReader.ReadInteger("Setting", "com2_parity", 0));
 	m_DataBits2.SetCurSel(iniReader.ReadInteger("Setting", "com2_databits", 0));
 	m_StopBits2.SetCurSel(iniReader.ReadInteger("Setting", "com2_stopbits", 0));
+
+	this->ChangeComm(1, m_Com2.GetCurSel());
+	this->ChangeBoud(1, m_Speed2.GetCurSel());
+	this->ChangeParity(1, m_Parity2.GetCurSel());
+	this->ChangeDatabits(1, m_DataBits2.GetCurSel());
+	this->ChangeStopbits(1, m_StopBits2.GetCurSel());
 
 	m_Com3.SetCurSel(iniReader.ReadInteger("Setting", "com3_num", 2));
 	m_Speed3.SetCurSel(iniReader.ReadInteger("Setting", "com3_speed", 5));
@@ -397,11 +409,23 @@ BOOL CSCOMMDlg::OnInitDialog()
 	m_DataBits3.SetCurSel(iniReader.ReadInteger("Setting", "com3_databits", 0));
 	m_StopBits3.SetCurSel(iniReader.ReadInteger("Setting", "com3_stopbits", 0));
 
+	this->ChangeComm(2, m_Com3.GetCurSel());
+	this->ChangeBoud(2, m_Speed3.GetCurSel());
+	this->ChangeParity(2, m_Parity3.GetCurSel());
+	this->ChangeDatabits(2, m_DataBits3.GetCurSel());
+	this->ChangeStopbits(2, m_StopBits3.GetCurSel());
+
 	m_Com4.SetCurSel(iniReader.ReadInteger("Setting", "com4_num", 3));
 	m_Speed4.SetCurSel(iniReader.ReadInteger("Setting", "com4_speed", 5));
 	m_Parity4.SetCurSel(iniReader.ReadInteger("Setting", "com4_parity", 0));
 	m_DataBits4.SetCurSel(iniReader.ReadInteger("Setting", "com4_databits", 0));
 	m_StopBits4.SetCurSel(iniReader.ReadInteger("Setting", "com4_stopbits", 0));
+
+	this->ChangeComm(3, m_Com4.GetCurSel());
+	this->ChangeBoud(3, m_Speed4.GetCurSel());
+	this->ChangeParity(3, m_Parity4.GetCurSel());
+	this->ChangeDatabits(3, m_DataBits4.GetCurSel());
+	this->ChangeStopbits(3, m_StopBits4.GetCurSel());
 
 	// initial device UI.
 	this->m_Protocal.SetCurSel(iniReader.ReadInteger("Setting", "channel1_protocal", 0));
@@ -667,41 +691,6 @@ void CSCOMMDlg::StartOrStopPort(int i, CButton* openPort, CStatic* statusIcon)
 void CSCOMMDlg::OnButtonOpenport() 
 {
 	StartOrStopPort(0, &m_ctrlOpenPort, &m_ctrlIconOpenoff);
-	// TODO: Add your control notification handler code here
-	/*m_bOpenPort=!m_bOpenPort;
-	if(m_bOpenPort)  //关闭串口
-	{
-		if(m_ctrlAutoSend.GetCheck())
-		{
-			m_bOpenPort=!m_bOpenPort;
-			AfxMessageBox("请先关掉自动发送");
-			return;
-		}
-
-		m_ctrlOpenPort.SetWindowText("打开串口");
-		m_Port.ClosePort();//关闭串口
-		m_ctrlPortStatus.SetWindowText("STATUS：COM Port Closed");
-		m_ctrlIconOpenoff.SetIcon(m_hIconOff);
-	}
-	else  //打开串口
-	{
-		m_ctrlOpenPort.SetWindowText("关闭串口");
-		
-		CString strStatus;
-		if (m_Port.InitPort(this, m_nCom, m_nBaud,m_cParity,m_nDatabits,m_nStopbits,m_dwCommEvents,512))
-		{
-			m_Port.StartMonitoring();
-			m_ctrlIconOpenoff.SetIcon(m_hIconRed);
-			strStatus.Format("STATUS：COM%d OPENED，%d,%c,%d,%d",m_nCom, m_nBaud,m_cParity,m_nDatabits,m_nStopbits);
-			//"当前状态：串口打开，无奇偶校验，8数据位，1停止位");
-		}
-		else
-		{
-			AfxMessageBox("没有发现此串口或被占用");
-			m_ctrlIconOpenoff.SetIcon(m_hIconOff);
-		}
-		m_ctrlPortStatus.SetWindowText(strStatus);
-	}*/
 }
 
 
