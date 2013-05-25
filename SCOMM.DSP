@@ -131,6 +131,10 @@ SOURCE=.\IniReader.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\IniWriter.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\MainDialog.cpp
 # End Source File
 # Begin Source File
@@ -209,6 +213,10 @@ SOURCE=.\DSCProtocol.h
 # Begin Source File
 
 SOURCE=.\IniReader.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\IniWriter.h
 # End Source File
 # Begin Source File
 
