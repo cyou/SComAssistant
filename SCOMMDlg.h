@@ -267,6 +267,7 @@ protected:
 	afx_msg void OnCheckCr();
 	afx_msg void OnButtonstart();
 	afx_msg void OnCheckCrc();
+	afx_msg void OnClose();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 	//DECLARE_DYNAMIC_MAP()
@@ -285,6 +286,8 @@ private:
 
 	void UpdateCommFromEdit(int i, CComboBox &c);
 	void SetDeviceSettings(int i, int pIndex, int cIndex);
+
+	void SaveOptionsStatus();
 
 	Device* GetActiveDevice();
 

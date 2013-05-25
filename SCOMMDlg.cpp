@@ -306,6 +306,7 @@ BEGIN_MESSAGE_MAP(CSCOMMDlg, CDialog)
 	ON_BN_CLICKED(IDC_CHECK_CR, OnCheckCr)
 	ON_BN_CLICKED(IDC_BUTTONSTART, OnButtonstart)
 	ON_BN_CLICKED(IDC_CHECK_CRC, OnCheckCrc)
+	ON_WM_CLOSE()
 	//}}AFX_MSG_MAP
 	ON_EN_CHANGE(IDC_EDIT_RECIVE, OnEnChangeEditRecive)
 END_MESSAGE_MAP()
@@ -1431,50 +1432,10 @@ void CSCOMMDlg::OnButtonCountreset()
 
 void CSCOMMDlg::OnButtonClose() 
 {
-	// Write current settings into ini file.
-	CIniWriter iniWriter(Settings_CFG);
-
-	iniWriter.WriteInteger("Setting", "com1_num", m_Com.GetCurSel());
-	iniWriter.WriteInteger("Setting", "com1_speed", m_Speed.GetCurSel());
-	iniWriter.WriteInteger("Setting", "com1_parity", m_Parity.GetCurSel());
-	iniWriter.WriteInteger("Setting", "com1_databits", m_DataBits.GetCurSel());
-	iniWriter.WriteInteger("Setting", "com1_stopbits", m_StopBits.GetCurSel());
-
-	iniWriter.WriteInteger("Setting", "com2_num", m_Com2.GetCurSel());
-	iniWriter.WriteInteger("Setting", "com2_speed", m_Speed2.GetCurSel());
-	iniWriter.WriteInteger("Setting", "com2_parity", m_Parity2.GetCurSel());
-	iniWriter.WriteInteger("Setting", "com2_databits", m_DataBits2.GetCurSel());
-	iniWriter.WriteInteger("Setting", "com2_stopbits", m_StopBits2.GetCurSel());
-
-
-	iniWriter.WriteInteger("Setting", "com3_num", m_Com3.GetCurSel());
-	iniWriter.WriteInteger("Setting", "com3_speed", m_Speed3.GetCurSel());
-	iniWriter.WriteInteger("Setting", "com3_parity", m_Parity3.GetCurSel());
-	iniWriter.WriteInteger("Setting", "com3_databits", m_DataBits3.GetCurSel());
-	iniWriter.WriteInteger("Setting", "com3_stopbits", m_StopBits3.GetCurSel());
-
-
-	iniWriter.WriteInteger("Setting", "com4_num", m_Com4.GetCurSel());
-	iniWriter.WriteInteger("Setting", "com4_speed", m_Speed4.GetCurSel());
-	iniWriter.WriteInteger("Setting", "com4_parity", m_Parity4.GetCurSel());
-	iniWriter.WriteInteger("Setting", "com4_databits", m_DataBits4.GetCurSel());
-	iniWriter.WriteInteger("Setting", "com4_stopbits", m_StopBits4.GetCurSel());
-
-
-	iniWriter.WriteInteger("Setting", "channel1_protocal", m_Protocal.GetCurSel());
-	iniWriter.WriteInteger("Setting", "channel1_port", m_usePort.GetCurSel());
-	iniWriter.WriteInteger("Setting", "channel2_protocal", m_Protocal2.GetCurSel());
-	iniWriter.WriteInteger("Setting", "channel2_port", m_usePort2.GetCurSel());
-	iniWriter.WriteInteger("Setting", "channel3_protocal", m_Protocal3.GetCurSel());
-
-	iniWriter.WriteInteger("Setting", "channel3_port", m_usePort3.GetCurSel());
-	iniWriter.WriteInteger("Setting", "channel4_protocal", m_Protocal4.GetCurSel());
-	iniWriter.WriteInteger("Setting", "channel4_port", m_usePort4.GetCurSel());
-
 	//CString str;
 	//str.Format("RoaringWindSoft You can use all the functions of the SComAssistant,But if you registered:\r\nNo popup Message and No marks of RoaringWindStudio\r\nFree Updates(Send to you Automaticly by Email)\r\n Thank You");
 	//AfxMessageBox(str);
-
+	this->SaveOptionsStatus();
 	CSCOMMDlg::OnOK();
 }
 
@@ -2247,4 +2208,54 @@ void CSCOMMDlg::OnCheckCrc()
 	// TODO: Add your control notification handler code here
 	m_AutoAddCRC = !m_AutoAddCRC;
 	
+}
+
+void CSCOMMDlg::OnClose() 
+{
+	// TODO: Add your message handler code here and/or call default
+	this->SaveOptionsStatus();
+	CDialog::OnClose();
+}
+
+void CSCOMMDlg::SaveOptionsStatus()
+{
+	// Write current settings into ini file.
+	CIniWriter iniWriter(Settings_CFG);
+
+	iniWriter.WriteInteger("Setting", "com1_num", m_Com.GetCurSel());
+	iniWriter.WriteInteger("Setting", "com1_speed", m_Speed.GetCurSel());
+	iniWriter.WriteInteger("Setting", "com1_parity", m_Parity.GetCurSel());
+	iniWriter.WriteInteger("Setting", "com1_databits", m_DataBits.GetCurSel());
+	iniWriter.WriteInteger("Setting", "com1_stopbits", m_StopBits.GetCurSel());
+
+	iniWriter.WriteInteger("Setting", "com2_num", m_Com2.GetCurSel());
+	iniWriter.WriteInteger("Setting", "com2_speed", m_Speed2.GetCurSel());
+	iniWriter.WriteInteger("Setting", "com2_parity", m_Parity2.GetCurSel());
+	iniWriter.WriteInteger("Setting", "com2_databits", m_DataBits2.GetCurSel());
+	iniWriter.WriteInteger("Setting", "com2_stopbits", m_StopBits2.GetCurSel());
+
+
+	iniWriter.WriteInteger("Setting", "com3_num", m_Com3.GetCurSel());
+	iniWriter.WriteInteger("Setting", "com3_speed", m_Speed3.GetCurSel());
+	iniWriter.WriteInteger("Setting", "com3_parity", m_Parity3.GetCurSel());
+	iniWriter.WriteInteger("Setting", "com3_databits", m_DataBits3.GetCurSel());
+	iniWriter.WriteInteger("Setting", "com3_stopbits", m_StopBits3.GetCurSel());
+
+
+	iniWriter.WriteInteger("Setting", "com4_num", m_Com4.GetCurSel());
+	iniWriter.WriteInteger("Setting", "com4_speed", m_Speed4.GetCurSel());
+	iniWriter.WriteInteger("Setting", "com4_parity", m_Parity4.GetCurSel());
+	iniWriter.WriteInteger("Setting", "com4_databits", m_DataBits4.GetCurSel());
+	iniWriter.WriteInteger("Setting", "com4_stopbits", m_StopBits4.GetCurSel());
+
+
+	iniWriter.WriteInteger("Setting", "channel1_protocal", m_Protocal.GetCurSel());
+	iniWriter.WriteInteger("Setting", "channel1_port", m_usePort.GetCurSel());
+	iniWriter.WriteInteger("Setting", "channel2_protocal", m_Protocal2.GetCurSel());
+	iniWriter.WriteInteger("Setting", "channel2_port", m_usePort2.GetCurSel());
+	iniWriter.WriteInteger("Setting", "channel3_protocal", m_Protocal3.GetCurSel());
+
+	iniWriter.WriteInteger("Setting", "channel3_port", m_usePort3.GetCurSel());
+	iniWriter.WriteInteger("Setting", "channel4_protocal", m_Protocal4.GetCurSel());
+	iniWriter.WriteInteger("Setting", "channel4_port", m_usePort4.GetCurSel());
 }
