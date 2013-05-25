@@ -417,6 +417,9 @@ BOOL CSCOMMDlg::OnInitDialog()
 
 	this->m_ctrSendChannel.SetCurSel(0);
 
+    this->m_nLongRecieveTimeout = iniReader.ReadInteger("Setting", "long_recieve_timeout", 500);
+	this->m_nShortRecieveTimeout = iniReader.ReadInteger("Setting", "short_recieve_timeout", 20);
+
 	// initial device object.
 	for (int j =0; j < MAX_NUM_DEVICE; j++)
 	{
@@ -558,7 +561,7 @@ LONG CSCOMMDlg::OnCommunication(WPARAM ch, LPARAM port)
 
 	if (p_activeDevice && p_activeDevice->isDeviceOpen()) {
 		p_activeDevice->getProtocol()->AddDataToBuffer((char) ch);
-		this->SetTimer(RECEIVE_CHAR_TIMEOUT_EVENT_ID, 20, NULL);
+		this->SetTimer(RECEIVE_CHAR_TIMEOUT_EVENT_ID, this->m_nShortRecieveTimeout, NULL);
 	}
 
 	rxdatacount++;   //接收的字节计数
@@ -2138,9 +2141,9 @@ void CSCOMMDlg::OnReceiveTimeOutEvent(int timerId)
 {
 	if (this->p_activeDevice){
 		if (timerId == RECEIVE_TIMEOUT_EVENT_ID){
-			this->p_activeDevice->handleTimeout(500);
+			this->p_activeDevice->handleTimeout(2);
 		}else{
-			if (this->p_activeDevice->handleTimeout(20)){
+			if (this->p_activeDevice->handleTimeout(1)){
 				KillTimer(RECEIVE_TIMEOUT_EVENT_ID);
 			};
 		}
@@ -2168,7 +2171,7 @@ UINT CSCOMMDlg::ThreadFunc(LPVOID pParam)
 
 			//send request command to serial port.
 			pDlg->p_activeDevice->sendCommand();
-			pDlg->SetTimer(RECEIVE_TIMEOUT_EVENT_ID, 500, NULL);
+			pDlg->SetTimer(RECEIVE_TIMEOUT_EVENT_ID, pDlg->m_nLongRecieveTimeout, NULL);
 
 			ProtocolData* p = pDlg->p_activeDevice->getCommandResponse();
 
@@ -2258,4 +2261,8 @@ void CSCOMMDlg::SaveOptionsStatus()
 	iniWriter.WriteInteger("Setting", "channel3_port", m_usePort3.GetCurSel());
 	iniWriter.WriteInteger("Setting", "channel4_protocal", m_Protocal4.GetCurSel());
 	iniWriter.WriteInteger("Setting", "channel4_port", m_usePort4.GetCurSel());
+
+	iniWriter.WriteInteger("Setting", "long_recieve_timeout", this->m_nLongRecieveTimeout);
+	iniWriter.WriteInteger("Setting", "short_recieve_timeout", this->m_nShortRecieveTimeout);
+
 }

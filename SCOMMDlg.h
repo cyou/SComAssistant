@@ -188,6 +188,10 @@ protected:
 	int m_nIntervalTime;
 	BOOL m_ProfileStart;
 
+
+	int m_nLongRecieveTimeout;
+	int m_nShortRecieveTimeout;
+
 	CRC16 &m_crc16;
 
 	// Generated message map functions

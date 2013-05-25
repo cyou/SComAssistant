@@ -32,7 +32,7 @@ public:
 
 	void setActive(BOOL active);
 
-	BOOL handleTimeout(int interval);
+	BOOL handleTimeout(int type);
 
 private:
 	CString m_name;

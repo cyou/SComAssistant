@@ -123,16 +123,16 @@ ProtocolData* Device::getCommandResponse()
 	}
 }
 
-BOOL Device::handleTimeout(int interval)
+BOOL Device::handleTimeout(int type)
 {
 	// receive timeout event.
 	// try to verify received data from serial port.
-	if (interval == 20){
+	if (type == 1){
 		if (this->getProtocol()->checkResponseValid()){
 			this->m_is_timeout = true;
 			return TRUE;
 		}
-	}else if (interval == 500){
+	}else if (type == 2){
 		this->m_is_timeout = true;
 	}
 	return FALSE;
