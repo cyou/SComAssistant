@@ -189,8 +189,8 @@ protected:
 	BOOL m_ProfileStart;
 
 
-	int m_nLongRecieveTimeout;
-	int m_nShortRecieveTimeout;
+	int m_nLongReceiveTimeout;
+	int m_nShortReceiveTimeout;
 
 	CRC16 &m_crc16;
 
