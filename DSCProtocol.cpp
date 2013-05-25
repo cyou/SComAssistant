@@ -177,7 +177,7 @@ BOOL DSCProtocol::checkResponseValid()
 			return TRUE;
 	#else
 		nr = find_nr_of_keyword(data, ';');
-		if (nr >= 16)
+		if (nr >= 15)
 			return TRUE;
 	#endif
 	}
