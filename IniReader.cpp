@@ -2,7 +2,6 @@
 
 #include "IniReader.h"
 #include <iostream>
-#include <Windows.h>
 
 CIniReader::CIniReader(char* szFileName)
 {
